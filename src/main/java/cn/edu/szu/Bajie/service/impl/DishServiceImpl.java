@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.szu.Bajie.entity.Dish;
 import cn.edu.szu.Bajie.service.DishService;
 import cn.edu.szu.Bajie.mapper.DishMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 * @createDate 2022-11-09 15:12:39
 */
 @Service
+@AllArgsConstructor
 public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
     implements DishService{
 

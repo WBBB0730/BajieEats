@@ -40,7 +40,7 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
     @Override
     public List<SimpleCanteenResultDto> list(CanteenListQueryDto dto) {
 
-        return this.getBaseMapper().getCanteens(dto.getPageIndex(),dto.getPageSize(), dto.getSortType());
+        return this.getBaseMapper().getCanteens(dto.getPageIndex(),dto.getPageSize(), dto.getSortType(),dto.getLongitude(),dto.getLatitude());
 
     }
 

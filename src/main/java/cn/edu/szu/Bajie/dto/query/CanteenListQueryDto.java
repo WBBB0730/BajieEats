@@ -6,10 +6,14 @@ import java.io.Serializable;
 @Data
 public class CanteenListQueryDto implements Serializable {
 
+    private double longitude;
+
+    private double latitude;
+
     private Integer pageIndex = 1;
 
     private Integer pageSize = 10;
 
-    private String sortType = "socre";
+    private String sortType = "score";
 
 }

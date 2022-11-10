@@ -22,9 +22,12 @@ public interface CanteenMapper extends BaseMapper<Canteen> {
      * @param sortType
      * @return
      */
-    List<SimpleCanteenResultDto> getCanteens(@Param("pageIndex") Integer pageIndex,
-                                             @Param("pageSize") Integer pageSize,
-                                             @Param("sortType") String sortType);
+    List<SimpleCanteenResultDto> getCanteens(
+            @Param("pageIndex") Integer pageIndex,
+            @Param("pageSize") Integer pageSize,
+            @Param("sortType") String sortType,
+            @Param("longitude") double longitude,
+            @Param("latitude") double latitude);
 
 }
 

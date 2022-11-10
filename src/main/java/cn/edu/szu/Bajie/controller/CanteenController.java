@@ -67,4 +67,6 @@ public class CanteenController {
 
         return CommonResult.success(list);
     }
+
+
 }
