@@ -37,4 +37,6 @@ public class WindowController {
 
         return CommonResult.success("删除成功");
     }
+
+
 }

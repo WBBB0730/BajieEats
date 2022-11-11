@@ -4,7 +4,9 @@ import cn.edu.szu.Bajie.common.CommonResult;
 import cn.edu.szu.Bajie.converter.CanteenConverter;
 import cn.edu.szu.Bajie.dto.query.CanteenListQueryDto;
 import cn.edu.szu.Bajie.dto.result.CanteenDetailResultDto;
+import cn.edu.szu.Bajie.dto.result.FloorsInfoResultDto;
 import cn.edu.szu.Bajie.dto.result.SimpleCanteenResultDto;
+import cn.edu.szu.Bajie.dto.result.WindowInfo;
 import cn.edu.szu.Bajie.entity.CanteenUrl;
 import cn.edu.szu.Bajie.entity.Windows;
 import cn.edu.szu.Bajie.service.CanteenUrlService;
@@ -19,7 +21,11 @@ import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
 * @author Whitence
@@ -54,15 +60,30 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
         LambdaQueryWrapper<Windows> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Windows::getCanteenId,canteenId);
 
-        List<Windows> windows = windowsService.list(wrapper);
-
         LambdaQueryWrapper<CanteenUrl> queryWrapper = new LambdaQueryWrapper<>();
         List<CanteenUrl> canteenUrls = canteenUrlService.list(queryWrapper);
 
         resultDto.setCanteenUrls(canteenUrls);
-        resultDto.setWindows(windows);
 
         return resultDto;
+    }
+
+    @Override
+    public List<FloorsInfoResultDto> getFloorList(Integer canteenId) {
+
+        LambdaQueryWrapper<Windows> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Windows::getCanteenId,canteenId);
+
+        Map<Integer, List<WindowInfo>> map =new HashMap<>();
+
+        windowsService.list(wrapper).forEach((item)->{
+            map.putIfAbsent(item.getFloorId(),new LinkedList<>());
+            map.get(item.getFloorId()).add(windowsService.getWinInfo(item.getWinId()));
+        });
+
+        return map.entrySet().stream().map((item)->{
+            return new FloorsInfoResultDto(item.getKey(),item.getValue());
+        }).collect(Collectors.toList());
     }
 
 

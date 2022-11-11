@@ -3,6 +3,7 @@ package cn.edu.szu.Bajie.controller;
 import cn.edu.szu.Bajie.common.CommonResult;
 import cn.edu.szu.Bajie.dto.query.CanteenListQueryDto;
 import cn.edu.szu.Bajie.dto.result.CanteenDetailResultDto;
+import cn.edu.szu.Bajie.dto.result.FloorsInfoResultDto;
 import cn.edu.szu.Bajie.dto.result.SimpleCanteenResultDto;
 import cn.edu.szu.Bajie.entity.Banner;
 import cn.edu.szu.Bajie.entity.Canteen;
@@ -60,6 +61,8 @@ public class CanteenController {
 
     }
 
+
+
     @PostMapping("/list")
     public CommonResult<List<SimpleCanteenResultDto>> list(@RequestBody CanteenListQueryDto dto){
 
@@ -69,4 +72,10 @@ public class CanteenController {
     }
 
 
+    @GetMapping("/getFloorList")
+    public CommonResult<List<FloorsInfoResultDto>> getFloors(@RequestParam("canteenId") Integer canteenId){
+        List<FloorsInfoResultDto> result = canteenService.getFloorList(canteenId);
+
+        return CommonResult.success(result);
+    }
 }

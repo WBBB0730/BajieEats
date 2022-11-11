@@ -12,7 +12,7 @@ import java.util.List;
 */
 public interface DishService extends IService<Dish> {
 
-    List<Dish> getDishList(Integer dishId);
+    List<Dish> getDishList(Integer winId);
 
     DishDetailResultDto getDishDetail(Integer dishId);
 

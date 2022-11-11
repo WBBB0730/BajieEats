@@ -10,8 +10,6 @@ import lombok.Data;
 @Data
 public class CanteenDetailResultDto extends Canteen {
 
-    List<Windows> windows;
-
     List<CanteenUrl> canteenUrls;
 
 
