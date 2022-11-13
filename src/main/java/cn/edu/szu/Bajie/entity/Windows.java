@@ -40,8 +40,8 @@ public class Windows implements Serializable {
     /**
      * 楼层id
      */
-    @TableField(value = "floor_id")
-    private Integer floorId;
+    @TableField(value = "floor_name")
+    private String floorName;
 
     /**
      * 删除状态

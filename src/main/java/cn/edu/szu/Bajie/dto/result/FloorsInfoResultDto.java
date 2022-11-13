@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FloorsInfoResultDto {
 
-    private Integer floorId;
+    private String floorName;
 
     private List<WindowInfo> windowList;
 

@@ -74,11 +74,11 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
         LambdaQueryWrapper<Windows> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Windows::getCanteenId,canteenId);
 
-        Map<Integer, List<WindowInfo>> map =new HashMap<>();
+        Map<String, List<WindowInfo>> map =new HashMap<>();
 
         windowsService.list(wrapper).forEach((item)->{
-            map.putIfAbsent(item.getFloorId(),new LinkedList<>());
-            map.get(item.getFloorId()).add(windowsService.getWinInfo(item.getWinId()));
+            map.putIfAbsent(item.getFloorName(),new LinkedList<>());
+            map.get(item.getFloorName()).add(windowsService.getWinInfo(item.getWinId()));
         });
 
         return map.entrySet().stream().map((item)->{
