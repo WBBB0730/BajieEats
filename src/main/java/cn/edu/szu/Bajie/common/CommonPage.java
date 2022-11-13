@@ -1,7 +1,8 @@
 package cn.edu.szu.Bajie.common;
 
 import com.github.pagehelper.PageInfo;
-import org.springframework.data.domain.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.Data;
 
 import java.util.List;
 
@@ -11,23 +12,29 @@ import java.util.List;
  * @date 2022/11/7 22:07
  * @version 1.0
  */
+@Data
 public class CommonPage<T> {
     private Integer pageNum;
     private Integer pageSize;
     private Integer totalPage;
-    private Long total;
+    private Integer total;
     private List<T> list;
 
     /**
      * 将PageHelper分页后的list转为分页信息
      */
     public static <T> CommonPage<T> restPage(List<T> list) {
-        CommonPage<T> result = new CommonPage<T>();
-        PageInfo<T> pageInfo = new PageInfo<T>(list);
+        CommonPage<T> result = new CommonPage<>();
+        PageInfo<T> pageInfo = new PageInfo<>(list);
+
         result.setTotalPage(pageInfo.getPages());
+
         result.setPageNum(pageInfo.getPageNum());
+
         result.setPageSize(pageInfo.getPageSize());
-        result.setTotal(pageInfo.getTotal());
+
+        result.setTotal(pageInfo.getSize());
+
         result.setList(pageInfo.getList());
         return result;
     }
@@ -37,51 +44,13 @@ public class CommonPage<T> {
      */
     public static <T> CommonPage<T> restPage(Page<T> pageInfo) {
         CommonPage<T> result = new CommonPage<T>();
-        result.setTotalPage(pageInfo.getTotalPages());
-        result.setPageNum(pageInfo.getNumber());
-        result.setPageSize(pageInfo.getSize());
-        result.setTotal(pageInfo.getTotalElements());
-        result.setList(pageInfo.getContent());
+        result.setList(pageInfo.getRecords());
+
+        result.setPageSize((int) pageInfo.getSize());
+        result.setPageNum((int) pageInfo.getCurrent());
+        result.setTotal((int) pageInfo.getTotal());
+        result.setTotalPage((int) pageInfo.getPages());
         return result;
     }
 
-    public Integer getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Integer getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
-
-    public Long getTotal() {
-        return total;
-    }
-
-    public void setTotal(Long total) {
-        this.total = total;
-    }
 }
