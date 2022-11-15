@@ -2,6 +2,8 @@ package cn.edu.szu.Bajie.service.impl;
 
 import cn.edu.szu.Bajie.dto.result.WxResultDto;
 import cn.edu.szu.Bajie.feign.WxFeignClient;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -37,6 +39,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         String string = wxFeignClient.getUserString(appid, appidSecure, code, "authorization_code");
 
         WxResultDto wxResultDto = JSONObject.parseObject(string, WxResultDto.class);
+
+        if(StrUtil.isBlank(wxResultDto.getOpenid())){
+            return null;
+        }
 
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getOpenId,wxResultDto.getOpenid());

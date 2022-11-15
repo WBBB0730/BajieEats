@@ -21,10 +21,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -81,9 +78,10 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
             map.get(item.getFloorName()).add(windowsService.getWinInfo(item.getWinId()));
         });
 
-        return map.entrySet().stream().map((item)->{
-            return new FloorsInfoResultDto(item.getKey(),item.getValue());
-        }).collect(Collectors.toList());
+        return map.entrySet().stream()
+                .map((item)->new FloorsInfoResultDto(item.getKey(),item.getValue()))
+                .sorted(Comparator.comparing(FloorsInfoResultDto::getFloorName))
+                .collect(Collectors.toList());
     }
 
 

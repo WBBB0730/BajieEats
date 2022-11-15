@@ -79,6 +79,16 @@ multipart:
 logging:
   config: classpath:config/logback-spring.xml
 
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
 wx:
   appid: "wx34f0d8fcaa93e6e0"
   app_secure: "cb6446b98224149ae05ce9e6a98edf7a"
