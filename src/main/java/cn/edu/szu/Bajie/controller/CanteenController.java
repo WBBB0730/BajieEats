@@ -26,31 +26,12 @@ public class CanteenController {
 
     private CanteenService canteenService;
 
-    @PostMapping
-    public CommonResult<String> add(@RequestBody Canteen canteen){
 
-        canteenService.save(canteen);
-
-        return CommonResult.success("添加成功");
-    }
-    @PutMapping
-    public CommonResult<String> update(@RequestBody Canteen canteen){
-
-        LambdaQueryWrapper<Canteen> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Canteen::getCanteenId,canteen.getCanteenId());
-
-        canteenService.update(canteen,wrapper);
-
-        return CommonResult.success("更新成功");
-    }
-    @DeleteMapping
-    public CommonResult<String> delete(@RequestParam("canteenId") Integer canteenId){
-
-        LambdaQueryWrapper<Canteen> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Canteen::getCanteenId,canteenId);
-
-        return CommonResult.success("删除成功");
-    }
+    /**
+     * 获取餐厅详情信息
+     * @param canteenId
+     * @return
+     */
 
     @GetMapping
     public CommonResult<CanteenDetailResultDto> get(@RequestParam("canteenId") Integer canteenId){
@@ -61,7 +42,11 @@ public class CanteenController {
 
     }
 
-
+    /**
+     * 获取餐厅列表
+     * @param dto
+     * @return
+     */
 
     @PostMapping("/list")
     public CommonResult<List<SimpleCanteenResultDto>> list(@RequestBody CanteenListQueryDto dto){
@@ -71,6 +56,11 @@ public class CanteenController {
         return CommonResult.success(list);
     }
 
+    /**
+     * 获取餐厅楼层以及菜品信息
+     * @param canteenId
+     * @return
+     */
 
     @GetMapping("/getFloorList")
     public CommonResult<List<FloorsInfoResultDto>> getFloors(@RequestParam("canteenId") Integer canteenId){

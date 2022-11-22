@@ -82,6 +82,12 @@ public class Dish implements Serializable {
     private BigDecimal score;
 
     /**
+     * 在售状态
+     */
+    @TableField(value = "on_sale_status")
+    private Integer onSaleStatus;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time")

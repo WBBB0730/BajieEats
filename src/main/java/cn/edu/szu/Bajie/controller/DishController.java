@@ -23,30 +23,11 @@ public class DishController {
 
     private DishService dishService;
 
-    @PostMapping
-    public CommonResult<String> add(@RequestBody Dish dish){
-
-            dishService.save(dish);
-
-        return CommonResult.success("添加成功");
-    }
-    @PutMapping
-    public CommonResult<String> update(@RequestBody Dish dish){
-
-        LambdaQueryWrapper<Dish> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Dish::getDishId,dish.getDishId());
-
-        dishService.update(dish,wrapper);
-
-        return CommonResult.success("更新成功");
-    }
-    @DeleteMapping
-    public CommonResult<String> delete(@RequestParam("dishId") Integer dishId){
-
-        dishService.removeById(dishId);
-
-        return CommonResult.success("删除成功");
-    }
+    /**
+     * 获取窗口下所有的菜品
+     * @param winId
+     * @return
+     */
 
     @GetMapping("/list")
     public CommonResult<List<Dish>> list(@RequestParam("winId") Integer winId){
@@ -57,6 +38,11 @@ public class DishController {
 
     }
 
+    /**
+     * 获取菜品详情
+     * @param dishId
+     * @return
+     */
     @GetMapping
     public CommonResult<DishDetailResultDto> get(@RequestParam("dishId") Integer dishId){
 

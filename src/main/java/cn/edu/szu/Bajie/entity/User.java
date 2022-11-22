@@ -49,6 +49,12 @@ public class User implements Serializable {
     private String phoneNumber;
 
     /**
+     * 背景图片
+     */
+    @TableField(value = "background_image")
+    private String backgroundImage;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time")

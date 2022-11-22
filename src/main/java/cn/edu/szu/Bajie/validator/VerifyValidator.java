@@ -62,12 +62,9 @@ public class VerifyValidator implements ConstraintValidator<ValidatorDiy,Object>
                 }
 
             }
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             return false;
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-            return  false;
         }
 
 

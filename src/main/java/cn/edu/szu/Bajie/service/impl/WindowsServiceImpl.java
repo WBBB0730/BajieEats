@@ -24,6 +24,11 @@ public class WindowsServiceImpl extends ServiceImpl<WindowsMapper, Windows>
 
     private DishService dishService;
 
+    /**
+     * 获取窗口信息
+     * @param winId
+     * @return
+     */
     @Override
     public WindowInfo getWinInfo(Integer winId) {
 
@@ -35,7 +40,7 @@ public class WindowsServiceImpl extends ServiceImpl<WindowsMapper, Windows>
 
         windowInfo.setWindowId(winId);
         windowInfo.setDishList(dishList);
-        windowInfo.setOpeningStatus(windows.getOpeningStatus());
+        windowInfo.setOpeningStatus(windows.getIsOpening());
         windowInfo.setWindowName(windows.getWinName());
 
         return windowInfo;

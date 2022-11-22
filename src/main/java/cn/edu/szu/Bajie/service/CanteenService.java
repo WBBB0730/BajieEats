@@ -20,7 +20,6 @@ public interface CanteenService extends IService<Canteen> {
 
      List<SimpleCanteenResultDto> list(CanteenListQueryDto dto);
 
-
      CanteenDetailResultDto getCanteenInfo(Integer canteenId);
 
     List<FloorsInfoResultDto> getFloorList(Integer canteenId);

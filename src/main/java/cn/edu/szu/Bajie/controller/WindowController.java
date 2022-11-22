@@ -16,27 +16,4 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class WindowController {
 
-    @PostMapping
-    public CommonResult<String> add(@RequestBody Dish dish){
-
-
-
-        return CommonResult.success("添加成功");
-    }
-    @PutMapping
-    public CommonResult<String> update(@RequestBody Dish dish){
-
-
-
-        return CommonResult.success("更新成功");
-    }
-    @DeleteMapping
-    public CommonResult<String> delete(@RequestParam("dishId") Integer dishId){
-
-
-
-        return CommonResult.success("删除成功");
-    }
-
-
 }

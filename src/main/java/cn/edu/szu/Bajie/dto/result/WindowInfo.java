@@ -10,7 +10,7 @@ public class WindowInfo {
 
     private String windowName;
 
-    private String openingStatus;
+    private Integer openingStatus;
 
     private List<Dish> dishList;
 }

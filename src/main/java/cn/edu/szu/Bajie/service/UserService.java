@@ -3,6 +3,8 @@ package cn.edu.szu.Bajie.service;
 import cn.edu.szu.Bajie.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 /**
 * @author Whitence
 * @description 针对表【user(用户表)】的数据库操作Service
@@ -10,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserService extends IService<User> {
 
-    User getUserInfo(String code);
+    String login(String code);
 }

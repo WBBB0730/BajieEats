@@ -28,8 +28,8 @@ public class Windows implements Serializable {
     /**
      * 营业状态
      */
-    @TableField(value = "opening_status")
-    private String openingStatus;
+    @TableField(value = "is_opening")
+    private Integer isOpening;
 
     /**
      * 餐厅id

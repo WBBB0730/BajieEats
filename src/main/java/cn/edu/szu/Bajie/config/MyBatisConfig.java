@@ -53,8 +53,7 @@ public class MyBatisConfig {
 
 
     /**
-     * 注解@Primary表示是主数据源
-     *
+     * 数据源
      * @return
      */
     @Bean("dataSource")
@@ -70,10 +69,23 @@ public class MyBatisConfig {
         return dataSource;
     }
 
+    /**
+     * 事务管理器
+     * @param dataSource
+     * @return
+     */
+
     @Bean(name = "transactionManager")
     public DataSourceTransactionManager transactionManager(@Autowired DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
+
+    /**
+     *
+     * @param dataSource
+     * @return
+     * @throws Exception
+     */
 
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(@Autowired DataSource dataSource)
@@ -95,6 +107,11 @@ public class MyBatisConfig {
         factoryBean.setPlugins(midMybatisPlusInterceptor());
         return factoryBean.getObject();
     }
+
+    /**
+     * 拦截器
+     * @return
+     */
 
     @Bean(name = "mybatisPlusInterceptor")
     public MybatisPlusInterceptor midMybatisPlusInterceptor() {

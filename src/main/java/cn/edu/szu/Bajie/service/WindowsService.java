@@ -12,4 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface WindowsService extends IService<Windows> {
 
     WindowInfo getWinInfo(Integer winId);
+
+
 }

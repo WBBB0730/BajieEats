@@ -2,6 +2,7 @@ package cn.edu.szu.Bajie.converter;
 
 
 import cn.edu.szu.Bajie.dto.result.CanteenDetailResultDto;
+import cn.edu.szu.Bajie.dto.result.CollectDishResultDto;
 import cn.edu.szu.Bajie.dto.result.DishDetailResultDto;
 import cn.edu.szu.Bajie.dto.result.SimpleDishResultDto;
 import cn.edu.szu.Bajie.entity.Canteen;
@@ -17,6 +18,8 @@ public interface DishConverter {
     SimpleDishResultDto dish2simpleDish(Dish dish);
 
     DishDetailResultDto dish2DishDetail(Dish dish);
+
+    CollectDishResultDto dish2ColletDish(Dish dish);
 
 
 

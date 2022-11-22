@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @description: TODO
@@ -16,10 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2022/11/7 22:14
  * @version 1.0
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ResponseBody
+    /**
+     * api错误
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value = ApiException.class)
     public CommonResult handle(ApiException e) {
         if (e.getErrorCode() != null) {
@@ -28,7 +33,12 @@ public class GlobalExceptionHandler {
         return CommonResult.failed(e.getMessage());
     }
 
-    @ResponseBody
+    /**
+     * 参数校验失败
+     * @param e
+     * @return
+     */
+
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public CommonResult handleValidException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
@@ -42,7 +52,11 @@ public class GlobalExceptionHandler {
         return CommonResult.validateFailed(message);
     }
 
-    @ResponseBody
+    /**
+     * 参数绑定失败
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value = BindException.class)
     public CommonResult handleValidException(BindException e) {
         BindingResult bindingResult = e.getBindingResult();

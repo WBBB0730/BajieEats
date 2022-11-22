@@ -82,7 +82,10 @@ public class Canteen implements Serializable {
     private BigDecimal score;
 
     @TableField(value = "is_opening")
-    private String isOpening;
+    private Integer isOpening;
+
+    @TableField(value = "announce")
+    private String announce;
 
     /**
      * 创建时间

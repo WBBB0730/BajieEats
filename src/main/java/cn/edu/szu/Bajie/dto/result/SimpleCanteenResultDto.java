@@ -59,5 +59,5 @@ public class SimpleCanteenResultDto implements Serializable {
     /**
      * 评论
      */
-    private Comment comment;
+    private String announce;
 }

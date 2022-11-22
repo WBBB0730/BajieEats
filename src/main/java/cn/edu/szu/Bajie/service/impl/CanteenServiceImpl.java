@@ -43,20 +43,26 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
     @Override
     public List<SimpleCanteenResultDto> list(CanteenListQueryDto dto) {
 
-        return this.getBaseMapper().getCanteens(dto.getPageIndex(),dto.getPageSize(), dto.getSortType(),dto.getLongitude(),dto.getLatitude());
+        return this.getBaseMapper()
+                .getCanteens(dto.getPageIndex(),dto.getPageSize(), dto.getSortType(),dto.getLongitude(),dto.getLatitude());
 
     }
 
     @Override
     public CanteenDetailResultDto getCanteenInfo(Integer canteenId) {
-
+        // 获取餐厅基本信息
         Canteen canteen = this.getById(canteenId);
+
+        if(Objects.isNull(canteen)){
+            return null;
+        }
 
         CanteenDetailResultDto resultDto = canteenConverter.canteen2canteenDetail(canteen);
 
         LambdaQueryWrapper<Windows> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Windows::getCanteenId,canteenId);
 
+        // 获取餐厅照片
         LambdaQueryWrapper<CanteenUrl> queryWrapper = new LambdaQueryWrapper<>();
         List<CanteenUrl> canteenUrls = canteenUrlService.list(queryWrapper);
 
@@ -67,19 +73,24 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
 
     @Override
     public List<FloorsInfoResultDto> getFloorList(Integer canteenId) {
-
+        // 查询条件
         LambdaQueryWrapper<Windows> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Windows::getCanteenId,canteenId);
 
+        // 用于记录楼层名以及该楼层窗口列表信息映射
         Map<String, List<WindowInfo>> map =new HashMap<>();
-
-        windowsService.list(wrapper).forEach((item)->{
+        // 获取餐厅楼层
+        windowsService.list(wrapper)
+                .forEach((item)->{
             map.putIfAbsent(item.getFloorName(),new LinkedList<>());
+            // 获取当前楼层的窗口信息
             map.get(item.getFloorName()).add(windowsService.getWinInfo(item.getWinId()));
         });
 
         return map.entrySet().stream()
+                // 转为结果类
                 .map((item)->new FloorsInfoResultDto(item.getKey(),item.getValue()))
+                // 按照楼层名字排序
                 .sorted(Comparator.comparing(FloorsInfoResultDto::getFloorName))
                 .collect(Collectors.toList());
     }

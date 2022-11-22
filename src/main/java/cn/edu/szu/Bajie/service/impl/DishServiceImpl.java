@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
 * @author Whitence
@@ -31,23 +32,27 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
 
     @Override
     public List<Dish> getDishList(Integer winId) {
-
+        // 构造条件
         LambdaQueryWrapper<Dish> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Dish::getWinId,winId);
-
+        // 获取
         return this.list(wrapper);
     }
 
     @Override
     public DishDetailResultDto getDishDetail(Integer dishId) {
-
+        // 获取菜品基本信息
         Dish dish = this.getById(dishId);
+
+        if(Objects.isNull(dish)){
+            return null;
+        }
 
         DishDetailResultDto resultDto = dishConverter.dish2DishDetail(dish);
 
+        // 获取菜品图片
         LambdaQueryWrapper<DishUrl> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(DishUrl::getDishId,dishId);
-
         List<DishUrl> list = dishUrlService.list(wrapper);
 
         resultDto.setUrlList(list);

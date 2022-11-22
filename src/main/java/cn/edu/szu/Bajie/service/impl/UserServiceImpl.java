@@ -4,6 +4,9 @@ import cn.edu.szu.Bajie.dto.result.WxResultDto;
 import cn.edu.szu.Bajie.feign.WxFeignClient;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.jwt.JWTUtil;
+import cn.hutool.jwt.signers.JWTSigner;
+import cn.hutool.jwt.signers.JWTSignerUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,8 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.logging.Handler;
 
 /**
 * @author Whitence
@@ -33,36 +40,63 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     private String appid;
     @Value("${wx.app_secure}")
     private String appidSecure;
-    @Override
-    public User getUserInfo(String code) {
 
+    @Value("${jwt.alg}")
+    private String alg;
+
+    @Value("${jwt.key}")
+    private String key;
+
+    @Override
+    public String login(String code) {
+
+        // 远程调用wxapi获取当前用户的openid
         String string = wxFeignClient.getUserString(appid, appidSecure, code, "authorization_code");
 
         WxResultDto wxResultDto = JSONObject.parseObject(string, WxResultDto.class);
 
+        // 登陆失败
         if(StrUtil.isBlank(wxResultDto.getOpenid())){
-            return null;
+            return "登陆失败";
         }
-
+        // 根据用户openid获取用户信息
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getOpenId,wxResultDto.getOpenid());
 
         User user = this.getOne(wrapper);
 
+        // 自动注册新用户
         if(Objects.isNull(user)){
-
             user = User.builder()
                     .nickName("微信用户"+ UUID.randomUUID().toString().substring(0,5))
                     .avatarUrl("https://img2.baidu.com/it/u=3094149767,177600321&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1668272400&t=9657735b8f76a8acd269ceee1649bd82")
+                    .backgroundImage("https://img2.baidu.com/it/u=3094149767,177600321&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1668272400&t=9657735b8f76a8acd269ceee1649bd82")
                     .openId(wxResultDto.getOpenid())
                     .phoneNumber("xxxx")
                     .build();
-
             this.save(user);
-
         }
+        // 根据用户id生成jwt并返回
+        JWTSigner signer = JWTSignerUtil.createSigner(alg,key.getBytes(StandardCharsets.UTF_8));
 
-        return user;
+        Map<String,Object> payload =new HashMap<>();
+
+        payload.put("userId",user.getOpenId());
+
+        return JWTUtil.createToken(payload, signer);
+    }
+
+    public static void main(String[] args) {
+        // 根据用户id生成jwt并返回
+        JWTSigner signer = JWTSignerUtil.createSigner("hs256","bajiechifan".getBytes(StandardCharsets.UTF_8));
+
+        Map<String,Object> payload =new HashMap<>();
+
+        payload.put("userId","oetvJ4l39GRcFg3G4-cm5WK-b6lA");
+
+        String token = JWTUtil.createToken(payload, signer);
+
+        System.out.println(token);
     }
 }
 

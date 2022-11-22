@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -21,18 +23,6 @@ public class Comment implements Serializable {
      */
     @TableId(value = "comment_id")
     private Integer commentId;
-
-    /**
-     * 昵称
-     */
-    @TableField(value = "nick_name")
-    private String nickName;
-
-    /**
-     * 图片url
-     */
-    @TableField(value = "avatar_url")
-    private String avatarUrl;
 
     /**
      * 评论内容
@@ -68,12 +58,14 @@ public class Comment implements Serializable {
      * 创建时间
      */
     @TableField(value = "create_time")
+    @JsonFormat(pattern="yyyy.MM.dd",timezone = "GMT+8")
     private Date createTime;
 
     /**
      * 更新时间
      */
     @TableField(value = "update_time")
+    @JsonFormat(pattern="yyyy.MM.dd",timezone = "GMT+8")
     private Date updateTime;
 
     @TableField(exist = false)

@@ -23,31 +23,11 @@ public class BannerController {
 
     private BannerService bannerService;
 
-    @PostMapping
-    public CommonResult<String> add(@RequestBody Banner banner){
-
-        bannerService.save(banner);
-
-        return CommonResult.success("添加成功");
-    }
-    @PutMapping
-    public CommonResult<String> update(@RequestBody Banner banner){
-
-        LambdaQueryWrapper<Banner> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Banner::getBannerId,banner.getBannerId());
-
-        bannerService.update(banner,wrapper);
-
-        return CommonResult.success("更新成功");
-    }
-    @DeleteMapping
-    public CommonResult<String> delete(@RequestParam("bannerId") String bannerId){
-
-        LambdaQueryWrapper<Banner> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Banner::getBannerId,bannerId);
-
-        return CommonResult.success("删除成功");
-    }
+    /**
+     * 获取轮播图详情
+     * @param bannerId
+     * @return
+     */
 
     @GetMapping
     public CommonResult<Banner> get(@RequestParam("bannerId") String bannerId){
@@ -60,6 +40,10 @@ public class BannerController {
         return CommonResult.success(banner);
     }
 
+    /**
+     * 获取轮播图列表
+     * @return
+     */
     @GetMapping("/list")
     public CommonResult<List<Banner>> list(){
         LambdaQueryWrapper<Banner> wrapper = new LambdaQueryWrapper<>();

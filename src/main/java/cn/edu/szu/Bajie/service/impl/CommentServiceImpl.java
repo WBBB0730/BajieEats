@@ -1,10 +1,17 @@
 package cn.edu.szu.Bajie.service.impl;
 
+import cn.edu.szu.Bajie.converter.CommentConverter;
+import cn.edu.szu.Bajie.dto.result.UserCommentsResultDto;
+import cn.edu.szu.Bajie.entity.*;
+import cn.edu.szu.Bajie.service.*;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.edu.szu.Bajie.entity.Comment;
-import cn.edu.szu.Bajie.service.CommentService;
 import cn.edu.szu.Bajie.mapper.CommentMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author Whitence
@@ -12,8 +19,84 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-11-09 15:12:39
 */
 @Service
+@AllArgsConstructor
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
     implements CommentService{
+
+
+    private UserService userService;
+
+    private DishService dishService;
+
+    private CanteenService canteenService;
+
+    private WindowsService windowsService;
+
+    private CommentUrlService commentUrlService;
+
+    private CommentConverter commentConverter;
+
+    @Override
+    public List<UserCommentsResultDto> getUserComments(String userId) {
+        // 获取评论列表
+        return this.list(
+                new LambdaQueryWrapper<Comment>()
+                        .eq(Comment::getOpenId,userId)
+        )
+                .stream()
+                .map(comment -> {
+                    // 获取评论信息
+                    UserCommentsResultDto userComment = commentConverter.comment2UserComment(comment);
+                    // 获取用户信息
+                    User user = userService.getOne(
+                            new LambdaQueryWrapper<User>()
+                                    .eq(User::getOpenId, userId)
+                    );
+                    // 评论url
+                    List<String> commentUrls = commentUrlService.list(
+                            new LambdaQueryWrapper<CommentUrl>()
+                                    .eq(CommentUrl::getCommentId, userComment.getCommentId())
+                    )
+                            .stream()
+                            .map(CommentUrl::getUrl)
+                            .collect(Collectors.toList());
+
+                    // 菜品信息
+                    Dish dish = dishService.getOne(
+                            new LambdaQueryWrapper<Dish>()
+                                    .eq(Dish::getDishId, userComment.getDishId())
+                    );
+
+                    // 窗口信息
+                    Windows windows = windowsService.getOne(
+                            new LambdaQueryWrapper<Windows>()
+                                    .eq(Windows::getWinId, dish.getWinId())
+                    );
+                    // 餐厅信息
+                    Canteen canteen = canteenService.getOne(
+                            new LambdaQueryWrapper<Canteen>()
+                                    .eq(Canteen::getCanteenId, windows.getCanteenId())
+                    );
+                    // 准备结果类
+                    userComment.setAvatarUrl(user.getAvatarUrl());
+                    userComment.setNickName(user.getNickName());
+
+                    userComment.setCommentUrls(commentUrls);
+
+                    userComment.setDishName(dish.getDishName());
+                    userComment.setDishImage(dish.getDishImage());
+
+                    userComment.setWinName(windows.getWinName());
+
+                    userComment.setCanteenName(canteen.getCanteenName());
+                    userComment.setCanteenAddress(canteen.getCanteenAddress());
+
+                    return userComment;
+                }).collect(Collectors.toList());
+
+    }
+
+
 
 }
 
