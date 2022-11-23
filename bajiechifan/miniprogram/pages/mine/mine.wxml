@@ -1,0 +1,25 @@
+<!--pages/mine/mine.wxml-->
+
+<view wx:if="{{flag==0}}">
+  <view class="top">
+    <view bindtap="getUserProfile" class="login">微信授权登录</view>
+  </view>
+</view>
+
+<view wx:if="{{flag==1}}">
+  <view class="top"  bindtap="Toinformation">
+    <view>
+      <image src="{{avatarUrl}}" class="picture"></image>
+    </view>
+    <view class="name">{{name}}</view>
+    <view class="icon">></view>
+  </view>
+</view>
+
+<view wx:for="{{myset}}" data-type="{{item.name}}" class="my" bindtap="tomyset">
+  <view class="middle">
+    {{item.name}}
+    <view class="icon">></view>
+  </view>
+</view>
+<view class="middle1">{{set}}<view class="icon">></view></view>

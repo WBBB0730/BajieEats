@@ -1,0 +1,105 @@
+<view class="body" catchtap="cancelDialog">
+<!-- 头部开始 -->
+  <view class="dish-top">
+    <image class="dish-img" src="{{dishImage}}">
+    </image>
+    <view class="share-part">
+      <view class="share-round">···</view>
+    </view>
+  </view>
+    <view class="brief-part">
+      <view class="left">
+        <text class="dish-name">{{dishName}}</text>
+        <view class="label-part">
+          <view wx:for="{{labelList}}" class="label">
+            <text class="label-name">{{item.name}}</text>
+          </view>
+        </view>
+        <view class="price">￥{{price}}</view>
+    </view>
+    <view class="right">
+        <image wx:if="{{!collectionFlag}}" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/dislike@3x.png" class="dislike-img"  bindtap="clickCollectionIcon"></image>
+        <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png" class="dislike-img" wx:if="{{collectionFlag}}" bindtap="clickCollectionIcon"></image>
+        <view class="collect-text">收藏</view>
+      </view>
+    </view>
+  <!-- 详情卡片主体 -->
+  <view class="detail-card" wx:if="{{cardType==0}}">
+    <view class="card-title">
+      <view class="detail-word-active">详情</view>
+      <view class="comment-word" bindtap="toComment">评价</view>
+      <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png" class="comment-icon"></image>
+      <text class="comment-point">4.7</text>
+    </view>
+    <view class="detail-content">
+      <text class="introduce">主料：</text>
+      <text class="introduce-content">{{ingredient}}</text>
+      <text>\n</text>
+      <text class="introduce">菜系：</text>
+      <text class="introduce-content">{{dishType}}</text>
+    </view>
+  </view>
+  <view class="detail-comment-card" wx:if="{{cardType==0}}">
+    <view class="card-title" bindtap="toComment">
+      <text class="comment-title">菜品评价</text>
+      <text class="comment-number">(共32条评论)</text>
+      <image class="right-arrow" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/antOutline-right@3x.png"></image>
+    </view>
+    <view class="comment-info" wx:for="{{commentList}}">
+      <view class="left-part">
+        <image src="{{item.avatarUrl}}" class="user-photo"></image>
+      </view>
+      <view class="middle-part">
+        <text class="username">{{item.nickName}}</text>
+        <view class="comment-sentence">{{item.content}}</view>
+        <!-- 判断完善 -->
+        <view class="comment-photos">
+          <image src="https://img1.baidu.com/it/u=1352581799,791408713&fm=253&fmt=auto&app=138&f=JPEG?w=742&h=500" class="comment-photo"></image>
+          <!-- <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄.jpeg" class="comment-photo"></image>
+          <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄.jpeg" class="comment-photo"></image> -->
+        </view>
+      </view>
+      <view class="right-part">{{item.createTime}}</view>
+    </view>
+  </view>
+  <!-- 评价卡片主体 -->
+  <view class="comment-card" wx:if="{{cardType==1}}">
+    <view class="card-title">
+      <view class="detail-word" bindtap="toDetail">详情</view>
+      <view class="comment-word-active">评价</view>
+      <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png" class="comment-icon"></image>
+      <text class="comment-point">{{score}}</text>
+    </view>
+    <view class="comment-second-title">
+      <view class="comment-label">
+        <view class="comment-active" wx:if="{{commentType=='Good'}}">好评</view>
+        <view class="comment-origin" wx:else bindtap="toGood">好评</view>
+        <view class="comment-active" wx:if="{{commentType=='Middle'}}">中评</view>
+        <view class="comment-origin" wx:else bindtap="toMiddle">中评</view>
+        <view class="comment-active" wx:if="{{commentType=='Bad'}}">差评</view>
+        <view class="comment-origin" wx:else bindtap="toBad">差评</view>
+      </view>
+      <image class="sort-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/排序_升.png" catchtap="selectDialog"></image>
+    </view>
+    <view class="select-dialog" wx:if="{{dialogFlag}}">
+        <view class="agree-sort">按点赞数排序</view>
+        <view class="time-sort">按时间排序</view>
+    </view>
+    <view class="comment-info" wx:for="{{commentList}}">
+      <view class="left-part">
+        <image src="{{item.avatarUrl}}" class="user-photo"></image>
+      </view>
+      <view class="middle-part">
+        <text class="username">{{item.nickName}}</text>
+        <view class="comment-sentence">{{item.content}}</view>
+        <!-- 判断完善 -->
+        <view class="comment-photos">
+          <!-- <image src="{{item.pro.commentPhoto}}" class="comment-photo" wx:for="{{item.commentPhotos}}" wx:for-item="pro" style="background-color: blue ;"></image>
+          <view wx:for="{{item.commentPhoto}}" wx:for-item="pro">{{item.commentPhotos}}</view> -->
+          <image src="https://img1.baidu.com/it/u=1352581799,791408713&fm=253&fmt=auto&app=138&f=JPEG?w=742&h=500" class="comment-photo"></image>
+        </view>
+      </view>
+      <view class="right-part">{{item.createTime}}</view>
+    </view>
+  </view>
+</view>

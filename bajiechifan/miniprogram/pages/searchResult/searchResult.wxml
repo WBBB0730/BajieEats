@@ -1,0 +1,34 @@
+<view class="search">
+  <view class="left-part">
+  <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arrow_back@3x.png" class="search-icon" bindtap="backToSearch"></image>
+  <input class="search-input" value="{{search_value}}" bindinput="getSearchValue"></input>
+  </view>
+  <view class="right-part">
+    <!-- <view class="search-button" bindtap="clearSearch">搜索</view> -->
+    <view class="search-button" bindtap="clickSearch">搜索</view>
+  </view>
+</view>
+<view wx:if="{{show_list_flag}}">
+    <view class="search-result" wx:for="{{search_list}}">
+      <view class="left_part">
+          <image class="canteen_image" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄.jpeg"></image>
+          <view class="canteen_distance">
+            <image class="location_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/iconPark-local@3x.png"></image>
+            <text class="location">沧海校区</text>
+            <text class="distance">100m</text>
+          </view>
+      </view>
+      <view class="middle_part">
+          <view class="canteen_name">梨园</view>
+          <view class="comment_score">
+            <image class="comment_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png"></image>
+            <text class="comment_point">4.7</text>
+          </view>
+          <view class="time">6：30-20：00</view>
+          <view class="comment">合适</view>
+      </view>
+  </view>
+</view>
+<view wx:else class="no-finding">
+ <text>什么都没找到~</text> 
+</view>

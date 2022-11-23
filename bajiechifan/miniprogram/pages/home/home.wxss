@@ -1,0 +1,206 @@
+/* 地址头部 */
+.top_address {
+  position: relative;
+  left: 50rpx;
+  top: 10rpx;
+}
+/* 搜索框 */
+.search_input {
+  position: relative;
+  top: 32rpx;
+  left: 40rpx;
+  width: 670rpx;
+  height: 66rpx;
+  border-radius: 40rpx;
+  background-color: #ffff;
+  background-image: url(https://img95.699pic.com/xsj/16/4h/tj.jpg!/fw/700/watermark/url/L3hzai93YXRlcl9kZXRhaWwyLnBuZw/align/southeast);
+  background-repeat: no-repeat;
+  background-size: 70rpx,70rpx;
+  background-position: 5rpx -1rpx;
+  display: inline-block;
+}
+.search {
+  position: absolute;
+  width: 586rpx;
+  height: 42rpx;
+  top: 16rpx;
+  left: 72rpx;
+  color: rgb(143, 138, 138);
+  font-family: Source Han Sans CN;
+  font-weight: regular;
+  font-size: 28rpx;
+  line-height: normal;
+  letter-spacing: 2rpx;
+  text-align: left;
+}
+/* 轮播图 */
+.index_swiper {
+  position: relative;
+  left: 40rpx;
+  top: 50rpx;
+  width: 670rpx;
+  height: 280rpx;
+  border-radius: 25rpx;
+  background: rgb(255, 255, 255);
+}
+
+.index_swiper swiper {
+  height: 100%;
+  width: 100%;
+  border-radius: 25rpx;
+  overflow: hidden;
+}
+.swiper_image {
+width: 100%;
+border-radius: 25rpx;
+background-color: #dfdfdf;
+}
+
+.wx-swiper-dots .wx-swiper-dot-active {
+  position: relative;
+  top: 0rpx;
+  width: 32rpx;
+  height: 16rpx;
+  border-radius: 8rpx;
+  background-color: #c94848;
+}
+/* 二级菜单 */
+.function_entries {
+  position: relative;
+  display: flex;
+  align-items: center;
+  left: 40rpx;
+  top: 73rpx;
+  width: 670rpx;
+  height: 200rpx;
+  border-radius: 25rpx;
+  background-color: white;
+}
+.function_block {
+  width:80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.function_img {
+  width: 75rpx;
+  height:75rpx;
+}
+/* 餐厅列表 */
+.canteen_part {
+  position: relative;
+  left: 40rpx;
+  top: 93rpx;
+  width: 670rpx;
+  height: auto;
+  border-radius: 25rpx;
+  background-color: white;
+}
+.title_part {
+  display: flex;
+  justify-content: space-between;
+  margin: 15rpx 0 40rpx 0;
+}
+.title {
+  position: relative;
+  left: 26rpx;
+}
+.sort_icon {
+  position: relative;
+  top: 6rpx;
+  right: 20rpx;
+  width: 45rpx;
+  height: 38rpx;
+}
+/* 餐厅列表 */
+.canteen_list {
+  position: relative;
+  width: 610rpx;
+  height: 200rpx;
+  border: solid 1px #e9e8e8;
+  border-radius: 25rpx;
+  margin: 20rpx 32rpx 20rpx 28rpx;
+  display: flex;
+}
+/* 左侧 */
+.left_part {
+  margin-left: 20rpx;
+  width: 220rpx;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.canteen_image {
+  width: 220rpx;
+  height: 124rpx;
+  margin-top: 14rpx;
+  border-radius: 20rpx;
+}
+/* 距离地址 */
+.canteen_distance {
+  width: 220rpx;
+  height: 40rpx;
+  display: flex;
+  justify-content: space-between;
+
+}
+.location_icon {
+  width:30rpx;
+  height:30rpx;
+}
+.location {
+  font-size: 24rpx; 
+}
+.distance {
+  font-size: 26rpx;
+}
+/* 左部结束 中部开始*/
+.middle_part {
+  width: 280rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10rpx 0 10rpx 30rpx;
+
+}
+.canteen_name {
+  font-size: 34rpx;
+  height: 48rpx;
+  font-weight: 600;
+  color: orange;
+}
+.comment_score {
+  width: 280rpx;
+  height: 40rpx;
+  font-size: 26rpx;
+  color: orange;
+}
+.comment_icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  position: relative;
+  top: 4rpx;
+}
+.time {
+  height: 40rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: rgba(248, 191, 84,0.6);
+}
+.comment {
+  height: 36rpx;
+  font-size: 26rpx;
+  color: #e45252;
+  opacity: 76%;
+  font-weight: 600;
+}
+.collection_icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-top: 16rpx;
+}
+
+

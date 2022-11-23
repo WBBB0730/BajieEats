@@ -1,0 +1,18 @@
+<view class="search">
+  <view class="left-part">
+  <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arrow_back@3x.png" class="search-icon" bindtap="backToHome"></image>
+  <input class="search-input" value="{{search_value}}" bindinput="getSearchValue"></input>
+  </view>
+  <view class="right-part">
+    <!-- <view class="search-button" bindtap="clearSearch">搜索</view> -->
+    <view class="search-button" bindtap="clickSearch">搜索</view>
+  </view>
+</view>
+<view class="show-history">
+  <view class="history-tital">历史搜索</view>
+	<view bindtap="clear_history" class="clear-history">清除全部</view>
+</view>
+<view class="history-list">
+  <view class="history-item" wx:for="{{historyList}}" bindtap="tap_history" data-value="{{item}}">{{item}}</view>
+</view>
+<!-- <view style="position: relative;top:100rpx;left:200rpx" bindtap="entryResult">入口</view> -->

@@ -1,0 +1,94 @@
+.comment {
+  width: 752rpx;
+  height:600rpx;
+  position: relative;
+  background-color: white;
+  margin-top: 24rpx;
+}
+.user-info{
+  width: 752rpx;
+  height: 150rpx;
+  /* background-color: burlywood; */
+  display: flex;
+  align-items: center;
+}
+.user-photo{
+  width: 100rpx;
+  height:100rpx;
+  margin: 25rpx;
+  border-radius: 50%;
+}
+.user-name{
+  font-size: 32rpx;
+}
+.user-comment{
+  position: relative;
+  left: 30rpx;
+  width:692rpx;
+  height:auto;
+  /* background-color: chartreuse; */
+  margin:10rpx 0 35rpx 0;
+  font-size: 30rpx;
+}
+.score{
+  margin: 0 0 30rpx 30rpx;
+}
+.dish{
+  width: 692rpx;
+  height: 150rpx;
+  background-color: #E8E7E7;
+  position: relative;
+  left:26rpx;
+  display: flex;
+  margin-bottom: 35rpx;
+}
+.dish-photo{
+  background-color: green;
+  width:100rpx;
+  height:100rpx;
+  margin: 25rpx;
+}
+.dish-info{
+  display: flex;
+  flex-direction: column;
+  height: 90rpx;
+  justify-content: space-between;
+  margin-top: 25rpx;
+  padding: 5rpx;
+}
+.canteen-name{
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.window-dish{
+  font-size: 28rpx;
+}
+.post-time{
+  margin-left: 25rpx;
+  font-size: 28rpx;
+  color: #545454;
+}
+.bottom{
+  height: 50rpx;
+  width: 692rpx;
+  padding: 25rpx 35rpx 25rpx 25rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.like{
+  width:85rpx;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.like-icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+.like-num{
+  font-size: 30rpx;
+}
+.more{
+  width: 40rpx;
+  height: 40rpx
+}

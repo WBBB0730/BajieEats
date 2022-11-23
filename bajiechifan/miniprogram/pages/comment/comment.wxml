@@ -1,0 +1,28 @@
+<custom-component></custom-component>
+<view wx:for="{{commentList}}" class="comment">
+  <view class="user-info">
+  <image src="{{item.avatarUrl}}" class="user-photo"></image>
+  <text class="user-name">{{item.nickName}}</text>
+  </view>
+  <view class="user-comment">
+  {{item.content}}
+  </view>
+  <view class="score">
+  评分
+  </view>
+  <view class="dish">
+   <image class="dish-photo" src="{{item.dishInfo.dishImage}}"></image>
+   <view class="dish-info">
+      <text class="canteen-name">{{item.dishInfo.canteenName}}({{item.dishInfo.canteenAddress}})</text>
+      <text class="window-dish">{{item.dishInfo.winName}} · {{item.dishInfo.dishName}}</text>
+   </view>
+  </view>
+  <view class="post-time" bindtap="test">发布于{{item.createTime}}</view>
+  <view class="bottom">
+    <view class="like">
+    <image class="like-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-good-job@3x.png"></image>
+    <text class="like-num">{{item.likes}}</text>
+    </view>
+    <image class="more" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arcoDesign-more@3x.png"></image>
+  </view>
+</view>

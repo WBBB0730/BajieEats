@@ -1,0 +1,100 @@
+<!--pages/canteenDetails/canteenDetails.wxml-->
+<!-- 轮播图 -->
+<swiper class="canteen-images" indicator-dots="{{indicator_dots}}" autoplay="{{autoplay}}" indicator-active-color="orange" circular="true" duration="1000">
+  <swiper-item wx:for="{{canteen_info.canteen_images}}" wx:key="index">
+    <image class="canteen-image" src="{{item}}" mode="widthFix" style="--canteen-image-blur--:{{canteen_image_blur}}rpx"></image>
+  </swiper-item>
+</swiper>
+
+<!-- 主体 -->
+<view class="body" style="--body-border-radius--:{{body_border_radius}}rpx;">
+  <view class="head">
+    <!-- 标题 -->
+    <view class="canteen-title">
+      <text class="canteen-name">{{canteen_info.canteen_name}}</text>
+      <image class="favorites-button" src="{{canteen_info.is_canteen_favored ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" bindtap="change_canteen_favored"></image>
+    </view>
+    <!-- 营业信息 -->
+    <view class="canteen-business-info">
+      <text class="canteen-business-state">{{canteen_info.canteen_business_state}}</text>
+      <text class="canteen-business-hours">{{canteen_info.canteen_business_hours}}</text>
+    </view>
+    <!-- 位置信息 -->
+    <view class="canteen-location-info">
+      <view class="canteen-distance">
+        <image class="location-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位-3.png"></image>
+        <text class="canteen-distance">{{canteen_info.canteen_distance}}</text>
+      </view>
+      <text class="canteen-address">{{canteen_info.canteen_address}}</text>
+      <view class="navigate-button">
+        <image class="navigate-button" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/导航-2.png"></image>
+        <text class="navigate-button">路线</text>
+      </view>
+      <view class="live-button">
+        <image class="live-button" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/实况-1.png"></image>
+        <text class="live-button">实况</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 选择楼层 -->
+  <view class="content" style="--height--:{{window_height}}rpx">
+    <view class="banner">
+      <scroll-view class="floor-selector" scroll-x="true">
+        <view class="floor" wx:for="{{floor_list}}" wx:key="floorIndex" bindtap="selectFloor" data-index="{{item.floorIndex}}">
+          <text>{{item.floorName}}\n</text>
+          <view class="line" wx:if="{{item.floorIndex === selected_floorIndex}}"></view>
+        </view>
+      </scroll-view>
+      <!-- <view class="block"></view> -->
+    </view>
+    <!-- 窗口列表 -->
+    <scroll-view class="window-selector" scroll-y="true" style="--height--:{{window_height - 100}}rpx" show-scrollbar="false">
+      <!-- 窗口卡片 -->
+      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowId" bind>
+        <view class="window {{selected_windowId === item.windowId ? 'selected' : 'unselected'}}" bindtap="selectWindow" data-id="{{item.windowId}}">
+          <text class="window-name">{{item.windowName}}\n</text>
+          <text class="window-business-state">{{item.openingStatus}}</text>
+        </view>
+      </block>
+    </scroll-view>
+    <!-- 菜品列表 -->
+    <scroll-view class="dish-list" scroll-y="true" style="--height--:{{window_height - 100}}rpx" enhanced="false" bindscroll="scrollDishList">
+      <!-- 窗口盒子 -->
+      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowId">
+        <!-- 窗口名字 -->
+        <view class="window-title" id="window-{{item.windowId}}">
+          <text>{{item.windowName}}</text>
+        </view>
+        <!-- 菜品卡片 -->
+        <block wx:for="{{item.dishList}}" wx:key="dishId">
+          <view class="dish-card" bindtap="toDish">
+            <image class="dish-image" src="{{item.dishImage}}"></image>
+            <view class="relative-box">
+              <view class="dish-details">
+                <text class="dish-name">{{item.dishName}}</text>
+                <view class="dish-score">
+                  <image class="dish-score-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png"></image>
+                  <text class="dish-score">{{item.score}}</text>
+                </view>
+                <view class="dish-label-list">
+                  <!-- <text class="dish-label" wx:for="{{item.tags}}">{{item}}</text> -->
+                  <!-- <text class="dish-label">{{item.tags.[0]}}</text> -->
+                  <text class="dish-label">{{fn.split(item.tags, ',')[0]}}</text>
+                </view>
+              </view>
+              <text class="dish-price">￥{{item.price}}</text>
+            </view>
+          </view>
+        </block>
+      </block>
+    </scroll-view>
+  </view>
+</view>
+<wxs module="fn">
+    module.exports={
+        split:function(str,sign){
+            return str.split(sign);
+        }
+    }
+</wxs>

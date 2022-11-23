@@ -1,0 +1,19 @@
+<view class="information">
+  <view class="detail_avatarUrl">
+    <view class="avatarUrl1">我的头像</view>
+    <view><image src="{{avatarUrl}}" class="avatarUrl"/></view>
+  </view>
+
+  <view class="detail">我的ID
+    <view class="icon">12345678</view>
+  </view>
+
+  <view class="detail">我的昵称
+    <view class="icon">{{name}}</view>
+  </view>
+
+  <view class="detail">手机号
+    <view class="icon">{{phone}}</view>
+  </view>
+</view>
+

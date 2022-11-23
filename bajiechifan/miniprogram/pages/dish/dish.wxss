@@ -1,0 +1,318 @@
+
+/* 头部开始 */
+.dish-top {
+  position: relative;
+  width: auto;
+  height: auoto;
+}
+/* 头部图片 */
+.dish-img {
+  width: 751rpx;
+  height: 450rpx;
+}
+/* 分享图标 */
+.share-part {
+  position: relative;
+  left: 680rpx;
+  bottom: 410rpx;
+}
+.share-round {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: #101010;
+  color: white;
+  font-size: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  opacity: 72%;
+}
+/* 简介 */
+.brief-part {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  bottom: 65rpx;
+  width: 751rpx;
+  height: 260rpx;
+  background-color: white;
+}
+.left {
+  left: 20rpx;
+  width: 600rpx;
+  height: 260rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.right {
+  position: relative;
+  top: 14rpx;
+  left: 26rpx;
+  width: 152rpx;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items:center;
+}
+.dish-name{
+  position: relative;
+  left: 20rpx;
+  font-weight: bolder;
+  font-size: larger;
+}
+/* 收藏 */
+.dislike-img {
+  position: relative;
+  width: 45rpx;
+  height: 45rpx;
+}
+.collect-text {
+  position: relative;
+  color: rgb(99, 97, 97);
+}
+/* 菜品标签 */
+.label {
+  position: relative;
+  left:20rpx;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #E5E5E5;
+  border-radius: 10%;
+  padding: 0 10rpx 0 10rpx;
+  margin-right: 10rpx;
+}
+.label-name {
+  position: relative;
+  left: 2rpx;
+  bottom: 2rpx;
+  font-size: 26rpx;
+}
+.price {
+  position: relative;
+  left: 20rpx;
+  font-size: 38rpx;
+}
+/* 头部结束 */
+/* 评价详情卡片开始 */
+/* title部分 */
+.card-title {
+  position: relative;
+  bottom: 40rpx;
+  width: 752rpx;
+  height: 90rpx;
+  background-color: white;
+  border-bottom: #BBBBBB solid 1rpx;
+}
+.detail-word {
+  position: relative;
+  left: 10rpx;
+  height: 75rpx;
+  display: inline-block;
+  /* border-bottom: orange solid 1px; */
+  margin: 15rpx;
+  line-height: 60rpx;
+  color: gray;
+}
+.detail-word-active{
+  position: relative;
+  left: 10rpx;
+  height: 75rpx;
+  display: inline-block;
+  border-bottom: orange solid 1px;
+  margin: 15rpx;
+  line-height: 60rpx;
+}
+.comment-word{
+  position: relative;
+  left: 10rpx;
+  height: 75rpx;
+  display: inline-block;
+  /* border-bottom: orange solid 1px; */
+  margin: 15rpx;
+  line-height: 60rpx;
+  color: gray;
+}
+.comment-word-active{
+  position: relative;
+  left: 10rpx;
+  height: 75rpx;
+  display: inline-block;
+  border-bottom: orange solid 1px;
+  margin: 15rpx;
+  line-height: 60rpx;
+}
+.comment-icon {
+  position: relative;
+  left: 10rpx;
+  width: 24rpx;
+  height: 24rpx;
+}
+.comment-point {
+  position: relative;
+  left: 18rpx;
+  bottom: 2rpx;
+  font-size: 28rpx;
+  color: orange;
+}
+/* 卡片核心展示内容 */
+.detail-content {
+  position: relative;
+  bottom: 40rpx;
+  width: 752rpx;
+  height: 250rpx;
+  background-color: white;
+}
+.introduce {
+  display: inline-block;
+  margin: 20rpx;
+  position: relative;
+  top: 20rpx;
+  font-size: 28rpx;
+  color: gray;
+}
+.introduce-content {
+  display: inline-block;
+  position: relative;
+  top: 20rpx;
+  font-size: 26rpx;
+}
+.detail-comment-card {
+  width: 752rpx;
+  position: relative;
+  top:30rpx;
+}
+.comment-title {
+  line-height: 90rpx;
+  font-size: 38rpx;
+  position: relative;
+  left: 20rpx;
+}
+.comment-number {
+  position: relative;
+  left: 25rpx;
+  color: rgb(90, 89, 89);
+}
+.right-arrow {
+  position: relative;
+  top: 6rpx;
+  left: 380rpx;
+  width: 40rpx;
+  height: 40rpx
+}
+/* 评论的二级头部 */
+.comment-second-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  bottom: 40rpx;
+  width: 752rpx;
+  height: 100rpx;
+  background-color: white;
+}
+.comment-label {
+  position: relative;
+  left: 22rpx;
+  width: 340rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.comment-active {
+  width:100rpx;
+  height:60rpx;
+  background-color: #FCCA00;
+  border-radius: 15%;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 26rpx;
+  font-weight:500;
+  color: white;
+}
+.comment-origin{
+  width:100rpx;
+  height:60rpx;
+  background-color: #E5E5E5;
+  border-radius: 15%;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  font-weight:400;
+}
+.sort-icon {
+  z-index: 5;
+  position: relative;
+  right: 30rpx;
+  width: 40rpx;
+  height: 36rpx;
+}
+.select-dialog {
+  position: absolute;
+  z-index: 1;
+  right: 5rpx;
+  top: 900rpx;
+  /* border-radius: 10%; */
+  /* background-color: rgb(240, 236, 236,0.9); */
+  background-color: white;
+  border: rgba(128,128,128,0.5) solid 1rpx;
+}
+.agree-sort ,.time-sort{
+  padding: 10rpx;
+  font-size: 26rpx;
+}
+
+/* 评价信息 */
+.comment-info{
+  /* 样式 */
+  position: relative;
+  bottom: 40rpx;
+  width: 752rpx;
+  height: auto;
+  background-color: white;
+  /* 布局 */
+  display: flex;
+  justify-content: space-around;
+  border-bottom: rgba(187,187,187,0.16) solid 1px ;
+}
+.left-part {
+  margin-top: 20rpx;
+}
+.middle-part {
+  position: relative;
+  right: 10rpx;
+  margin-top: 20rpx;
+  width: 400rpx;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.right-part {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: gray;
+}
+.comment-photos {
+  display: flex;
+  justify-content: flex-start;
+  width: 400rpx;
+  margin:20rpx 0 20rpx 0
+}
+.user-photo {
+  width:80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.comment-sentence {
+  font-size: 26rpx;
+  margin: 20rpx 0 10rpx 0;
+}
+.comment-photo {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5%;
+  margin: 0 20rpx 0 0;
+}

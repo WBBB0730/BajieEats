@@ -1,0 +1,313 @@
+/* pages/canteenDetails/canteenDetails.wxss */
+
+/* 轮播图 */
+swiper.canteen-images {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 562.5rpx;
+}
+
+image.canteen-image {
+  width: 100%;
+  height: 562.5rpx;
+  filter: blur(var(--canteen-image-blur--));
+  /* transform: scale(1.2); */
+}
+
+/* 主体框架 */
+view.body {
+  position: absolute;
+  left: 0;
+  top: 562.5rpx;
+
+  width: 100%;
+  background-color: white;
+  border-radius: var(--body-border-radius--) var(--body-border-radius--) 0 0;
+}
+
+/* 头部 */
+view.head {
+  padding: 30rpx 30rpx 0 30rpx;
+}
+
+/* 标题栏 */
+view.canteen-title {
+  display: flex;
+  height: 60rpx;
+}
+
+/* 餐厅名字 */
+text.canteen-name {
+  font-size: 45rpx;
+  font-weight: bold;
+}
+
+/* 收藏按钮 */
+image.favorites-button {
+  width: 60rpx;
+  height: 60rpx;
+  margin: auto 0 auto auto;
+}
+
+/* 营业信息 */
+view.canteen-business-info {
+  height: 120rpx;
+  line-height: 120rpx;
+}
+
+/* 营业状态 */
+text.canteen-business-state {
+  font-size: 30rpx;
+}
+
+/* 营业时间 */
+text.canteen-business-hours {
+  position: relative;
+  left: 30rpx;
+  font-size: 25rpx;
+}
+
+/* 餐厅定位 */
+view.canteen-location-info {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 120rpx;
+}
+
+/* 与餐厅距离 */
+view.canteen-distance {
+  margin: auto 30rpx auto 0;
+}
+
+image.location-icon {
+  display: block;
+  margin: auto;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+text.canteen-distance {
+  margin: auto;
+  font-size: 22rpx;
+  /* color: grey; */
+}
+
+/* 餐厅地址 */
+text.canteen-address {
+  left: 30rpx;
+  margin: auto auto auto 0;
+  width: auto;
+  text-align: left;
+  font-size: 30rpx;
+  font-weight: 300;
+  color: rgb(80, 80, 80);
+}
+
+/* 导航、实况按钮 */
+view.navigate-button,
+view.live-button {
+  margin: auto 0 auto 30rpx;
+}
+
+image.navigate-button,
+image.live-button {
+  display: block;
+  width: 50rpx;
+  height: 50rpx;
+  margin: 0 auto;
+}
+
+text.navigate-button,
+text.live-button {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 25rpx;
+  color: rgb(80, 80, 80);
+  white-space: nowrap;
+}
+
+/* 内容部分 */
+view.content {
+  /* display: flex; */
+  position: -webkit-sticky;
+  position: sticky;
+  height: var(--height--);
+  top: 0;
+}
+
+view.banner {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  border-bottom: 1px solid #bbbbbb;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 选择楼层 */
+scroll-view.floor-selector {
+  width: 480rpx;
+  height: 100rpx;
+}
+
+view.banner view.block {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 400rpx;
+  height: 100rpx;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}
+
+view.floor {
+  display: inline-block;
+  position: relative;
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  /* background-color: #bbbbbb; */
+  text-align: center;
+  font-size: 35rpx;
+  margin-left: 30rpx;
+}
+
+view.line {
+  position: absolute;
+  bottom: 0;
+  width: 100rpx;
+  height: 10rpx;
+  background-color: orange;
+}
+
+/* 窗口列表 */
+scroll-view.window-selector {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  width: 200rpx;
+  height: var(--height--);
+  border-right: 1px solid #bbbbbb;
+  /* background-color: green; */
+}
+
+/* 窗口 */
+view.window {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 150rpx;
+}
+
+view.window.selected {
+  background-color: rgba(255, 165, 0, 0.25);
+}
+
+view.window.unselected {
+  height: 150rpx;
+}
+
+view.window text.window-name {
+  margin-top: auto;
+  font-size: 30rpx;
+}
+
+view.window text.window-business-state {
+  margin-bottom: auto;
+  font-size: 25rpx;
+  color: rgb(80, 80, 80);
+}
+
+/* 菜品列表 */
+scroll-view.dish-list {
+  position: absolute;
+  right: 0;
+  width: 550rpx;
+  height: var(--height--);
+  /* background-color: blue; */
+}
+
+/* 菜品列表中的窗口标题 */
+view.window-title {
+  height: 80rpx;
+  font-size: 40rpx;
+  line-height: 80rpx;
+  padding: 0 30rpx 0 20rpx;
+}
+
+/* 菜品卡片 */
+view.dish-card {
+  display: flex;
+  height: 220rpx;
+}
+
+image.dish-image {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 20rpx;
+}
+
+view.relative-box {
+  position: relative;
+  margin: 20rpx 20rpx 20rpx 0;
+}
+
+/* 菜品信息 */
+view.dish-details {
+  display: flex;
+  flex-direction: column;
+  width: 310rpx;
+  height: 100%;
+  /* background-color: #bbbbbb; */
+}
+
+text.dish-name {
+  font-size: 35rpx;
+}
+
+/* 菜品评分 */
+view.dish-score {
+  display: flex;
+  margin: auto auto auto 0;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 28rpx;
+  color: orange;
+}
+
+image.dish-score-icon {
+  margin: auto;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+/* 标签列表 */
+view.dish-label-list {
+  display: flex;
+  width: 100%;
+  margin: 0 auto 0 0;
+}
+
+/* 标签 */
+text.dish-label {
+  margin: auto 10rpx 0 0;
+  padding: 0 10rpx;
+  background-color: #e5e5e5;
+  font-size: 25rpx;
+  border-radius: 12rpx;
+  white-space: nowrap;
+}
+
+/* 菜品价格 */
+text.dish-price {
+  /* margin: auto 0 0 auto; */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 45rpx;
+  white-space: nowrap;
+}

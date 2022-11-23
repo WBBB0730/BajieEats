@@ -1,0 +1,128 @@
+.search {
+  position: relative;
+  top: 40rpx;
+  left: 40rpx;
+  border-radius:40rpx;
+  width: 670rpx;
+  height: 66rpx;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: orange solid 1rpx;
+}
+.search-input {
+  display: inline-block;
+  width:300rpx;
+  position: relative;
+  left: 20rpx;
+  font-size: 30rpx;
+}
+.search-icon {
+  position: relative;
+  top: 4rpx;
+  left: 10rpx;
+  width: 50rpx;
+  height: 50rpx;
+  /* border-radius: 40rpx; */
+}
+.search-button {
+  width: 130rpx;
+  text-align: center;
+  line-height: 66rpx;
+  font-size: 30rpx;
+  background-color: orange;
+  border-radius: 40rpx;
+}
+.no-finding {
+  position: relative;
+  font-size: 30rpx;
+  color: rgb(75, 74, 74);
+  top: 100rpx;
+  left: 280rpx;
+}
+/* 搜索结果列表 */
+.search-result {
+  position: relative;
+  top: 60rpx;
+  left: 10rpx;
+  width: 670rpx;
+  height: 180rpx;
+  border: solid 1px #e9e8e8;
+  border-radius: 25rpx;
+  margin: 20rpx 32rpx 20rpx 28rpx;
+  display: flex;
+}
+.left_part {
+  margin-left: 20rpx;
+  width: 220rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.canteen_image {
+  width: 220rpx;
+  height: 124rpx;
+  margin-top: 14rpx;
+  border-radius: 20rpx;
+}
+/* 距离地址 */
+.canteen_distance {
+  width: 220rpx;
+  height: 40rpx;
+  display: flex;
+  justify-content: space-between;
+
+}
+.location_icon {
+  width:30rpx;
+  height:30rpx;
+}
+.location {
+  font-size: 24rpx; 
+}
+.distance {
+  font-size: 26rpx;
+}
+/* 左部结束 中部开始*/
+.middle_part {
+  width: 280rpx;
+  height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10rpx 0 10rpx 30rpx;
+}
+.canteen_name {
+  font-size: 34rpx;
+  height: 48rpx;
+  font-weight: 600;
+  color: orange;
+}
+.comment_score {
+  width: 280rpx;
+  height: 40rpx;
+  font-size: 26rpx;
+  color: orange;
+}
+.comment_icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  position: relative;
+  top: 4rpx;
+}
+.time {
+  height: 40rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: rgba(248, 191, 84,0.6);
+}
+.comment {
+  height: 36rpx;
+  font-size: 26rpx;
+  color: #e45252;
+  opacity: 76%;
+  font-weight: 600;
+}
