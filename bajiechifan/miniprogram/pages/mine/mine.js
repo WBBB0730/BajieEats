@@ -84,9 +84,9 @@ Page({
         url: '../Notice_for_Lost/Notice_for_Lost',
       })
     }
-    else if(e.currentTarget.dataset.type=='我的关注'){
+    else if(e.currentTarget.dataset.type=='我的收藏'){
       wx.navigateTo({
-        url: '../Follow/Follow',
+        url: '../myFavorites/myFavorites',
       })
     }
   },
