@@ -1,0 +1,30 @@
+<view class="comment">
+  <view class="dish">
+   <image class="dish-photo" src="{{item.dishInfo.dishImage}}"></image>
+   <view class="dish-info">
+      <text class="canteen-name">{{item.dishInfo.dishName}}</text>
+      <text class="window-dish">{{item.dishInfo.canteenName}} · {{item.dishInfo.winName}}</text>
+   </view>
+  </view>
+  <!-- 五星评分 -->
+  <view class="score">评分
+    <view class="five-stars">
+      <view wx:for="{{5}}">
+        <!-- <image wx:if="{{star>=index+1}}" data-star="{{index+1}}" class="color-star" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star 2@3x.png" catchtap="changeColor"></image>
+        <image wx:if="{{star<index+1}}" data-star="{{index+1}}" class="gray-star" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star@3x.png" catchtap="changeColor"></image> -->
+        <image data-star="{{index+1}}" class="color-star" src="{{(star>=index+1) ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star 2@3x.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star@3x.png'}}" catchtap="changeColor"></image>
+      </view>
+    </view>
+  </view>
+  <textarea class="comment-word" maxlength="200" placeholder="请在此输入你想发表的评价" bindinput="getCommentValue" model:value="{{commentValue}}"></textarea>
+  <view class="comment-photos">
+    <view wx:for="{{imgUrl}}">
+      <image src="{{item}}" class="comment-photo"></image>
+      <image  class="del-photo" catchtap="deletePhoto" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/382fa7d3619583c2d450d0f4e8b35df.png" data-i="{{index}}"></image>
+    </view>
+    <image wx:if="{{imgUrl.length<3}}" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/上传图片@3x.png" class="add-photo" catchtap="chooseImg"></image>
+  </view>
+</view>
+<view class="post" bindtap="submit">
+发布
+</view>

@@ -1,0 +1,81 @@
+.comment{
+  width:100%;
+  background-color: white;
+}
+.score{
+  margin: 0 0 30rpx 30rpx;
+  font-size: larger;
+  display: flex;
+}
+.five-stars{
+  display: flex;
+}
+.gray-star,.color-star{
+  width:46rpx;
+  height:46rpx;
+  margin-left: 30rpx;
+}
+.dish{
+  width: 692rpx;
+  height: 150rpx;
+  background-color: #E8E7E7;
+  position: relative;
+  left:26rpx;
+  display: flex;
+  margin-bottom: 35rpx;
+}
+.dish-photo{
+  background-color: green;
+  width:100rpx;
+  height:100rpx;
+  margin: 25rpx;
+}
+.dish-info{
+  display: flex;
+  flex-direction: column;
+  height: 90rpx;
+  justify-content: space-between;
+  margin-top: 25rpx;
+  padding: 5rpx;
+}
+.canteen-name{
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.window-dish{
+  font-size: 28rpx;
+}
+.comment-word{
+  width: 692rpx;
+  height: 200rpx;
+  margin: 0 30rpx 30rpx 30rpx;
+}
+.comment-photos{
+  display: flex;
+ 
+}
+.add-photo,.comment-photo{
+  width: 210rpx;
+  height: 210rpx;
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+  border-radius: 10rpx;
+}
+.del-photo{
+  width: 40rpx;
+  height: 40rpx;
+  position: fixed;
+  transform:translate(-28rpx,-10rpx)
+}
+.post{
+  width: 200rpx;
+  height: 100rpx;
+  background-color: #FFBF6B;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: larger;
+  border-radius: 60rpx;
+  position: relative;
+  top:60rpx;
+  left:226rpx
+}
