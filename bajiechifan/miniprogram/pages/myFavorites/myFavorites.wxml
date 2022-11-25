@@ -1,2 +1,54 @@
 <!--pages/myFavorites/myFavorrites.wxml-->
-<text>pages/myFavorites/myFavorrites.wxml</text>
+<!-- 顶栏 -->
+<view id="top">
+  <view id="options">
+    <!-- 筛选按钮 -->
+    <view id="filter-button" catchtap="filter">
+      <text class="{{(page_state == 1) ? 'darkorange' : ''}}" id="filter-button-text">筛选</text>
+      <image id="filter-button-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/展开-1.png"></image>
+    </view>
+    <!-- 排序按钮 -->
+    <view id="sort-button" catchtap="sort">
+      <text class="{{(page_state == 2) ? 'darkorange' : ''}}" id="sort-button-text">{{sort_type_str[sort_type]}}</text>
+      <image id="sort-button-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/排序_降.png"></image>
+    </view>
+  </view>
+  <!-- 筛选选项 -->
+  <view id="filter" wx:if="{{page_state == 1}}">
+    <text>类型\n</text>
+    <view class="filter-options">
+      <view class="filter-option {{(types[0]) ? 'orange' : 'f6f6f6'}}" catchtap="filterType" data-type="0">餐厅</view>
+      <view class="filter-option {{(types[1]) ? 'orange' : 'f6f6f6'}}" catchtap="filterType" data-type="1">窗口</view>
+      <view class="filter-option {{(types[2]) ? 'orange' : 'f6f6f6'}}" catchtap="filterType" data-type="2">菜品</view>
+    </view>
+    <text>状态\n</text>
+    <view class="filter-options">
+      <view class="filter-option {{(status == 0) ? 'orange' : 'f6f6f6'}}" catchtap="filterStatus" data-status="0">全部</view>
+      <view class="filter-option {{(status == 1) ? 'orange' : 'f6f6f6'}}" catchtap="filterStatus" data-status="1">营业中/在售</view>
+    </view>
+    <text>距离\n</text>
+    <view class="filter-distance">
+      <view class="filter-option {{(distance == -1) ? 'orange' : 'f6f6f6'}}" catchtap="filterDistance" data-distance="-1">不限</view>
+      <view class="filter-option {{(distance == 500) ? 'orange' : 'f6f6f6'}}" catchtap="filterDistance" data-distance="500">500m</view>
+      <view class="filter-option {{(distance == 1000) ? 'orange' : 'f6f6f6'}}" catchtap="filterDistance" data-distance="1000">1km</view>
+      <view class="filter-option {{(distance == 2000) ? 'orange' : 'f6f6f6'}}" catchtap="filterDistance" data-distance="2000">2km</view>
+    </view>
+    <view id="filter-buttons">
+      <view class="filter-button" id="cancel-button" catchtap="cancel">取消</view>
+      <view class="filter-button" id="submit-button" catchtap="submit">确定</view>
+    </view>
+  </view>
+  <!-- 排序选项 -->
+  <view id="sort" wx:if="{{page_state == 2}}">
+    <view class="sort-option" catchtap="sortByTime">
+      <text class="{{(sort_type == 0 || sort_type == 1) ? 'darkorange' : ''}}">按收藏时间排序</text>
+    </view>
+    <view class="sort-option" catchtap="sortByName">
+      <text class="{{(sort_type == 2 || sort_type == 3) ? 'darkorange' : ''}}">按名称排序</text>
+    </view>
+    <view class="sort-option" catchtap="sortByDistance">
+      <text class="{{(sort_type == 4) ? 'darkorange' : ''}}">按距离排序</text>
+    </view>
+  </view>
+</view>
+<view id="mask" wx:if="{{page_state != 0}}" catchtap="cancel"></view>

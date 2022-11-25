@@ -22,16 +22,16 @@
     <!-- 位置信息 -->
     <view class="canteen-location-info">
       <view class="canteen-distance">
-        <image class="location-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位-3.png"></image>
+        <image class="location-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位.png"></image>
         <text class="canteen-distance">{{canteen_info.canteen_distance}}</text>
       </view>
       <text class="canteen-address">{{canteen_info.canteen_address}}</text>
       <view class="navigate-button">
-        <image class="navigate-button" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/导航-2.png"></image>
+        <image class="navigate-button" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/导航.png"></image>
         <text class="navigate-button">路线</text>
       </view>
       <view class="live-button">
-        <image class="live-button" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/实况-1.png"></image>
+        <image class="live-button" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/实况.png"></image>
         <text class="live-button">实况</text>
       </view>
     </view>

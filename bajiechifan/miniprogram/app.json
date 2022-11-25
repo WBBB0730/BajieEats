@@ -12,7 +12,7 @@
     "pages/comment/comment",
     "pages/myFavorites/myFavorites"
   ],
-  " permission": {
+  "permission": {
     "scope.userLocation": {
       "desc": "请求获取您的位置"
     }

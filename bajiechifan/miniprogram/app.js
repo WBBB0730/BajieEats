@@ -14,6 +14,12 @@ App({
       });
     }
 
-    this.globalData = {};
+    this.globalData = {
+      token: wx.getStorageSync('token')
+    };
+    console.log("token: " + this.globalData.token);
+  },
+  globalData: {
+    token: ''
   }
 });

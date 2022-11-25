@@ -126,7 +126,7 @@ Page({
     canteen_image_blur: 0,
     indicator_dots: true,
     autoplay: true,
-    window_height: px_to_rpx(wx.getSystemInfoSync().windowHeight),
+    window_height: 0,
     scroll_enabled: false,
     content_top: 10000,
   },
@@ -181,6 +181,10 @@ Page({
           floor_list: temp 
         })
       }
+    });
+
+    _this.setData({
+      window_height: px_to_rpx(wx.getSystemInfoSync().windowHeight)
     })
 
     // 获取内容部分顶部坐标
@@ -430,11 +434,14 @@ Page({
     }
   },
   //跳转
-  toDish(){
+  toDish: function(){
     wx.navigateTo({
       url: '/pages/dish/dish',
     })
-  }
+  },
+
+  // 收藏餐厅
+
 })
 
 function rpx_to_px(rpx) {
