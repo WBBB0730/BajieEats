@@ -10,10 +10,6 @@ public class CanteenListQueryDto implements Serializable {
 
     private double latitude;
 
-    private Integer pageIndex = 1;
-
-    private Integer pageSize = 10;
-
-    private String sortType = "score";
+    private Integer sortType = 0;
 
 }

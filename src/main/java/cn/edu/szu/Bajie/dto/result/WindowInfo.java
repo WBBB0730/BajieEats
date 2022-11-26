@@ -12,5 +12,7 @@ public class WindowInfo {
 
     private Integer openingStatus;
 
+    private Integer isCollected;
+
     private List<Dish> dishList;
 }

@@ -18,6 +18,8 @@ import java.util.List;
 @Data
 public class DishDetailResultDto extends Dish implements Serializable {
 
-    List<DishUrl> urlList;
+    private List<DishUrl> urlList;
+
+    private Integer isCollected;
 
 }

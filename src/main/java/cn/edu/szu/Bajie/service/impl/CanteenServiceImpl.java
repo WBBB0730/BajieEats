@@ -44,7 +44,10 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
     public List<SimpleCanteenResultDto> list(CanteenListQueryDto dto) {
 
         return this.getBaseMapper()
-                .getCanteens(dto.getPageIndex(),dto.getPageSize(), dto.getSortType(),dto.getLongitude(),dto.getLatitude());
+                .getCanteens(
+                        dto.getSortType(),
+                        dto.getLongitude(),
+                        dto.getLatitude());
 
     }
 
@@ -87,7 +90,8 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
             map.get(item.getFloorName()).add(windowsService.getWinInfo(item.getWinId()));
         });
 
-        return map.entrySet().stream()
+        return map.entrySet()
+                .stream()
                 // 转为结果类
                 .map((item)->new FloorsInfoResultDto(item.getKey(),item.getValue()))
                 // 按照楼层名字排序

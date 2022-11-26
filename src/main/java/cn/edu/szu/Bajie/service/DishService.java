@@ -1,5 +1,6 @@
 package cn.edu.szu.Bajie.service;
 
+import cn.edu.szu.Bajie.dto.result.BriefDishResultDto;
 import cn.edu.szu.Bajie.dto.result.DishDetailResultDto;
 import cn.edu.szu.Bajie.dto.result.SimpleDishResultDto;
 import cn.edu.szu.Bajie.entity.Dish;

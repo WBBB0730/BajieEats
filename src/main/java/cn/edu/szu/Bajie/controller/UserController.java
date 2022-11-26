@@ -12,6 +12,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -59,5 +60,24 @@ public class UserController {
         // 更新
         userService.update(user, wrapper);
         return CommonResult.success("更新成功");
+    }
+
+    /**
+     * 获取用户信息
+     * @param response
+     * @return
+     */
+    @GetMapping
+    public CommonResult<User> getUserInfo(HttpServletResponse response){
+
+        String userId = response.getHeader("userId");
+
+        User user = userService.getOne(
+                new LambdaQueryWrapper<User>()
+                        .eq(User::getOpenId, userId)
+        );
+
+        return CommonResult.success(user);
+
     }
 }

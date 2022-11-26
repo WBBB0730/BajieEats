@@ -102,5 +102,23 @@ public class CommentController {
     }
 
 
+    @DeleteMapping
+    public CommonResult<String> delete(@RequestParam("commentId") Integer commentId,HttpServletResponse response){
+
+        String userId = response.getHeader("userId");
+
+        commentService.remove(
+                new LambdaQueryWrapper<Comment>()
+                        .eq(Comment::getCommentId,commentId)
+                        .eq(Comment::getOpenId,userId)
+        );
+
+        commentUrlService.remove(
+                new LambdaQueryWrapper<CommentUrl>()
+                        .eq(CommentUrl::getCommentId,commentId)
+        );
+        return CommonResult.success("删除成功");
+
+    }
 
 }

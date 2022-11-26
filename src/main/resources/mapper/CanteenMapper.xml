@@ -44,7 +44,8 @@
                 announce,
                  st_distance(
 
-                         POINT(canteen_position_longitude,canteen_position_latitude),
+                         POINT(canteen_position_longitude,
+                             canteen_position_latitude),
 
                          POINT(#{longitude},#{latitude})
 
@@ -53,11 +54,17 @@
              FROM canteen) tmp
 
         ORDER BY tmp.sort asc
-        <if test="'score'.equals(sortType)">
+        <if test="sortType == 0">
+            ,tmp.score asc
+        </if>
+        <if test="sortType == 1">
             ,tmp.score desc
         </if>
-        <if test="'distance'.equals(sortType)">
-            ,tmp.distance asc
+        <if test="sortType == 2">
+            ,tmp.distance desc
+        </if>
+        <if test="sortType == 3">
+            ,tmp.distance desc
         </if>
     </select>
 </mapper>

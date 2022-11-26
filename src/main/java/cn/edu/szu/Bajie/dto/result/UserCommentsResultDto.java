@@ -36,11 +36,11 @@ public class UserCommentsResultDto extends Comment implements Serializable {
      */
     private String canteenAddress;
 
+
     /**
      * 窗口名
      */
     private String winName;
-
 
     /**
      * 菜品名

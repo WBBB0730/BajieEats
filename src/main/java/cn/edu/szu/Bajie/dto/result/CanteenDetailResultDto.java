@@ -12,5 +12,7 @@ public class CanteenDetailResultDto extends Canteen {
 
     List<CanteenUrl> canteenUrls;
 
+    private Integer isCollected;
+
 
 }

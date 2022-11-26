@@ -1,10 +1,12 @@
 package cn.edu.szu.Bajie.service.impl;
 
 import cn.edu.szu.Bajie.converter.DishConverter;
+import cn.edu.szu.Bajie.dto.result.BriefDishResultDto;
 import cn.edu.szu.Bajie.dto.result.DishDetailResultDto;
 import cn.edu.szu.Bajie.dto.result.SimpleDishResultDto;
 import cn.edu.szu.Bajie.entity.DishUrl;
 import cn.edu.szu.Bajie.service.DishUrlService;
+import cn.edu.szu.Bajie.service.WindowsService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.szu.Bajie.entity.Dish;
@@ -59,6 +61,9 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
 
         return resultDto;
     }
+
+
+
 }
 
 
