@@ -18,13 +18,12 @@ Page({
       url: 'http://114.132.234.161:8888/bajie/canteen/list',
       method: 'POST',
       data: {
-        "pageIndex": "1",
-        "pageSize": "10",
-        "sortType": "score",
+        "sortType": 0,
         "longitude": 8,
         "latitude": 82
         },
       header: {
+        token: '',
         'contebt-Type':'application/x-www-form-urlencoded' 
       },
       success(res){
@@ -58,9 +57,9 @@ Page({
       }
     })
   },
-  toCanteenDetail(){
+  toCanteenDetail(e){
     wx.navigateTo({
-      url: '/pages/canteenDetails/canteenDetails',
+      url: '/pages/canteenDetails/canteenDetails?id=' + e.currentTarget.dataset.id,
     })
   },
   clickCollection: function (e){

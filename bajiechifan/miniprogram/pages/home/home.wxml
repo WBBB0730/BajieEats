@@ -10,7 +10,7 @@
 	<!-- 轮播图 -->
 	<view class="index_swiper">
 		<swiper circular indicator-dots="{{true}}" autoplay interval="3000" indicator-color="white" indicator-active-color="orange">
-			<swiper-item wx:for="{{swiperList}}">
+			<swiper-item wx:for="{{swiperList}}" wx:key="index">
 				<image src="{{item.bannerUrl}}" class="swiper_image" wx:key="{{item.bannerId}}"></image>
 			</swiper-item>
 		</swiper>
@@ -37,7 +37,7 @@
       <text class="title">餐厅列表</text>
       <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/排序_升.png" class="sort_icon"></image>
     </view>
-    <view class="canteen_list" wx:for="{{canteen_list}}" wx:key="{{item.canteenId}}" wx:for-index="i" bindtap="toCanteenDetail">
+    <view class="canteen_list" wx:for="{{canteen_list}}" wx:key="canteenId" wx:for-index="i" wx:key="index" bindtap="toCanteenDetail" data-id="{{item.canteenId}}">
       <view class="left_part">
           <image class="canteen_image" src="{{item.mainImage}}"></image>
           <view class="canteen_distance">
