@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.szu.Bajie.mapper.CollectionMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.Collection">
+            <id property="collectId" column="collect_id" jdbcType="INTEGER"/>
+            <result property="collectType" column="collect_type" jdbcType="INTEGER"/>
+            <result property="targetId" column="target_id" jdbcType="INTEGER"/>
+            <result property="isCollected" column="is_collected" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="openId" column="open_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        collect_id,collect_type,target_id,
+        is_collected,create_time,update_time,
+        open_id
+    </sql>
+</mapper>
