@@ -16,19 +16,19 @@ import lombok.Data;
 @Data
 public class CommentUrl implements Serializable {
     /**
-     * 鏁版嵁id
+     * 数据id
      */
     @TableId(value = "data_id")
     private Integer dataId;
 
     /**
-     * 璇勮id
+     * 评论id
      */
     @TableField(value = "comment_id")
     private Integer commentId;
 
     /**
-     * 鍥剧墖url
+     * 评论照片url
      */
     @TableField(value = "url")
     private String url;

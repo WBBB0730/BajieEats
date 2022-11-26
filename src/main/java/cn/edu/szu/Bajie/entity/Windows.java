@@ -1,7 +1,9 @@
 package cn.edu.szu.Bajie.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -35,7 +37,7 @@ public class Windows implements Serializable {
      * 餐厅id
      */
     @TableField(value = "canteen_id")
-    private Integer canteenId;
+    private Long canteenId;
 
     /**
      * 楼层id
@@ -47,7 +49,6 @@ public class Windows implements Serializable {
      * 删除状态
      */
     @TableField(value = "delete_status")
-    @TableLogic
     private Integer deleteStatus;
 
     /**

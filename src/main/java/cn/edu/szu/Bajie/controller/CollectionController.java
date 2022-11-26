@@ -40,32 +40,13 @@ public class CollectionController {
     @PostMapping
     public CommonResult<String> add(@RequestBody @Validated CollectionAddDto dto, HttpServletResponse response){
 
-        String userId = response.getHeader("userId");
-
-        // 查询条件
-        LambdaQueryWrapper<Collection> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Collection::getOpenId,userId)
-                .eq(Collection::getCollectType,dto.getType())
-                .eq(Collection::getTargetId,dto.getTargetId());
-        // 准备实体
-        Collection collection = new Collection();
-        collection.setCollectType(dto.getType());
-        collection.setIsCollected(dto.getIsCollected());
-        collection.setOpenId(userId);
-        collection.setTargetId(dto.getTargetId());
-        // 保存或更新
-        collectionService.saveOrUpdate(collection,wrapper);
-
-        return  CommonResult.success("操作成功");
+        return null;
     }
 
 
     @PostMapping("/list")
     public CommonResult<List<Object>> list(@RequestBody @Validated CollectionsQueryDto dto,HttpServletResponse response){
-
-        String userId = response.getHeader("userId");
-
-        return CommonResult.success(collectionService.getCollections(dto,userId));
+        return null;
 
     }
 }

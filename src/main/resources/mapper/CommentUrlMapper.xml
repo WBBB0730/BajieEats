@@ -7,7 +7,7 @@
     <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.CommentUrl">
             <id property="dataId" column="data_id" jdbcType="INTEGER"/>
             <result property="commentId" column="comment_id" jdbcType="INTEGER"/>
-            <result property="url" column="url" jdbcType="CHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>

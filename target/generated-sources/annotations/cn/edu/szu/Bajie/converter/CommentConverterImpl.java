@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-22T10:49:56+0800",
+    date = "2022-11-26T16:37:09+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_281 (Oracle Corporation)"
 )
 @Component
@@ -26,9 +26,9 @@ public class CommentConverterImpl implements CommentConverter {
         userCommentsResultDto.setLikes( comment.getLikes() );
         userCommentsResultDto.setScore( comment.getScore() );
         userCommentsResultDto.setOpenId( comment.getOpenId() );
+        userCommentsResultDto.setDishId( comment.getDishId() );
         userCommentsResultDto.setCreateTime( comment.getCreateTime() );
         userCommentsResultDto.setUpdateTime( comment.getUpdateTime() );
-        userCommentsResultDto.setDishId( comment.getDishId() );
 
         return userCommentsResultDto;
     }

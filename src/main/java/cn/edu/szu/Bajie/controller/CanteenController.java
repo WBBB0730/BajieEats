@@ -36,9 +36,7 @@ public class CanteenController {
     @GetMapping
     public CommonResult<CanteenDetailResultDto> get(@RequestParam("canteenId") Integer canteenId){
 
-        CanteenDetailResultDto canteenInfo = canteenService.getCanteenInfo(canteenId);
-
-        return CommonResult.success(canteenInfo);
+        return null;
 
     }
 
@@ -51,9 +49,7 @@ public class CanteenController {
     @PostMapping("/list")
     public CommonResult<List<SimpleCanteenResultDto>> list(@RequestBody CanteenListQueryDto dto){
 
-        List<SimpleCanteenResultDto> list = canteenService.list(dto);
-
-        return CommonResult.success(list);
+        return null;
     }
 
     /**
@@ -64,8 +60,7 @@ public class CanteenController {
 
     @GetMapping("/getFloorList")
     public CommonResult<List<FloorsInfoResultDto>> getFloors(@RequestParam("canteenId") Integer canteenId){
-        List<FloorsInfoResultDto> result = canteenService.getFloorList(canteenId);
 
-        return CommonResult.success(result);
+        return null;
     }
 }

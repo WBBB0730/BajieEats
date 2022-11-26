@@ -35,12 +35,7 @@ public class UserController {
     @GetMapping("/login")
     public CommonResult<String> get(@RequestParam("code") String code){
 
-        String res = userService.login(code);
-
-        if("登录失败".equals(res)){
-            return CommonResult.failed(ResultCode.FAILED,res);
-        }
-        return CommonResult.success(res);
+        return null;
     }
 
     /**
@@ -51,13 +46,6 @@ public class UserController {
     @PostMapping("/updateUser")
     public CommonResult<String> update(@RequestBody User user, HttpServletRequest request){
 
-        // 获取用户id
-        String userId = request.getHeader("userId");
-
-        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(User::getOpenId,userId);
-        // 更新
-        userService.update(user, wrapper);
-        return CommonResult.success("更新成功");
+        return null;
     }
 }

@@ -46,14 +46,7 @@ public class CommentController {
     public CommonResult<CommonPage<Comment>> list(@RequestParam("dishId") Integer dishId,
                                      @RequestParam("pageIndex") Integer pageIndex,
                                      @RequestParam("pageSize") Integer pageSize){
-
-        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Comment::getDishId,dishId);
-        // 分页获取
-        Page<Comment> page = new Page<>(pageIndex, pageSize);
-        commentService.page(page,wrapper);
-
-        return CommonResult.success(CommonPage.restPage(page));
+        return null;
     }
 
     /**
@@ -66,39 +59,13 @@ public class CommentController {
     @PostMapping
     public CommonResult<String> add(@RequestBody CommentAddDto dto, HttpServletResponse response){
 
-        String userId = response.getHeader("userId");
-        // 准备实体类
-        Comment comment = new Comment();
-        comment.setContent(dto.getContent());
-        comment.setDishId(dto.getDishId());
-        comment.setLikes(0);
-        comment.setScore(dto.getScore());
-        comment.setOpenId(userId);
-        // 保存
-        commentService.save(comment);
-
-        // 保存url
-        List<CommentUrl> urlList = dto.getCommentUrls()
-                .stream()
-                .map(url -> {
-                    CommentUrl commentUrl = new CommentUrl();
-                    commentUrl.setCommentId(comment.getCommentId());
-                    commentUrl.setUrl(url);
-                    return commentUrl;
-                }).collect(Collectors.toList());
-
-        commentUrlService.saveBatch(urlList);
-
-        return CommonResult.success("添加成功");
+        return null;
 
     }
 
     @GetMapping("/user")
     public CommonResult<List<UserCommentsResultDto>> userComments(HttpServletResponse response){
-
-        String userId = response.getHeader("userId");
-
-        return CommonResult.success(commentService.getUserComments(userId));
+        return null;
     }
 
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * @author Whitence
 * @description 针对表【banner(轮播图)】的数据库操作Service实现
-* @createDate 2022-11-09 15:43:53
+* @createDate 2022-11-26 17:14:25
 */
 @Service
 public class BannerServiceImpl extends ServiceImpl<BannerMapper, Banner>

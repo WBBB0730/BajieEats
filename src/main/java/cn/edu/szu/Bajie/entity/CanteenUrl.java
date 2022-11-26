@@ -18,7 +18,7 @@ public class CanteenUrl implements Serializable {
     /**
      * 数据id
      */
-    @TableId(value = "data_id")
+    @TableId(value = "data_id", type = IdType.AUTO)
     private Integer dataId;
 
     /**

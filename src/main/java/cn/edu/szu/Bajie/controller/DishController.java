@@ -32,9 +32,7 @@ public class DishController {
     @GetMapping("/list")
     public CommonResult<List<Dish>> list(@RequestParam("winId") Integer winId){
 
-        List<Dish> dishList = dishService.getDishList(winId);
-
-        return CommonResult.success(dishList);
+        return null;
 
     }
 
@@ -45,10 +43,7 @@ public class DishController {
      */
     @GetMapping
     public CommonResult<DishDetailResultDto> get(@RequestParam("dishId") Integer dishId){
-
-        DishDetailResultDto dishDetail = dishService.getDishDetail(dishId);
-
-        return CommonResult.success(dishDetail);
+        return null;
 
     }
 

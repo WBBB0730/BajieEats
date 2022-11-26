@@ -25,7 +25,7 @@ public class DishUrl implements Serializable {
      * 菜品id
      */
     @TableField(value = "dish_id")
-    private Integer dishId;
+    private Long dishId;
 
     /**
      * 菜品图片url

@@ -63,8 +63,52 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
+                  <option name="className" value="Banner" />
+                  <option name="tableName" value="banner" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="Canteen" />
+                  <option name="tableName" value="canteen" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="CanteenDynamic" />
+                  <option name="tableName" value="canteen_dynamic" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="CanteenUrl" />
+                  <option name="tableName" value="canteen_url" />
+                </TableUIInfo>
+                <TableUIInfo>
                   <option name="className" value="Collection" />
                   <option name="tableName" value="collection" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="Comment" />
+                  <option name="tableName" value="comment" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="CommentUrl" />
+                  <option name="tableName" value="comment_url" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="Dish" />
+                  <option name="tableName" value="dish" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="DishDynamic" />
+                  <option name="tableName" value="dish_dynamic" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="DishUrl" />
+                  <option name="tableName" value="dish_url" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="User" />
+                  <option name="tableName" value="user" />
+                </TableUIInfo>
+                <TableUIInfo>
+                  <option name="className" value="Windows" />
+                  <option name="tableName" value="windows" />
                 </TableUIInfo>
               </list>
             </option>

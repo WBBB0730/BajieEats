@@ -6,7 +6,7 @@
 
     <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.DishUrl">
             <id property="dataId" column="data_id" jdbcType="INTEGER"/>
-            <result property="dishId" column="dish_id" jdbcType="INTEGER"/>
+            <result property="dishId" column="dish_id" jdbcType="BIGINT"/>
             <result property="url" column="url" jdbcType="CHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>

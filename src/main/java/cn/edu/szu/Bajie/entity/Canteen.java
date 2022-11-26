@@ -1,14 +1,16 @@
 package cn.edu.szu.Bajie.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 餐厅表
+ * 餐厅基本信息表
  * @TableName canteen
  */
 @TableName(value ="canteen")
@@ -18,7 +20,7 @@ public class Canteen implements Serializable {
      * 餐厅id
      */
     @TableId(value = "canteen_id", type = IdType.AUTO)
-    private Integer canteenId;
+    private Long canteenId;
 
     /**
      * 餐厅名
@@ -57,35 +59,10 @@ public class Canteen implements Serializable {
     private String openingTime;
 
     /**
-     * 推荐状态
-     */
-    @TableField(value = "recommend_status")
-    private Integer recommendStatus;
-
-    /**
      * 删除状态
      */
     @TableField(value = "delete_status")
-    @TableLogic
     private Integer deleteStatus;
-
-    /**
-     * 排序
-     */
-    @TableField(value = "sort")
-    private Integer sort;
-
-    /**
-     * 评分
-     */
-    @TableField(value = "score")
-    private BigDecimal score;
-
-    @TableField(value = "is_opening")
-    private Integer isOpening;
-
-    @TableField(value = "announce")
-    private String announce;
 
     /**
      * 创建时间

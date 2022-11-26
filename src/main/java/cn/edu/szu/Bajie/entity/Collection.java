@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -33,7 +31,7 @@ public class Collection implements Serializable {
      * 目标id
      */
     @TableField(value = "target_id")
-    private Integer targetId;
+    private Long targetId;
 
     /**
      * 是否收藏
@@ -42,13 +40,16 @@ public class Collection implements Serializable {
     private Integer isCollected;
 
     /**
+     * 用户id
+     */
+    @TableField(value = "open_id")
+    private String openId;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time")
     private Date createTime;
-
-    @TableField(value = "open_id")
-    private String openId;
 
     /**
      * 更新时间
@@ -58,47 +59,4 @@ public class Collection implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
-    @AllArgsConstructor
-    public static enum CollectionType{
-        // 餐厅
-        CANTEEN(0),
-        // 窗口
-        WINDOW(1),
-        // 菜品
-        DISH(2);
-
-        private int value;
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    @AllArgsConstructor
-    public static enum CollectionSortType{
-        // 时间
-        TIME(0),
-        // 名字
-        NAME(1),
-        // 距离
-        DISTANCE(2);
-
-        private int value;
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    public interface ICollectionHelper{
-
-        double getDistance();
-
-        long getTimeStamp();
-
-        String getName();
-
-    }
-
 }
