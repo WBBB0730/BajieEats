@@ -15,6 +15,6 @@ public class CollectionAddDto implements Serializable {
 
     private Integer targetId;
 
-    @ValidatorDiy(message = "收藏标志只能是0或者1",methodNames = "checkIsCollected",predicts = CustomizeValidator.class)
-    private Integer isCollected;
+//    @ValidatorDiy(message = "收藏标志只能是0或者1",methodNames = "checkIsCollected",predicts = CustomizeValidator.class)
+//    private Integer isCollected;
 }

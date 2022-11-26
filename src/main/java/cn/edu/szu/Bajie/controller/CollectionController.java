@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.List;
+import java.util.Objects;
+
 /**
  * @description: TODO
  * @author hjc
@@ -47,12 +49,20 @@ public class CollectionController {
         wrapper.eq(Collection::getOpenId,userId)
                 .eq(Collection::getCollectType,dto.getType())
                 .eq(Collection::getTargetId,dto.getTargetId());
-        // 准备实体
-        Collection collection = new Collection();
-        collection.setCollectType(dto.getType());
-        collection.setIsCollected(dto.getIsCollected());
-        collection.setOpenId(userId);
-        collection.setTargetId(dto.getTargetId());
+
+        Collection collection = collectionService.getOne(wrapper);
+
+        if(Objects.isNull(collection)){
+            // 准备实体
+             collection = new Collection();
+            collection.setCollectType(dto.getType());
+            collection.setOpenId(userId);
+            collection.setTargetId(dto.getTargetId());
+            collection.setIsCollected(0);
+        }
+
+        collection.setIsCollected(collection.getIsCollected()^1);
+
         // 保存或更新
         collectionService.saveOrUpdate(collection,wrapper);
 
