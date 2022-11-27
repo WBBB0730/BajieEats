@@ -1,28 +1,44 @@
 <custom-component></custom-component>
-<view wx:for="{{commentList}}" class="comment">
+<view wx:for="{{commentList}}" wx:for-item="pro" class="comment">
+  <!-- 用户头像，昵称显示 -->
   <view class="user-info">
-  <image src="{{item.avatarUrl}}" class="user-photo"></image>
-  <text class="user-name">{{item.nickName}}</text>
+    <image src="{{avatarUrl}}" class="user-photo"></image>
+    <text class="user-name">{{nickName}}</text>
   </view>
+  <!-- 展示上传的评论图片 -->
+  <view class="comment-photos">
+    <view wx:for="{{pro.commentUrls}}">
+      <image wx:if="{{pro.commentUrls.length>0}}" class="comment-photo" src="{{item}}"></image>
+    </view>
+  </view>
+  <!-- 展示评价内容 -->
   <view class="user-comment">
-  {{item.content}}
+    {{pro.content}}
   </view>
+  <!-- 展示评分 -->
   <view class="score">
-  评分
+    评分
+    <view class="five-stars">
+      <view wx:for="{{5}}">
+        <image class="color-star" src="{{(pro.score>=index+1) ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star 2@3x.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star@3x.png'}}"></image>
+      </view>
+    </view>
   </view>
-  <view class="dish">
-   <image class="dish-photo" src="{{item.dishInfo.dishImage}}"></image>
-   <view class="dish-info">
-      <text class="canteen-name">{{item.dishInfo.canteenName}}({{item.dishInfo.canteenAddress}})</text>
-      <text class="window-dish">{{item.dishInfo.winName}} · {{item.dishInfo.dishName}}</text>
-   </view>
+  <!-- 展示菜品信息 -->
+  <view class="dish" catchtap="toDish" data-dishId = "{{pro.dishId}}">
+    <image class="dish-photo" src="{{pro.dishImage}}"></image>
+    <view class="dish-info">
+      <text class="canteen-name">{{pro.dishName}}</text>
+      <text class="window-dish">{{pro.canteenName}} · {{pro.winName}}</text>
+    </view>
   </view>
-  <view class="post-time" bindtap="test">发布于{{item.createTime}}</view>
+  <!-- 底部 -->
+  <view class="post-time">发布于 {{pro.createTime}}</view>
   <view class="bottom">
     <view class="like">
-    <image class="like-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-good-job@3x.png"></image>
-    <text class="like-num">{{item.likes}}</text>
+      <image class="like-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-good-job@3x.png"></image>
+      <text class="like-num">{{pro.likes}}</text>
     </view>
-    <image class="more" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arcoDesign-more@3x.png"></image>
+    <image class="more" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arcoDesign-more@3x.png" bindtap="more" data-id="{{pro.commentId}}"></image>
   </view>
 </view>

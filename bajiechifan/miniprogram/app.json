@@ -10,7 +10,8 @@
     "pages/information/information",
     "pages/social/social",
     "pages/comment/comment",
-    "pages/myFavorites/myFavorites"
+    "pages/myFavorites/myFavorites",
+    "pages/postComment/postComment"
   ],
   "permission": {
     "scope.userLocation": {

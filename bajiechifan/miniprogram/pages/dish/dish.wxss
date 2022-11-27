@@ -316,3 +316,16 @@
   border-radius: 5%;
   margin: 0 20rpx 0 0;
 }
+.post-comment {
+  position: fixed;
+  width: 212rpx;
+  height : 70rpx;
+  border-radius: 38rpx;
+  border: 2rpx solid gray;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 70rpx;
+  background-color: white;
+  top:88%;
+  left:37%
+}

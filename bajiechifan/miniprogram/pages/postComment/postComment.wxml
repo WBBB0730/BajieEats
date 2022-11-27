@@ -1,17 +1,15 @@
 <view class="comment">
-  <view class="dish">
-   <image class="dish-photo" src="{{item.dishInfo.dishImage}}"></image>
+  <view class="dish" bindtap="toDish">
+   <image class="dish-photo" src="{{dishImage}}"></image>
    <view class="dish-info">
-      <text class="canteen-name">{{item.dishInfo.dishName}}</text>
-      <text class="window-dish">{{item.dishInfo.canteenName}} · {{item.dishInfo.winName}}</text>
+      <text class="canteen-name">{{dishName}}</text>
+      <text class="window-dish">{{canteenName}} · {{winName}}</text>
    </view>
   </view>
   <!-- 五星评分 -->
   <view class="score">评分
     <view class="five-stars">
       <view wx:for="{{5}}">
-        <!-- <image wx:if="{{star>=index+1}}" data-star="{{index+1}}" class="color-star" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star 2@3x.png" catchtap="changeColor"></image>
-        <image wx:if="{{star<index+1}}" data-star="{{index+1}}" class="gray-star" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star@3x.png" catchtap="changeColor"></image> -->
         <image data-star="{{index+1}}" class="color-star" src="{{(star>=index+1) ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star 2@3x.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star@3x.png'}}" catchtap="changeColor"></image>
       </view>
     </view>

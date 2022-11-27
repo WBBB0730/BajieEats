@@ -1,6 +1,5 @@
 .comment {
   width: 752rpx;
-  height:600rpx;
   position: relative;
   background-color: white;
   margin-top: 24rpx;
@@ -21,6 +20,14 @@
 .user-name{
   font-size: 32rpx;
 }
+.comment-photos{
+  display: flex;
+}
+.comment-photo{
+  width: 210rpx;
+  height: 210rpx;
+  margin: 30rpx 0 30rpx 30rpx;
+}
 .user-comment{
   position: relative;
   left: 30rpx;
@@ -32,6 +39,16 @@
 }
 .score{
   margin: 0 0 30rpx 30rpx;
+  display: flex;
+  font-size: large;
+}
+.five-stars{
+  display: flex;
+}
+.color-star{
+  width:46rpx;
+  height:46rpx;
+  margin-left: 30rpx;
 }
 .dish{
   width: 692rpx;

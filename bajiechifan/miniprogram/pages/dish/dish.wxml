@@ -29,7 +29,7 @@
       <view class="detail-word-active">详情</view>
       <view class="comment-word" bindtap="toComment">评价</view>
       <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png" class="comment-icon"></image>
-      <text class="comment-point">4.7</text>
+      <text class="comment-point">{{score}}</text>
     </view>
     <view class="detail-content">
       <text class="introduce">主料：</text>
@@ -39,13 +39,14 @@
       <text class="introduce-content">{{dishType}}</text>
     </view>
   </view>
+  <!-- 菜品评价入口 -->
   <view class="detail-comment-card" wx:if="{{cardType==0}}">
     <view class="card-title" bindtap="toComment">
       <text class="comment-title">菜品评价</text>
-      <text class="comment-number">(共32条评论)</text>
+      <text class="comment-number">(共{{commentListNum}}条评论)</text>
       <image class="right-arrow" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/antOutline-right@3x.png"></image>
     </view>
-    <view class="comment-info" wx:for="{{commentList}}">
+    <view class="comment-info" wx:for="{{commentList}}" key="{{commentId}}" wx:if="{{index<2}}">
       <view class="left-part">
         <image src="{{item.avatarUrl}}" class="user-photo"></image>
       </view>
@@ -54,9 +55,9 @@
         <view class="comment-sentence">{{item.content}}</view>
         <!-- 判断完善 -->
         <view class="comment-photos">
-          <image src="https://img1.baidu.com/it/u=1352581799,791408713&fm=253&fmt=auto&app=138&f=JPEG?w=742&h=500" class="comment-photo"></image>
-          <!-- <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄.jpeg" class="comment-photo"></image>
-          <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄.jpeg" class="comment-photo"></image> -->
+          <view wx:for="{{item.commentUrls}}" wx:for-item="pro">
+            <image src="{{pro}}" class="comment-photo"></image>
+          </view>
         </view>
       </view>
       <view class="right-part">{{item.createTime}}</view>
@@ -94,12 +95,13 @@
         <view class="comment-sentence">{{item.content}}</view>
         <!-- 判断完善 -->
         <view class="comment-photos">
-          <!-- <image src="{{item.pro.commentPhoto}}" class="comment-photo" wx:for="{{item.commentPhotos}}" wx:for-item="pro" style="background-color: blue ;"></image>
-          <view wx:for="{{item.commentPhoto}}" wx:for-item="pro">{{item.commentPhotos}}</view> -->
-          <image src="https://img1.baidu.com/it/u=1352581799,791408713&fm=253&fmt=auto&app=138&f=JPEG?w=742&h=500" class="comment-photo"></image>
+          <view wx:for="{{item.commentUrls}}" wx:for-item="pro">
+            <image src="{{pro}}" class="comment-photo"></image>
+          </view>
         </view>
       </view>
       <view class="right-part">{{item.createTime}}</view>
     </view>
   </view>
+  <view class="post-comment" bindtap="toPost">点我说两句~</view>
 </view>
