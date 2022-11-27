@@ -67,6 +67,7 @@ Page({
     wx.chooseMedia({
       count: 3,
       sourceType: ['album', 'camera'],
+      mediaType:['image'],
       camera: 'back',
       success(res) {
         console.log(res, 'chooseMedia');

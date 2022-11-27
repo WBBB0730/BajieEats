@@ -102,5 +102,17 @@ Page({
     wx.navigateTo({
       url: '/pages/dish/dish?id=' + i,
     })
+  },
+  bigImg(e) {
+    let i = e.currentTarget.dataset.index;
+    console.log(i,'photoIndex');
+    let j = e.currentTarget.dataset.commentindex;
+    console.log(j,'commentIndex');
+    let commentUrls = this.data.commentList[j].commentUrls;
+    console.log(commentUrls);
+    wx.previewImage({
+      current: commentUrls[i],
+      urls: commentUrls
+    })
   }
 })

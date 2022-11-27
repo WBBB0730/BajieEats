@@ -1,5 +1,5 @@
 <custom-component></custom-component>
-<view wx:for="{{commentList}}" wx:for-item="pro" class="comment">
+<view wx:for="{{commentList}}" wx:for-item="pro" class="comment" wx:for-index="commentIndex">
   <!-- 用户头像，昵称显示 -->
   <view class="user-info">
     <image src="{{avatarUrl}}" class="user-photo"></image>
@@ -8,7 +8,7 @@
   <!-- 展示上传的评论图片 -->
   <view class="comment-photos">
     <view wx:for="{{pro.commentUrls}}">
-      <image wx:if="{{pro.commentUrls.length>0}}" class="comment-photo" src="{{item}}" mode="aspectFill"></image>
+      <image class="comment-photo" src="{{item}}" mode="aspectFill" bindtap="bigImg" data-index="{{index}}" data-commentIndex="{{commentIndex}}"></image>
     </view>
   </view>
   <!-- 展示评价内容 -->

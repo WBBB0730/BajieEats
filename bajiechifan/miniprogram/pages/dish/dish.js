@@ -123,11 +123,13 @@ Page({
       }
     })
   },
+  //切换至详情卡片
   toDetail(e) {
     this.setData({
       cardType: 0
     })
   },
+  //切换至评价卡片
   toComment(e) {
     this.setData({
       cardType: 1
@@ -165,6 +167,7 @@ Page({
       dialogFlag: false
     })
   },
+  //发表评价
   toPost() {
     let _this = this;
     let app = getApp();
@@ -188,5 +191,18 @@ Page({
         }
       })
     }
+  },
+  //点击看大图
+  bigImg(e) {
+    let i = e.currentTarget.dataset.index;
+    console.log(i,'photoIndex');
+    let j = e.currentTarget.dataset.commentindex;
+    console.log(j,'commentIndex');
+    let commentUrls = this.data.commentList[j].commentUrls;
+    console.log(commentUrls);
+    wx.previewImage({
+      current: commentUrls[i],
+      urls: commentUrls
+    })
   }
 });
