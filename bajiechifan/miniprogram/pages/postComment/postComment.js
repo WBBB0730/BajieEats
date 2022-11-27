@@ -194,7 +194,7 @@ Page({
             star: 0,
             commentValue: ''
           })
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/comment/comment',
           })
         }
