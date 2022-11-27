@@ -1,64 +1,65 @@
 <!-- 首页 -->
 
 <view class="top_address" bindtap="moveToLocation">
-	<text class="address" style="font-size: 14px;"> 深圳大学沧海校区</text>
-	<view id="arrowHead"></view>
+  <text class="address" style="font-size: 14px;"> 深圳大学沧海校区</text>
+  <view id="arrowHead"></view>
 </view>
 <view class="search_input" catchtap="clickSearch">
-    <text class="search">点击搜索</text>
+  <text class="search">点击搜索</text>
 </view>
-	<!-- 轮播图 -->
-	<view class="index_swiper">
-		<swiper circular indicator-dots="{{true}}" autoplay interval="3000" indicator-color="white" indicator-active-color="orange">
-			<swiper-item wx:for="{{swiperList}}" wx:key="index">
-				<image src="{{item.bannerUrl}}" class="swiper_image" wx:key="{{item.bannerId}}"></image>
-			</swiper-item>
-		</swiper>
-	</view>
-	<!-- 轮播图结束 -->
-  <!-- 二级功能 -->
-  <view class="function_entries">
-      <view class="function_block">
-      <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/地图(Map)_爱给网_aigei_com.png" class="function_img"></image>
-      <text style="color:gray;font-size:12px">地 图</text>
-      </view>
-      <view class="function_block">
-      <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/爱心_爱给网_aigei_com.png" class="function_img"></image>
-      <text style="color:gray;font-size:12px">我的收藏</text>
-      </view>
-     <view class="function_block">
-      <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/失物招领-1.png" class="function_img"></image>
-      <text style="color:gray;font-size:12px">失物招领</text>
-      </view>
+<!-- 轮播图 -->
+<view class="index_swiper">
+  <swiper circular indicator-dots="{{true}}" autoplay interval="3000" indicator-color="white" indicator-active-color="orange">
+    <swiper-item wx:for="{{swiperList}}" wx:key="index">
+      <image src="{{item.bannerUrl}}" class="swiper_image" wx:key="{{item.bannerId}}"></image>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- 二级功能 -->
+<view class="function_entries">
+  <!-- 地图 -->
+  <view class="function_block">
+    <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/地图(Map)_爱给网_aigei_com.png" class="function_img"></image>
+    <text style="color:gray;font-size:12px">地 图</text>
   </view>
-  <!--餐厅列表-->
-  <view class="canteen_part">
-    <view class="title_part">
-      <text class="title">餐厅列表</text>
-      <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/排序_升.png" class="sort_icon"></image>
-    </view>
-    <view class="canteen_list" wx:for="{{canteen_list}}" wx:key="canteenId" wx:for-index="i" wx:key="index" bindtap="toCanteenDetail" data-id="{{item.canteenId}}">
-      <view class="left_part">
-          <image class="canteen_image" src="{{item.mainImage}}"></image>
-          <view class="canteen_distance">
-            <image class="location_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/iconPark-local@3x.png"></image>
-            <text class="location">沧海校区</text>
-            <text class="distance">100m</text>
-          </view>
-      </view>
-      <view class="middle_part">
-          <view class="canteen_name">{{item.canteenName}}</view>
-          <view class="comment_score">
-            <image class="comment_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png"></image>
-            <text class="comment_point">{{item.score}}</text>
-          </view>
-          <view class="time">{{item.openingTime}}</view>
-          <view class="comment">好吃，美味</view>
-      </view>
-      <view class="right_part">
-      <image class="collection_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/dislike@3x.png" catchtap="clickCollection" data-num="{{i}}" wx:if="{{!collectFlagArray[i]}}"></image>
-      <image class="collection_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png" catchtap="clickCollection" data-num="{{i}}"wx:if="{{collectFlagArray[i]}}"></image>
+  <!-- 我的收藏 -->
+  <view class="function_block" catchtap="toMyFavorites">
+    <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/爱心_爱给网_aigei_com.png" class="function_img"></image>
+    <text style="color:gray;font-size:12px">我的收藏</text>
+  </view>
+  <!-- 失物招领 -->
+  <view class="function_block">
+    <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/失物招领-1.png" class="function_img"></image>
+    <text style="color:gray;font-size:12px">失物招领</text>
+  </view>
+</view>
+<!--餐厅列表-->
+<view class="canteen_part">
+  <view class="title_part">
+    <text class="title">餐厅列表</text>
+    <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/排序_降.png" class="sort_icon"></image>
+  </view>
+  <view class="canteen_list" wx:for="{{canteen_list}}" wx:key="canteenId" wx:for-index="i" wx:key="index" bindtap="toCanteenDetail" data-id="{{item.canteenId}}">
+    <view class="left_part">
+      <image class="canteen_image" src="{{item.mainImage}}"></image>
+      <view class="canteen_distance">
+        <image class="location_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/iconPark-local@3x.png"></image>
+        <text class="location">沧海校区</text>
+        <text class="distance">100m</text>
       </view>
     </view>
+    <view class="middle_part">
+      <view class="canteen_name">{{item.canteenName}}</view>
+      <view class="comment_score">
+        <image class="comment_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png"></image>
+        <text class="comment_point">{{item.score}}</text>
+      </view>
+      <view class="time">{{item.openingTime}}</view>
+      <view class="comment">好吃，美味</view>
+    </view>
+    <view class="right_part">
+      <image class="collection_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/dislike@3x.png" catchtap="clickCollection" data-num="{{i}}" wx:if="{{!item.isCollected}}"></image>
+      <image class="collection_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png" catchtap="clickCollection" data-num="{{i}}" wx:if="{{item.isCollected}}"></image>
+    </view>
   </view>
-  
+</view>

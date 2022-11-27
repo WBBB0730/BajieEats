@@ -11,7 +11,7 @@
       <view class="left">
         <text class="dish-name">{{dishName}}</text>
         <view class="label-part">
-          <view wx:for="{{labelList}}" class="label">
+          <view wx:for="{{labelList}}" class="label" wx:key="index">
             <text class="label-name">{{item.name}}</text>
           </view>
         </view>
@@ -46,7 +46,7 @@
       <text class="comment-number">(共{{commentListNum}}条评论)</text>
       <image class="right-arrow" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/antOutline-right@3x.png"></image>
     </view>
-    <view class="comment-info" wx:for="{{commentList}}" key="{{commentId}}" wx:if="{{index<2}}">
+    <view class="comment-info" wx:for="{{commentList}}" wx:key="commentId" wx:if="{{index<2}}">
       <view class="left-part">
         <image src="{{item.avatarUrl}}" class="user-photo"></image>
       </view>
@@ -55,7 +55,7 @@
         <view class="comment-sentence">{{item.content}}</view>
         <!-- 判断完善 -->
         <view class="comment-photos">
-          <view wx:for="{{item.commentUrls}}" wx:for-item="pro">
+          <view wx:for="{{item.commentUrls}}" wx:for-item="pro" wx:key="index">
             <image src="{{pro}}" class="comment-photo"></image>
           </view>
         </view>
@@ -86,7 +86,7 @@
         <view class="agree-sort">按点赞数排序</view>
         <view class="time-sort">按时间排序</view>
     </view>
-    <view class="comment-info" wx:for="{{commentList}}">
+    <view class="comment-info" wx:for="{{commentList}}" wx:key="index">
       <view class="left-part">
         <image src="{{item.avatarUrl}}" class="user-photo"></image>
       </view>
@@ -95,7 +95,7 @@
         <view class="comment-sentence">{{item.content}}</view>
         <!-- 判断完善 -->
         <view class="comment-photos">
-          <view wx:for="{{item.commentUrls}}" wx:for-item="pro">
+          <view wx:for="{{item.commentUrls}}" wx:for-item="pro" wx:key="index">
             <image src="{{pro}}" class="comment-photo"></image>
           </view>
         </view>

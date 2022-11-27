@@ -19,54 +19,108 @@ Page({
     set: "设置",
   },
 
-  onLoad: function() {
+  onShow: function () {
     let _this = this;
-    let app = getApp();
-    console.log("token1:" + app.globalData.token);
-    if (app.globalData.token) {
+    let token = getApp().globalData.token;
+    if (token) {
       _this.setData({
         flag: 1
       });
+      let userInfo = wx.getStorageSync('userInfo');
+      if (!userInfo) {
+        console.log("用户信息已失效");
+        wx.request({
+          url: 'http://114.132.234.161:8888/bajie/user',
+          header: {
+            token: token
+          },
+          success: (res) => {
+            console.log(res);
+            wx.setStorageSync('userInfo', res.data.data);
+            userInfo = res.data.data;
+            _this.setData({
+              avatarUrl: userInfo.avatarUrl,
+              name: userInfo.nickName,
+            });
+          }
+        });
+      } else {
+        _this.setData({
+          avatarUrl: userInfo.avatarUrl,
+          name: userInfo.nickName,
+        });
+      }
     }
   },
 
   getUserProfile: function () {
     let _this = this;
-    wx.login({
-      success: (res) => {
-        if (res.code) {
-          wx.request({
-            url: 'http://114.132.234.161:8888/bajie/user/login',
-            data: {
-              code: res.code,
-            },
-            success: function (res) {
-              console.log(res);
-              wx.setStorageSync('token', res.data.data);
-            },
-          })
-        } else {
-          console.log('登录失败' + res.errMsg);
-        }
-      },
-    })
+    // 获取用户信息
     wx.getUserProfile({
-      desc: '你就说给不给吧',
+      desc: '获取用户头像、昵称',
       success: (res) => {
-        console.log('success', res)
-        wx.setStorage({
-          data: res.userInfo,
-          key: 'userInfo',
+        let userInfo = res.userInfo;
+        // 获取登录code
+        wx.login({
+          success: (res) => {
+            if (res.code) {
+              // 调用后端登录接口获取token
+              wx.request({
+                url: 'http://114.132.234.161:8888/bajie/user/login',
+                data: {
+                  code: res.code,
+                },
+                success: function (res) {
+                  if (res.data.code == 200) {
+                    let token = res.data.data;
+                    wx.setStorageSync('token', token);
+                    getApp().globalData.token = token;
+                    // 上传用户信息
+                    wx.request({
+                      url: 'http://114.132.234.161:8888/bajie/user/updateUser',
+                      method: 'POST',
+                      header: {
+                        token: token
+                      },
+                      data: {
+                        nickName: userInfo.nickName,
+                        avatarUrl: userInfo.avatarUrl
+                      },
+                      success: (res) => {
+                        if (res.data.code == 200) {
+                          console.log("用户信息上传成功");
+                        } else {
+                          console.log("用户信息上传失败");
+                        }
+                      }
+                    })
+                    wx.setStorageSync('userInfo', userInfo);
+                    _this.setData({
+                      flag: 1
+                    });
+                    _this.setData({
+                      avatarUrl: userInfo.avatarUrl,
+                      name: userInfo.nickName,
+                    })
+                  }
+                },
+                fail: function () {
+                  console.log("token获取失败")
+                }
+              })
+            } else {
+              console.log('登录失败' + res.errMsg);
+            }
+          },
         });
-        this.setData({
-          flag: 1
-        })
-        this.onShow();
+      },
+      fail: (res) => {
+        console.log("用户拒绝授权");
       }
     })
   },
 
-  Toinformation: function (e) {
+  toInformation: function (e) {
     wx.navigateTo({
       url: '../information/information',
     })
@@ -92,12 +146,4 @@ Page({
     }
   },
 
-  onShow: function () {
-    var useInfo = wx.getStorageSync('userInfo')
-    var that = this;
-    that.setData({
-      avatarUrl: useInfo.avatarUrl,
-      name: useInfo.nickName,
-    })
-  }
 })

@@ -7,12 +7,8 @@ Page({
   data: {
     state: "state-1",
     scrollTop: 0,
-    images: {
-      favorites_button: 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/dislike@3x.png',
-      favorites_button_unlit: 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/dislike@3x.png',
-      favorites_button_lit: 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png',
-    },
     canteen_info: {
+      canteen_id: "",
       canteen_images: [
         // 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/IMG_20221107_165024.jpg', 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/IMG_20221107_162531.jpg', 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/IMG_20221107_162419.jpg'
       ],
@@ -27,9 +23,11 @@ Page({
       floorIndex: 0,
       floorName: "1F",
       windowList: [{
+        windowIndex: 0,
         windowId: 0,
         windowName: "石锅菜",
         openingSataus: "营业中",
+        isCollected: false,
         dishList: [{
           dishName: "香芋排骨煲",
           price: "13",
@@ -121,7 +119,7 @@ Page({
     }],
     window_top_list: [],
     selected_floorIndex: 0,
-    selected_windowId: 0,
+    selected_windowIndex: 0,
     body_border_radius: 0,
     canteen_image_blur: 0,
     indicator_dots: true,
@@ -135,21 +133,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    var _this = this;
+    let _this = this;
+    _this.setData({
+      "canteen_info.canteen_id": options.id
+    })
+  },
 
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow() {
+    let _this = this;
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/canteen/',
       data: {
-        canteenId: 1
+        canteenId: _this.data.canteen_info.canteen_id
       },
       header: {
-        'contetnt-type': 'application/json'
+        'contetnt-type': 'application/json',
+        'token': getApp().globalData.token
       },
       success: (res) => {
         let data = res.data.data;
         let temp = this.data.canteen_info;
         temp.canteen_name = data.canteenName;
-        temp.canteen_id = data.canteenId;
+        temp.is_canteen_favored = data.isCollected;
         temp.canteen_address = data.canteenAddress;
         temp.canteen_business_hours = data.openingTime;
         temp.canteen_business_state = data.isOpening;
@@ -167,19 +182,23 @@ Page({
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/canteen/getFloorList',
       data: {
-        canteenId: 1
+        canteenId: _this.data.canteen_info.canteen_id
       },
       header: {
-        'contetnt-type': 'application/json'
+        'contetnt-type': 'application/json',
+        'token': getApp().globalData.token
       },
       success: (res) => {
         let temp = res.data.data;
         for (let i = 0; i < temp.length; i++) {
           temp[i].floorIndex = i;
+          for (let j = 0; j < temp[i].windowList.length; j++) {
+            temp[i].windowList[j].windowIndex = j;
+          }
         }
         _this.setData({
-          floor_list: temp 
-        })
+          floor_list: temp
+        });
       }
     });
 
@@ -212,7 +231,6 @@ Page({
     for (let i = 0; i < this.data.floor_list[this.data.selected_floorIndex].windowList.length; i++) {
       let window = this.data.floor_list[this.data.selected_floorIndex].windowList[i],
         _top;
-      var _this = this;
       this.setData({
         window_top_list: []
       });
@@ -222,40 +240,13 @@ Page({
         .select(".dish-list").scrollOffset()
         .exec(res => {
           let obj = {
-            id: window.windowId,
+            index: window.windowIndex,
             top: res[0].top - res[1].top + res[2].scrollTop
           };
           _this.data.window_top_list.push(obj);
           // console.log(_this.data.window_top_list);
         })
     };
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
 
   },
 
@@ -267,24 +258,10 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  },
-
-  /**
    * 用户滚动页面
    */
   onPageScroll: function (e) {
-    var _this = this;
+    let _this = this;
 
     // 滚动到顶部时显示圆点并开始自动播放
     if (e.scrollTop <= 0) {
@@ -356,9 +333,12 @@ Page({
 
   // 选择楼层
   selectFloor: function (e) {
-    this.setData({
-      selected_floorIndex: e.currentTarget.dataset.index,
-      selected_windowId: 0
+    let _this = this;
+    let floor_index = e.currentTarget.dataset.index;
+    let window = _this.data.floor_list[floor_index].windowList[0];
+    _this.setData({
+      selected_floorIndex: floor_index,
+      selected_windowIndex: 0
     });
     wx.pageScrollTo({
       scrollTop: this.data.content_top,
@@ -375,7 +355,6 @@ Page({
     for (let i = 0; i < this.data.floor_list[this.data.selected_floorIndex].windowList.length; i++) {
       let window = this.data.floor_list[this.data.selected_floorIndex].windowList[i],
         _top;
-      var _this = this;
       this.setData({
         window_top_list: []
       });
@@ -385,7 +364,7 @@ Page({
         .select(".dish-list").scrollOffset()
         .exec(res => {
           let obj = {
-            id: window.windowId,
+            index: window.windowIndex,
             top: res[0].top - res[1].top + res[2].scrollTop
           };
           _this.data.window_top_list.push(obj);
@@ -407,17 +386,89 @@ Page({
         console.log("选择:" + scroll_view.scrollEnabled);
       });
     this.setData({
-      selected_windowId: e.currentTarget.dataset.id
+      selected_windowIndex: e.currentTarget.dataset.index
     });
   },
 
   // 点击餐厅收藏按钮
-  change_canteen_favored: function () {
-    let obj = this.data.canteen_info;
-    obj.is_canteen_favored = !obj.is_canteen_favored;
-    this.setData({
-      canteen_info: obj
+  favorCanteen: function () {
+    let _this = this;
+    let token = getApp().globalData.token;
+    // 如果用户未登录
+    if (!token) {
+      console.log("登录后才可进行收藏");
+      return;
+    }
+    // 用户已登录
+    _this.setData({
+      "canteen_info.is_canteen_favored": !_this.data.canteen_info.is_canteen_favored
     });
+    wx.request({
+      url: 'http://114.132.234.161:8888/bajie/collection/',
+      method: 'POST',
+      header: {
+        'token': token
+      },
+      data: {
+        type: 0,
+        targetId: _this.data.canteen_info.canteen_id,
+        isCollected: _this.data.canteen_info.is_canteen_favored ? 1 : 0
+      },
+      success: (res) => {
+        console.log(res);
+        if (res.statusCode != 200) {
+          console.log("失败（收藏）", res)
+        }
+        if (_this.data.canteen_info.is_canteen_favored) {
+          console.log("收藏成功");
+        } else {
+          console.log("取消收藏成功");
+        }
+      }
+    })
+  },
+
+  // 点击窗口收藏按钮
+  favorWindow: function (e) {
+    let _this = this;
+    let floor_index = e.currentTarget.dataset.floor_index;
+    let window_index = e.currentTarget.dataset.window_index;
+    let window = _this.data.floor_list[floor_index].windowList[window_index];
+    console.log(e, window);
+    let token = getApp().globalData.token;
+    // 如果用户未登录
+    if (!token) {
+      console.log("登录后才可进行收藏");
+      return;
+    }
+    // 用户已登录
+    window.isCollected = !window.isCollected;
+    _this.setData({
+      ["floor_list[" + floor_index + "].windowList[" + window_index + "]"]: window
+    });
+    wx.request({
+      url: 'http://114.132.234.161:8888/bajie/collection/',
+      method: 'POST',
+      header: {
+        'token': token
+      },
+      data: {
+        type: 1,
+        targetId: window.windowId,
+        isCollected: window.isCollected ? 1 : 0
+      },
+      success: (res) => {
+        console.log(res);
+        if (res.statusCode != 200) {
+          console.log("失败（收藏）", res)
+        }
+        if (_this.data.canteen_info.is_canteen_favored) {
+          console.log("收藏成功");
+        } else {
+          console.log("取消收藏成功");
+        }
+      }
+    })
   },
 
   // 滚动菜品列表
@@ -425,22 +476,20 @@ Page({
     // console.log(e.detail.scrollTop);
     let length = this.data.window_top_list.length;
     for (let i = 0; i < length; i++) {
-      if (e.detail.scrollTop > this.data.window_top_list[i].top + rpx_to_px(5) && (i == length - 1 || e.detail.scrollTop < this.data.window_top_list[i + 1].top - rpx_to_px(5)) && this.data.window_top_list[i].id !== this.data.selected_windowId) {
+      if (e.detail.scrollTop > this.data.window_top_list[i].top + rpx_to_px(5) && (i == length - 1 || e.detail.scrollTop < this.data.window_top_list[i + 1].top - rpx_to_px(5)) && this.data.window_top_list[i].index !== this.data.selected_windowIndex) {
         this.setData({
-          selected_windowId: this.data.window_top_list[i].id
+          selected_windowIndex: this.data.window_top_list[i].index
         });
         break;
       }
     }
   },
   //跳转
-  toDish: function(){
+  toDish: function (e) {
     wx.navigateTo({
-      url: '/pages/dish/dish',
+      url: '/pages/dish/dish?id=' + e.currentTarget.dataset.id,
     })
   },
-
-  // 收藏餐厅
 
 })
 

@@ -14,7 +14,8 @@ Page({
       types: [1, 1, 1],
       status: 0,
       distance: -1
-    }
+    },
+    favorites: []
   },
 
   /**
@@ -22,7 +23,6 @@ Page({
    */
   onLoad(options) {
     let _this = this;
-    _this.load();
   },
 
   /**
@@ -36,7 +36,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    let _this = this;
+    _this.load();
   },
 
   /**
@@ -95,31 +96,37 @@ Page({
     });
   },
 
+  // 按收藏时间排序
   sortByTime: function () {
     let _this = this;
     _this.setData({
       sort_type: (_this.data.sort_type !== 0) ? 0 : 1,
       page_state: 0
     });
+    _this.load();
   },
 
+  // 按名称排序
   sortByName: function () {
     let _this = this;
     _this.setData({
       sort_type: (_this.data.sort_type !== 2) ? 2 : 3,
       page_state: 0
     });
+    _this.load();
   },
 
+  // 按距离排序
   sortByDistance: function () {
     let _this = this;
     _this.setData({
       sort_type: 4,
       page_state: 0
     });
+    _this.load();
   },
 
-  // 取消
+  // 取消筛选或排序
   cancel: function () {
     let _this = this;
     if (_this.data.page_state == 1) {
@@ -146,22 +153,29 @@ Page({
         temp: temp
       });
     }
+    _this.load();
     _this.setData({
       page_state: 0
     });
   },
 
-  // 加载数据
+  // 加载收藏列表
   load: function() {
     let _this = this;
+    let types = []
+    for (let i = 0; i < 3; i++) {
+      if (_this.data.types[i]) {
+        types.push(i);
+      }
+    }
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/collection/list',
       method: "POST",
       header: {
-        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJvZXR2SjRnZGdxYjJ0Zm9xT3VRLWx5Q09SOEZnIn0.xkp0p3a_fpow-lZKs8AInmL4w53oXIYo8PG4X5F3cTY'
+        token: getApp().globalData.token
       },
       data: {
-        types: _this.data.types,
+        types: types,
         status: _this.data.status,
         distance: _this.data.distance,
         sortType: _this.data.sort_type,
@@ -169,8 +183,35 @@ Page({
         latitude: 0
       },
       success: (res) => {
+        console.log(types, _this.data.status, _this.data.distance, _this.data.sort_type)
         console.log(res);
+        if (res.data.code == 200) {
+          _this.setData({
+            favorites: res.data.data
+          })
+        }
       }
     })
+  },
+
+  // 跳转到餐厅详情页
+  toCanteen: function(e) {
+    wx.navigateTo({
+      url: '/pages/canteenDetails/canteenDetails?id=' + e.currentTarget.dataset.id,
+    });
+  },
+
+  // 跳转到窗口
+  toWindow: function(e) {
+    wx.navigateTo({
+      url: '/pages/canteenDetails/canteenDetails?id=' + e.currentTarget.dataset.id,
+    })
+  },
+
+  // 跳转到菜品
+  toDish: function(e) {
+    wx.navigateTo({
+      url: '/pages/dish/dish?id=' + e.currentTarget.dataset.id,
+    })
   }
-})
+});

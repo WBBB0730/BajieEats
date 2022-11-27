@@ -2,7 +2,7 @@
 <!-- 轮播图 -->
 <swiper class="canteen-images" indicator-dots="{{indicator_dots}}" autoplay="{{autoplay}}" indicator-active-color="orange" circular="true" duration="1000">
   <swiper-item wx:for="{{canteen_info.canteen_images}}" wx:key="index">
-    <image class="canteen-image" src="{{item}}" mode="widthFix" style="--canteen-image-blur--:{{canteen_image_blur}}rpx"></image>
+    <image class="canteen-image" src="{{item}}" mode="aspectFill" style="--canteen-image-blur--:{{canteen_image_blur}}rpx"></image>
   </swiper-item>
 </swiper>
 
@@ -12,11 +12,12 @@
     <!-- 标题 -->
     <view class="canteen-title">
       <text class="canteen-name">{{canteen_info.canteen_name}}</text>
-      <image class="favorites-button" src="{{canteen_info.is_canteen_favored ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" bindtap="change_canteen_favored"></image>
+      <!-- 餐厅收藏按钮 -->
+      <image class="favorites-button" src="{{canteen_info.is_canteen_favored ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" catchtap="favorCanteen"></image>
     </view>
     <!-- 营业信息 -->
     <view class="canteen-business-info">
-      <text class="canteen-business-state">{{canteen_info.canteen_business_state}}</text>
+      <text class="canteen-business-state">{{canteen_info.canteen_business_state ? '营业中' : '休息中'}}</text>
       <text class="canteen-business-hours">{{canteen_info.canteen_business_hours}}</text>
     </view>
     <!-- 位置信息 -->
@@ -51,25 +52,27 @@
     <!-- 窗口列表 -->
     <scroll-view class="window-selector" scroll-y="true" style="--height--:{{window_height - 100}}rpx" show-scrollbar="false">
       <!-- 窗口卡片 -->
-      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowId" bind>
-        <view class="window {{selected_windowId === item.windowId ? 'selected' : 'unselected'}}" bindtap="selectWindow" data-id="{{item.windowId}}">
+      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowIndex">
+        <view class="window {{selected_windowIndex === item.windowIndex ? 'selected' : 'unselected'}}" catchtap="selectWindow" data-index="{{item.windowIndex}}">
           <text class="window-name">{{item.windowName}}\n</text>
-          <text class="window-business-state">{{item.openingStatus}}</text>
+          <text class="window-business-state">{{item.openingStatus ? '营业中' : '休息中'}}</text>
         </view>
       </block>
     </scroll-view>
     <!-- 菜品列表 -->
     <scroll-view class="dish-list" scroll-y="true" style="--height--:{{window_height - 100}}rpx" enhanced="false" bindscroll="scrollDishList">
       <!-- 窗口盒子 -->
-      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowId">
-        <!-- 窗口名字 -->
+      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowIndex">
         <view class="window-title" id="window-{{item.windowId}}">
+          <!-- 窗口名字 -->
           <text>{{item.windowName}}</text>
+          <!-- 窗口收藏按钮 -->
+          <image class="favorites-button" src="{{item.isCollected ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" catchtap="favorWindow" data-floor_index="{{selected_floorIndex}}" data-window_index="{{index}}"></image>
         </view>
         <!-- 菜品卡片 -->
         <block wx:for="{{item.dishList}}" wx:key="dishId">
-          <view class="dish-card" bindtap="toDish">
-            <image class="dish-image" src="{{item.dishImage}}"></image>
+          <view class="dish-card" catchtap="toDish" data-id="{{item.dishId}}">
+            <image class="dish-image" src="{{item.dishImage}}" mode="aspectFill"></image>
             <view class="relative-box">
               <view class="dish-details">
                 <text class="dish-name">{{item.dishName}}</text>
@@ -92,9 +95,9 @@
   </view>
 </view>
 <wxs module="fn">
-    module.exports={
-        split:function(str,sign){
-            return str.split(sign);
-        }
+  module.exports = {
+    split: function (str, sign) {
+      return str.split(sign);
     }
+  }
 </wxs>

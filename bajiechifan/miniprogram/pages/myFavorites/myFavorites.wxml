@@ -5,29 +5,32 @@
     <!-- 筛选按钮 -->
     <view id="filter-button" catchtap="filter">
       <text class="{{(page_state == 1) ? 'darkorange' : ''}}" id="filter-button-text">筛选</text>
-      <image id="filter-button-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/展开-1.png"></image>
+      <image id="filter-button-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/展开-1.png" mode="aspectFill"></image>
     </view>
     <!-- 排序按钮 -->
     <view id="sort-button" catchtap="sort">
       <text class="{{(page_state == 2) ? 'darkorange' : ''}}" id="sort-button-text">{{sort_type_str[sort_type]}}</text>
-      <image id="sort-button-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/排序_降.png"></image>
+      <image id="sort-button-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/排序_黑.png"></image>
     </view>
   </view>
   <!-- 筛选选项 -->
   <view id="filter" wx:if="{{page_state == 1}}">
+    <!-- 按类型筛选 -->
     <text>类型\n</text>
     <view class="filter-options">
       <view class="filter-option {{(types[0]) ? 'orange' : 'f6f6f6'}}" catchtap="filterType" data-type="0">餐厅</view>
       <view class="filter-option {{(types[1]) ? 'orange' : 'f6f6f6'}}" catchtap="filterType" data-type="1">窗口</view>
       <view class="filter-option {{(types[2]) ? 'orange' : 'f6f6f6'}}" catchtap="filterType" data-type="2">菜品</view>
     </view>
+    <!-- 按状态筛选 -->
     <text>状态\n</text>
     <view class="filter-options">
       <view class="filter-option {{(status == 0) ? 'orange' : 'f6f6f6'}}" catchtap="filterStatus" data-status="0">全部</view>
       <view class="filter-option {{(status == 1) ? 'orange' : 'f6f6f6'}}" catchtap="filterStatus" data-status="1">营业中/在售</view>
     </view>
+    <!-- 按距离筛选 -->
     <text>距离\n</text>
-    <view class="filter-distance">
+    <view class="filter-options">
       <view class="filter-option {{(distance == -1) ? 'orange' : 'f6f6f6'}}" catchtap="filterDistance" data-distance="-1">不限</view>
       <view class="filter-option {{(distance == 500) ? 'orange' : 'f6f6f6'}}" catchtap="filterDistance" data-distance="500">500m</view>
       <view class="filter-option {{(distance == 1000) ? 'orange' : 'f6f6f6'}}" catchtap="filterDistance" data-distance="1000">1km</view>
@@ -40,15 +43,91 @@
   </view>
   <!-- 排序选项 -->
   <view id="sort" wx:if="{{page_state == 2}}">
+    <!-- 按收藏时间排序 -->
     <view class="sort-option" catchtap="sortByTime">
       <text class="{{(sort_type == 0 || sort_type == 1) ? 'darkorange' : ''}}">按收藏时间排序</text>
     </view>
+    <!-- 按名称排序 -->
     <view class="sort-option" catchtap="sortByName">
       <text class="{{(sort_type == 2 || sort_type == 3) ? 'darkorange' : ''}}">按名称排序</text>
     </view>
+    <!-- 按距离排序 -->
     <view class="sort-option" catchtap="sortByDistance">
       <text class="{{(sort_type == 4) ? 'darkorange' : ''}}">按距离排序</text>
     </view>
   </view>
 </view>
+<!-- 收藏卡片 -->
+<block wx:for="{{favorites}}" wx:key="index">
+  <!-- 餐厅卡片 -->
+  <view class="card" wx:if="{{item.collectedType == 0}}" catchtap="toCanteen" data-id="{{item.canteenId}}">
+    <image class="canteen-image" src="{{item.mainImage}}" mode="aspectFill"></image>
+    <view class="canteen-info">
+      <text class="canteen-name">{{item.canteenName}}</text>
+      <text>{{item.isOpening ? '营业中' : '休息中'}}</text>
+      <text class="opening-time">{{item.openingTime}}</text>
+      <text class="orange">{{item.announce}}</text>
+    </view>
+    <view class="canteen-address">
+      <image class="canteen-distance-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位.png"></image>
+      <text class="canteen-address-text">{{function.getDisStr(item.distance)}}</text>
+      <text class="canteen-address-text">{{item.canteenAddress}}</text>
+    </view>
+  </view>
+  <!-- 窗口卡片 -->
+  <view class="card" wx:if="{{item.collectedType == 1}}" catchtap="toWindow" data-id="{{item.canteenId}}">
+    <view class="window-title">
+      <text class="window-name">{{item.winName}}</text>
+      <text class="window-status">{{item.isOpening ? '营业中' : '休息中'}}</text>
+    </view>
+    <view class="window-address">
+      <text>{{item.canteenName}} {{item.floorName}}</text>
+      <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位.png"></image>
+      <text>{{function.getDisStr(item.distance)}}</text>
+    </view>
+    <view class="dishes" wx:if="{{item.isOpening}}">
+      <view class="dish" wx:for="{{item.dishs}}" wx:key="dishId">
+        <image class="window-dish-image" src="{{item.dishImage}}" mode="aspectFill"></image>
+        <text class="window-dish-name">\n{{item.dishName}}</text>
+        <text class="darkorange">\n{{function.getPriceStr(item.price)}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 菜品卡片 -->
+  <view class="card" wx:if="{{item.collectedType == 2}}" catchtap="toDish" data-id="{{item.dishId}}">
+    <image class="dish-image" src="{{item.dishImage}}" mode="aspectFill"></image>
+    <view class="dish-info">
+      <text class="dish-name">{{item.dishName}}</text>
+      <text class="dish-address">{{item.canteenName}} {{item.floorName}} | {{item.winName}}</text>
+      <text>{{item.onSaleStatus ? '在售' : '售罄'}}</text>
+      <view class="dish-tags">
+        <text class="dish-tag" wx:for="{{function.split(item.tags, ',')}}" wx:key="index">{{item}}</text>
+      </view>
+      <text class="dish-price">{{function.getPriceStr(item.price)}}</text>
+    </view>
+  </view>
+</block>
+<!-- 遮罩 -->
 <view id="mask" wx:if="{{page_state != 0}}" catchtap="cancel"></view>
+<wxs module="function">
+  module.exports = {
+    getDisStr: function (d) {
+      return "900m";
+      //if (d < 1000) {
+      //  return Math.round(d) + "m";
+      //} else {
+      //  return (d / 1000).toFixed(1) + "km";
+      //}
+    },
+    getPriceStr: function (p) {
+      if (p % 1 == 0) {
+        return "￥" + p;
+      } else {
+        return "￥" + p.toFixed(1);
+      }
+    },
+    split: function (tags, c) {
+      return tags.split(c);
+    }
+  }
+</wxs>

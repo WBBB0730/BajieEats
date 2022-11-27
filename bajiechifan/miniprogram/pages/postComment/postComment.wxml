@@ -1,6 +1,6 @@
 <view class="comment">
   <view class="dish" bindtap="toDish">
-   <image class="dish-photo" src="{{dishImage}}"></image>
+   <image class="dish-photo" src="{{dishImage}}" mode="aspectFill"></image>
    <view class="dish-info">
       <text class="canteen-name">{{dishName}}</text>
       <text class="window-dish">{{canteenName}} · {{winName}}</text>
@@ -16,8 +16,8 @@
   </view>
   <textarea class="comment-word" maxlength="200" placeholder="请在此输入你想发表的评价" bindinput="getCommentValue" model:value="{{commentValue}}"></textarea>
   <view class="comment-photos">
-    <view wx:for="{{imgUrl}}">
-      <image src="{{item}}" class="comment-photo"></image>
+    <view wx:for="{{imgUrl}}" wx:key="index">
+      <image src="{{item}}" class="comment-photo" mode="aspectFill"></image>
       <image  class="del-photo" catchtap="deletePhoto" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/382fa7d3619583c2d450d0f4e8b35df.png" data-i="{{index}}"></image>
     </view>
     <image wx:if="{{imgUrl.length<3}}" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/上传图片@3x.png" class="add-photo" catchtap="chooseImg"></image>

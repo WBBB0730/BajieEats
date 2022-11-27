@@ -233,6 +233,7 @@ scroll-view.dish-list {
 
 /* 菜品列表中的窗口标题 */
 view.window-title {
+  display: flex;
   height: 80rpx;
   font-size: 40rpx;
   line-height: 80rpx;

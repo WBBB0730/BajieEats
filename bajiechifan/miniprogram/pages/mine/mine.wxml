@@ -7,16 +7,14 @@
 </view>
 
 <view wx:if="{{flag==1}}">
-  <view class="top"  bindtap="Toinformation">
-    <view>
+  <view class="top" catchtap="toInformation">
       <image src="{{avatarUrl}}" class="picture"></image>
-    </view>
     <view class="name">{{name}}</view>
     <view class="icon">></view>
   </view>
 </view>
 
-<view wx:for="{{myset}}" data-type="{{item.name}}" class="my" bindtap="tomyset">
+<view wx:for="{{myset}}" wx:key="index" data-type="{{item.name}}" class="my" bindtap="tomyset">
   <view class="middle">
     {{item.name}}
     <view class="icon">></view>
