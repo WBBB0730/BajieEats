@@ -72,6 +72,7 @@ public class DishController {
                                 .eq(Collection::getOpenId, userId)
                                 .eq(Collection::getCollectType, 2)
                                 .eq(Collection::getTargetId, dishId)
+                                .eq(Collection::getIsCollected,1)
                 )
         );
 

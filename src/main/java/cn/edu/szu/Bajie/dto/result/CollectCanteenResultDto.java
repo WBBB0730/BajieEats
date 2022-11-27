@@ -1,6 +1,7 @@
 package cn.edu.szu.Bajie.dto.result;
 
 import cn.edu.szu.Bajie.entity.Collection;
+import cn.edu.szu.Bajie.util.PinyinUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -28,6 +29,8 @@ public class CollectCanteenResultDto implements Collection.ICollectionHelper {
 
     private Integer isOpening;
 
+    private String openingTime;
+
     private String announce;
 
     private double distance;
@@ -47,6 +50,6 @@ public class CollectCanteenResultDto implements Collection.ICollectionHelper {
 
     @Override
     public String getName() {
-        return canteenName;
+        return PinyinUtil.toPinyin(canteenName);
     }
 }

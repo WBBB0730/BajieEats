@@ -53,6 +53,7 @@ public class CanteenController {
                                 .eq(Collection::getTargetId,canteenId)
                                 .eq(Collection::getCollectType,0)
                                 .eq(Collection::getOpenId,userId)
+                                .eq(Collection::getIsCollected,1)
 
                 )
         );
@@ -85,6 +86,7 @@ public class CanteenController {
                                             .eq(Collection::getOpenId, userId)
                                             .eq(Collection::getCollectType, 0)
                                             .eq(Collection::getTargetId, item.getCanteenId())
+                                            .eq(Collection::getIsCollected,1)
                             );
                             item.setIsCollected((int) count);
                         });
@@ -118,6 +120,7 @@ public class CanteenController {
                                                         .eq(Collection::getOpenId, userId)
                                                         .eq(Collection::getCollectType, 1)
                                                         .eq(Collection::getTargetId, windowInfo.getWindowId())
+                                                        .eq(Collection::getIsCollected,1)
                                         )
                                 );
                             });

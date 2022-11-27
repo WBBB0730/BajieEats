@@ -1,5 +1,7 @@
 package cn.edu.szu.Bajie.service;
 
+import cn.edu.szu.Bajie.common.CommonPage;
+import cn.edu.szu.Bajie.dto.result.DishCommentResultDto;
 import cn.edu.szu.Bajie.dto.result.UserCommentsResultDto;
 import cn.edu.szu.Bajie.entity.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -13,4 +15,6 @@ public interface CommentService extends IService<Comment> {
 
 
     List<UserCommentsResultDto> getUserComments(String userId);
+
+    CommonPage<DishCommentResultDto> getDishComments(Integer dishId,Integer pageIndex,Integer pageSize);
 }

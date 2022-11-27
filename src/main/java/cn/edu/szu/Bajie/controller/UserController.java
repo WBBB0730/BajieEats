@@ -50,10 +50,10 @@ public class UserController {
      * @return
      */
     @PostMapping("/updateUser")
-    public CommonResult<String> update(@RequestBody User user, HttpServletRequest request){
+    public CommonResult<String> update(@RequestBody User user, HttpServletResponse response){
 
         // 获取用户id
-        String userId = request.getHeader("userId");
+        String userId = response.getHeader("userId");
 
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getOpenId,userId);

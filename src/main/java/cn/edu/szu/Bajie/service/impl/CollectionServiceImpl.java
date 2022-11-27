@@ -57,6 +57,7 @@ public class CollectionServiceImpl extends ServiceImpl<CollectionMapper, Collect
 
         // 构造排序的比较器
         Comparator<Collection.ICollectionHelper> comparing = null;
+
         switch (dto.getSortType()){
             case 0:
                 comparing = Comparator.comparing(Collection.ICollectionHelper::getTimeStamp).reversed();

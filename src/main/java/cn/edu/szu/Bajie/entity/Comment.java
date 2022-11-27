@@ -21,7 +21,7 @@ public class Comment implements Serializable {
     /**
      * 评论
      */
-    @TableId(value = "comment_id")
+    @TableId(value = "comment_id",type = IdType.AUTO)
     private Integer commentId;
 
     /**

@@ -1,6 +1,7 @@
 package cn.edu.szu.Bajie.dto.result;
 
 import cn.edu.szu.Bajie.entity.Collection;
+import cn.edu.szu.Bajie.util.PinyinUtil;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -53,6 +54,6 @@ public class CollectDishResultDto implements Collection.ICollectionHelper {
 
     @Override
     public String getName() {
-        return canteenName;
+        return PinyinUtil.toPinyin(dishName);
     }
 }

@@ -1,6 +1,7 @@
 package cn.edu.szu.Bajie.converter;
 
 
+import cn.edu.szu.Bajie.dto.result.DishCommentResultDto;
 import cn.edu.szu.Bajie.dto.result.UserCommentsResultDto;
 import cn.edu.szu.Bajie.entity.Comment;
 import org.mapstruct.Mapper;
@@ -12,5 +13,7 @@ public interface CommentConverter {
     CommentConverter INSTANCE = Mappers.getMapper(CommentConverter.class);
 
     UserCommentsResultDto comment2UserComment(Comment comment);
+
+    DishCommentResultDto comment2DishComment(Comment comment);
 
 }

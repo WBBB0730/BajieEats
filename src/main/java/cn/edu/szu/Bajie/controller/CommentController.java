@@ -3,6 +3,7 @@ package cn.edu.szu.Bajie.controller;
 import cn.edu.szu.Bajie.common.CommonPage;
 import cn.edu.szu.Bajie.common.CommonResult;
 import cn.edu.szu.Bajie.dto.add.CommentAddDto;
+import cn.edu.szu.Bajie.dto.result.DishCommentResultDto;
 import cn.edu.szu.Bajie.dto.result.UserCommentsResultDto;
 import cn.edu.szu.Bajie.entity.Comment;
 import cn.edu.szu.Bajie.entity.CommentUrl;
@@ -11,11 +12,13 @@ import cn.edu.szu.Bajie.service.CommentService;
 import cn.edu.szu.Bajie.service.CommentUrlService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,17 +46,12 @@ public class CommentController {
      */
 
     @GetMapping("/list")
-    public CommonResult<CommonPage<Comment>> list(@RequestParam("dishId") Integer dishId,
-                                     @RequestParam("pageIndex") Integer pageIndex,
-                                     @RequestParam("pageSize") Integer pageSize){
+    public CommonResult<CommonPage<DishCommentResultDto>> list(@RequestParam("dishId") Integer dishId,
+                                                               @RequestParam("pageIndex") Integer pageIndex,
 
-        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Comment::getDishId,dishId);
-        // 分页获取
-        Page<Comment> page = new Page<>(pageIndex, pageSize);
-        commentService.page(page,wrapper);
+                                                               @RequestParam("pageSize") Integer pageSize){
 
-        return CommonResult.success(CommonPage.restPage(page));
+        return CommonResult.success(commentService.getDishComments(dishId,pageIndex,pageSize));
     }
 
     /**
@@ -74,6 +72,7 @@ public class CommentController {
         comment.setLikes(0);
         comment.setScore(dto.getScore());
         comment.setOpenId(userId);
+
         // 保存
         commentService.save(comment);
 

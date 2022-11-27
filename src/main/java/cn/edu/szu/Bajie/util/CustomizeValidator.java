@@ -3,7 +3,7 @@ package cn.edu.szu.Bajie.util;
 import cn.edu.szu.Bajie.entity.Collection;
 
 import java.util.Arrays;
-
+import java.util.List;
 /**
  * @description: TODO
  * @author hjc
@@ -19,5 +19,17 @@ public class CustomizeValidator {
 
     public static boolean checkIsCollected(int value){
         return value == 0 || value == 1;
+    }
+
+
+    public static boolean checkCollectTypes(List<Integer> types){
+        if(types.size() == 0){
+            return false;
+        }
+
+        return types
+                .stream()
+                .anyMatch(type -> type == 0 || type == 1 || type == 2);
+
     }
 }
