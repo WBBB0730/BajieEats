@@ -66,7 +66,7 @@
       <text class="canteen-name">{{item.canteenName}}</text>
       <text>{{item.isOpening ? '营业中' : '休息中'}}</text>
       <text class="opening-time">{{item.openingTime}}</text>
-      <text class="orange">{{item.announce}}</text>
+      <view class="canteen-notice" style="width: {{item.announce.length * 29}}rpx;"><text class="canteen-notice orange" style="animation-duration: {{item.announce.length * 29 > 420 ? item.announce.length / 3 : 0}}s;">{{item.announce}}</text></view>
     </view>
     <view class="canteen-address">
       <image class="canteen-distance-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位.png"></image>
