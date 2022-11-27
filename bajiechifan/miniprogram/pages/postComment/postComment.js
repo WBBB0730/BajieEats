@@ -39,6 +39,7 @@ Page({
           }
         })
       },
+      // 点击第几颗星就是几星好评
       changeColor(e) {
         let star = e.currentTarget.dataset.star;
         console.log(star, 'e')
@@ -47,12 +48,14 @@ Page({
         })
         console.log(this.data.star, 'data')
       },
+      //获取评价的内容
       getCommentValue(e){
         console.log(e.detail.value);
         this.setData({
           commentValue: e.detail.value
         })
       },
+      // 点击上传图片按钮
       chooseImg() {
         let _this = this;
         wx.chooseMedia({
@@ -60,10 +63,13 @@ Page({
           sourceType: ['album', 'camera'],
           camera: 'back',
           success(res) {
-            console.log(res);
+            console.log(res,'chooseMedia');
             let imgList = _this.data.imgUrl;
             console.log(imgList)
-            imgList.push(res.tempFiles[0].tempFilePath);
+            for(let i = 0; i < res.tempFiles.length;i++){
+              console.log(i,'tempfiles i')
+              imgList.push(res.tempFiles[i].tempFilePath);
+            }
             _this.setData({
               imgUrl: imgList
             })
@@ -74,6 +80,7 @@ Page({
           }
         })
       },
+      //点击右上角删除图片
       deletePhoto(e) {
         let imgList = this.data.imgUrl;
         console.log(imgList);
@@ -92,6 +99,27 @@ Page({
         let app = getApp();
         let fIDs = new Array(this.data.imgUrl.length);
         console.log(app.globalData.token,"submit")
+        //有图片的情况
+        if(_this.data.star == 0){
+          wx.showModal({
+           title:'请为该菜品打分~',
+           showCancel:false,
+           success(res){
+            console.log(res,'打分success')
+          }
+          })
+          return;
+        }
+        if(_this.data.commentValue.length<2){
+          wx.showModal({
+           title:'至少评价2个字~',
+           showCancel:false,
+           success(res){
+            console.log(res,'评价success')
+          }
+          })
+          return;
+        }
         if(this.data.imgUrl.length!=0){
           for (let j = 0; j < this.data.imgUrl.length; j++) {
             console.log(_this.data.imgUrl[j], j);
@@ -140,6 +168,7 @@ Page({
             })
           }
         }
+        //无图片的情况
         else{
           wx.request({
             url: 'http://114.132.234.161:8888/bajie/comment/',
@@ -155,6 +184,10 @@ Page({
             },
             success(res) {
               console.log(res, 'res')
+              _this.setData({
+                star: 0,
+                commentValue:''
+              })
               wx.navigateTo({
                 url: '/pages/comment/comment',
               })
