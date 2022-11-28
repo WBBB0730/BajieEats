@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-26T16:37:10+0800",
+    date = "2022-11-28T20:02:14+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_281 (Oracle Corporation)"
 )
 @Component
@@ -31,12 +31,7 @@ public class CanteenConverterImpl implements CanteenConverter {
         canteenDetailResultDto.setCanteenPositionLongitude( canteen.getCanteenPositionLongitude() );
         canteenDetailResultDto.setCanteenPositionLatitude( canteen.getCanteenPositionLatitude() );
         canteenDetailResultDto.setOpeningTime( canteen.getOpeningTime() );
-        canteenDetailResultDto.setRecommendStatus( canteen.getRecommendStatus() );
         canteenDetailResultDto.setDeleteStatus( canteen.getDeleteStatus() );
-        canteenDetailResultDto.setSort( canteen.getSort() );
-        canteenDetailResultDto.setScore( canteen.getScore() );
-        canteenDetailResultDto.setIsOpening( canteen.getIsOpening() );
-        canteenDetailResultDto.setAnnounce( canteen.getAnnounce() );
         canteenDetailResultDto.setCreateTime( canteen.getCreateTime() );
         canteenDetailResultDto.setUpdateTime( canteen.getUpdateTime() );
 
@@ -51,14 +46,14 @@ public class CanteenConverterImpl implements CanteenConverter {
 
         CollectCanteenResultDto collectCanteenResultDto = new CollectCanteenResultDto();
 
-        collectCanteenResultDto.setCanteenId( canteen.getCanteenId() );
+        if ( canteen.getCanteenId() != null ) {
+            collectCanteenResultDto.setCanteenId( canteen.getCanteenId().intValue() );
+        }
         collectCanteenResultDto.setCanteenName( canteen.getCanteenName() );
         collectCanteenResultDto.setMainImage( canteen.getMainImage() );
         collectCanteenResultDto.setCanteenAddress( canteen.getCanteenAddress() );
         collectCanteenResultDto.setCanteenPositionLongitude( canteen.getCanteenPositionLongitude() );
         collectCanteenResultDto.setCanteenPositionLatitude( canteen.getCanteenPositionLatitude() );
-        collectCanteenResultDto.setIsOpening( canteen.getIsOpening() );
-        collectCanteenResultDto.setAnnounce( canteen.getAnnounce() );
 
         return collectCanteenResultDto;
     }
@@ -71,7 +66,6 @@ public class CanteenConverterImpl implements CanteenConverter {
 
         CollectWindowResultDto collectWindowResultDto = new CollectWindowResultDto();
 
-        collectWindowResultDto.setIsOpening( canteen.getIsOpening() );
         collectWindowResultDto.setCanteenName( canteen.getCanteenName() );
         collectWindowResultDto.setCanteenAddress( canteen.getCanteenAddress() );
         collectWindowResultDto.setCanteenPositionLongitude( canteen.getCanteenPositionLongitude() );

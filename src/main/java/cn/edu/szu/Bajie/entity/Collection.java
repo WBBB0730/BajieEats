@@ -59,4 +59,12 @@ public class Collection implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    public interface ICollectionHelper{
+         double getDistance();
+
+         long getTimeStamp();
+
+         String getName();
+    }
 }

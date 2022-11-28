@@ -7,7 +7,7 @@
     <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.CanteenUrl">
             <id property="dataId" column="data_id" jdbcType="INTEGER"/>
             <result property="canteenId" column="canteen_id" jdbcType="INTEGER"/>
-            <result property="url" column="url" jdbcType="CHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 

@@ -6,21 +6,18 @@
 
     <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.Comment">
             <id property="commentId" column="comment_id" jdbcType="INTEGER"/>
-            <result property="nickName" column="nick_name" jdbcType="CHAR"/>
-            <result property="avatarUrl" column="avatar_url" jdbcType="CHAR"/>
             <result property="content" column="content" jdbcType="CHAR"/>
             <result property="likes" column="likes" jdbcType="INTEGER"/>
-            <result property="score" column="score" jdbcType="DECIMAL"/>
+            <result property="score" column="score" jdbcType="INTEGER"/>
             <result property="openId" column="open_id" jdbcType="CHAR"/>
-            <result property="dishId" column="dish_id" jdbcType="INTEGER"/>
+            <result property="dishId" column="dish_id" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        comment_id,nick_name,avatar_url,
-        content,likes,score,
-        open_id,dish_id,create_time,
-        update_time
+        comment_id,content,likes,
+        score,open_id,dish_id,
+        create_time,update_time
     </sql>
 </mapper>

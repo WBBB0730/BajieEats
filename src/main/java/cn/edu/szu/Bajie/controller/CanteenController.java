@@ -34,9 +34,9 @@ public class CanteenController {
      */
 
     @GetMapping
-    public CommonResult<CanteenDetailResultDto> get(@RequestParam("canteenId") Integer canteenId){
+    public CommonResult<Canteen> get(@RequestParam("canteenId") Long canteenId){
 
-        return null;
+        return CommonResult.success(canteenService.getCanteenById(canteenId));
 
     }
 

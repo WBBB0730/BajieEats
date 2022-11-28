@@ -7,9 +7,9 @@
     <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.Windows">
             <id property="winId" column="win_id" jdbcType="INTEGER"/>
             <result property="winName" column="win_name" jdbcType="CHAR"/>
-            <result property="openingStatus" column="opening_status" jdbcType="INTEGER"/>
-            <result property="canteenId" column="canteen_id" jdbcType="INTEGER"/>
-            <result property="floorId" column="floor_id" jdbcType="INTEGER"/>
+            <result property="isOpening" column="is_opening" jdbcType="INTEGER"/>
+            <result property="canteenId" column="canteen_id" jdbcType="BIGINT"/>
+            <result property="floorName" column="floor_name" jdbcType="VARCHAR"/>
             <result property="deleteStatus" column="delete_status" jdbcType="INTEGER"/>
             <result property="sort" column="sort" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -17,8 +17,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        win_id,win_name,opening_status,
-        canteen_id,floor_id,delete_status,
+        win_id,win_name,is_opening,
+        canteen_id,floor_name,delete_status,
         sort,create_time,update_time
     </sql>
 </mapper>

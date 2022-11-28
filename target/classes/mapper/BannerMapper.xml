@@ -6,8 +6,8 @@
 
     <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.Banner">
             <id property="bannerId" column="banner_id" jdbcType="INTEGER"/>
-            <result property="bannerUrl" column="banner_url" jdbcType="CHAR"/>
-            <result property="redirectUrl" column="redirect_url" jdbcType="CHAR"/>
+            <result property="bannerUrl" column="banner_url" jdbcType="VARCHAR"/>
+            <result property="redirectUrl" column="redirect_url" jdbcType="VARCHAR"/>
             <result property="weight" column="weight" jdbcType="INTEGER"/>
             <result property="sort" column="sort" jdbcType="INTEGER"/>
             <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"/>

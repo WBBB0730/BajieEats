@@ -46,10 +46,7 @@ public class BannerController {
      */
     @GetMapping("/list")
     public CommonResult<List<Banner>> list(){
-        LambdaQueryWrapper<Banner> wrapper = new LambdaQueryWrapper<>();
-        wrapper.gt(Banner::getExpireTime,new Date())
-                .orderByAsc(Banner::getSort);
-        List<Banner> list = bannerService.list(wrapper);
+
         return CommonResult.success(list);
     }
 }

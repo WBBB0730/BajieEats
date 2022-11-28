@@ -10,4 +10,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CanteenService extends IService<Canteen> {
 
+    Canteen getCanteenById(Long canteenId);
+
+
 }

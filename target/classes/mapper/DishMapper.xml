@@ -5,26 +5,20 @@
 <mapper namespace="cn.edu.szu.Bajie.mapper.DishMapper">
 
     <resultMap id="BaseResultMap" type="cn.edu.szu.Bajie.entity.Dish">
-            <id property="dishId" column="dish_id" jdbcType="INTEGER"/>
+            <id property="dishId" column="dish_id" jdbcType="BIGINT"/>
             <result property="dishName" column="dish_name" jdbcType="CHAR"/>
             <result property="dishImage" column="dish_image" jdbcType="VARCHAR"/>
             <result property="price" column="price" jdbcType="DECIMAL"/>
-            <result property="tags" column="tags" jdbcType="CHAR"/>
             <result property="winId" column="win_id" jdbcType="INTEGER"/>
-            <result property="deleteStatus" column="delete_status" jdbcType="INTEGER"/>
-            <result property="recommendStatus" column="recommend_status" jdbcType="INTEGER"/>
-            <result property="sort" column="sort" jdbcType="INTEGER"/>
             <result property="ingredients" column="ingredients" jdbcType="CHAR"/>
-            <result property="score" column="score" jdbcType="DECIMAL"/>
+            <result property="deleteStatus" column="delete_status" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         dish_id,dish_name,dish_image,
-        price,tags,win_id,
-        delete_status,recommend_status,sort,
-        ingredients,score,create_time,
-        update_time
+        price,win_id,ingredients,
+        delete_status,create_time,update_time
     </sql>
 </mapper>

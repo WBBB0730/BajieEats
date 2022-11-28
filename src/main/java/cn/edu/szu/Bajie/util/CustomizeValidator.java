@@ -12,10 +12,10 @@ import java.util.Arrays;
  */
 public class CustomizeValidator {
 
-    public static boolean checkCollectType(int value){
-        return Arrays.stream(Collection.CollectionType.values())
-                .anyMatch((collectionType -> collectionType.getValue() == value));
-    }
+//    public static boolean checkCollectType(int value){
+//        return Arrays.stream(Collection.CollectionType.values())
+//                .anyMatch((collectionType -> collectionType.getValue() == value));
+//    }
 
     public static boolean checkIsCollected(int value){
         return value == 0 || value == 1;

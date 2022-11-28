@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-26T16:37:10+0800",
+    date = "2022-11-28T20:02:14+0800",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_281 (Oracle Corporation)"
 )
 @Component
@@ -23,13 +23,12 @@ public class DishConverterImpl implements DishConverter {
 
         SimpleDishResultDto simpleDishResultDto = new SimpleDishResultDto();
 
-        simpleDishResultDto.setDishId( dish.getDishId() );
+        if ( dish.getDishId() != null ) {
+            simpleDishResultDto.setDishId( dish.getDishId().intValue() );
+        }
         simpleDishResultDto.setDishName( dish.getDishName() );
         simpleDishResultDto.setDishImage( dish.getDishImage() );
         simpleDishResultDto.setPrice( dish.getPrice() );
-        simpleDishResultDto.setTags( dish.getTags() );
-        simpleDishResultDto.setSort( dish.getSort() );
-        simpleDishResultDto.setScore( dish.getScore() );
 
         return simpleDishResultDto;
     }
@@ -46,14 +45,9 @@ public class DishConverterImpl implements DishConverter {
         dishDetailResultDto.setDishName( dish.getDishName() );
         dishDetailResultDto.setDishImage( dish.getDishImage() );
         dishDetailResultDto.setPrice( dish.getPrice() );
-        dishDetailResultDto.setTags( dish.getTags() );
         dishDetailResultDto.setWinId( dish.getWinId() );
-        dishDetailResultDto.setDeleteStatus( dish.getDeleteStatus() );
-        dishDetailResultDto.setRecommendStatus( dish.getRecommendStatus() );
-        dishDetailResultDto.setSort( dish.getSort() );
         dishDetailResultDto.setIngredients( dish.getIngredients() );
-        dishDetailResultDto.setScore( dish.getScore() );
-        dishDetailResultDto.setOnSaleStatus( dish.getOnSaleStatus() );
+        dishDetailResultDto.setDeleteStatus( dish.getDeleteStatus() );
         dishDetailResultDto.setCreateTime( dish.getCreateTime() );
         dishDetailResultDto.setUpdateTime( dish.getUpdateTime() );
 
@@ -68,12 +62,12 @@ public class DishConverterImpl implements DishConverter {
 
         CollectDishResultDto collectDishResultDto = new CollectDishResultDto();
 
-        collectDishResultDto.setDishId( dish.getDishId() );
+        if ( dish.getDishId() != null ) {
+            collectDishResultDto.setDishId( dish.getDishId().intValue() );
+        }
         collectDishResultDto.setDishName( dish.getDishName() );
         collectDishResultDto.setDishImage( dish.getDishImage() );
-        collectDishResultDto.setTags( dish.getTags() );
         collectDishResultDto.setPrice( dish.getPrice() );
-        collectDishResultDto.setOnSaleStatus( dish.getOnSaleStatus() );
 
         return collectDishResultDto;
     }
