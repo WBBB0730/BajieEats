@@ -161,6 +161,7 @@ view.canteen-info {
   float: right;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 text.canteen-name {
@@ -172,6 +173,32 @@ text.canteen-name {
 text.opening-time {
   color: #6c6c6c;
   font-size: 28rpx;
+}
+
+view.canteen-notice {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* @keyframes roll {
+  0% {left: 0;}
+  48% {left: -100%; top: 0;}
+  49% {left: -100%; top: 100%;}
+  51% {left: 100%; top: 100%;}
+  52% {left: 100%; top: 0;}
+  100% {left: 0;}
+} */
+
+@keyframes roll {
+  0% {left: 420rpx;}
+  100% {left: -100%;}
+}
+
+text.canteen-notice {
+  position: relative;
+  animation: roll linear infinite;
+  white-space: nowrap;
 }
 
 view.canteen-address {
