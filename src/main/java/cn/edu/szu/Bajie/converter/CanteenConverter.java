@@ -21,4 +21,8 @@ public interface CanteenConverter {
     void canteenDynamic2canteenDetail(CanteenDynamic canteenDynamic,@MappingTarget CanteenDetailResultDto canteenDetailResultDto);
 
 
+    CollectCanteenResultDto canteen2CollectCanteen(Canteen canteen);
+
+    void canteenDynamic2CollectCanteen(CanteenDynamic canteenDynamic,@MappingTarget CollectCanteenResultDto collectCanteenResultDto);
+
 }

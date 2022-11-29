@@ -19,7 +19,7 @@ public class Windows implements Serializable {
      * 窗口id
      */
     @TableId(value = "win_id", type = IdType.AUTO)
-    private Integer winId;
+    private Long winId;
 
     /**
      * 窗口名

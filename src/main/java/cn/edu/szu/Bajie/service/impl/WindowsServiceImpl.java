@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.szu.Bajie.entity.Windows;
 import cn.edu.szu.Bajie.service.WindowsService;
 import cn.edu.szu.Bajie.mapper.WindowsMapper;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +14,15 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-11-28 21:23:23
 */
 @Service
+@CacheConfig(cacheNames = "windows")
 public class WindowsServiceImpl extends ServiceImpl<WindowsMapper, Windows>
     implements WindowsService{
 
+    @Override
+    @Cacheable(key = "#winId",unless = "#result == null")
+    public Windows getWindowInfo(Long winId) {
+        return this.getById(winId);
+    }
 }
 
 
