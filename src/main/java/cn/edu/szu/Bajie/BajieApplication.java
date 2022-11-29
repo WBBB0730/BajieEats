@@ -20,9 +20,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ServletComponentScan
 @EnableScheduling //开启定时任务
 @EnableAsync //开启异步调用
-@EnableFeignClients
+@EnableFeignClients// 远程调用
 @EnableConfigurationProperties
-@EnableCaching
+@EnableCaching // springCache
 public class BajieApplication {
 
 

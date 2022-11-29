@@ -6,6 +6,7 @@ import cn.edu.szu.Bajie.dto.result.CollectCanteenResultDto;
 import cn.edu.szu.Bajie.dto.result.CollectDishResultDto;
 import cn.edu.szu.Bajie.dto.result.CollectWindowResultDto;
 import cn.edu.szu.Bajie.entity.Canteen;
+import cn.edu.szu.Bajie.entity.CanteenDynamic;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
@@ -17,10 +18,7 @@ public interface CanteenConverter {
 
     CanteenDetailResultDto canteen2canteenDetail(Canteen canteen);
 
-    CollectCanteenResultDto canteen2collectCanteen(Canteen canteen);
+    void canteenDynamic2canteenDetail(CanteenDynamic canteenDynamic,@MappingTarget CanteenDetailResultDto canteenDetailResultDto);
 
-    CollectWindowResultDto canteen2collectWindow(Canteen canteen);
-
-    void canteen2collectDish(Canteen canteen, @MappingTarget CollectDishResultDto resultDto);
 
 }

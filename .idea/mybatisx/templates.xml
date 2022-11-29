@@ -63,10 +63,6 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="Banner" />
-                  <option name="tableName" value="banner" />
-                </TableUIInfo>
-                <TableUIInfo>
                   <option name="className" value="Canteen" />
                   <option name="tableName" value="canteen" />
                 </TableUIInfo>

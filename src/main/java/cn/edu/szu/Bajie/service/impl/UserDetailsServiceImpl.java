@@ -33,10 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>();
-        wrapper.eq(User::getOpenId,username);
-
-        User user = userService.getOne(wrapper);
+        User user = userService.getUserInfo(username);
         if(Objects.isNull(user)){
             return null;
         }

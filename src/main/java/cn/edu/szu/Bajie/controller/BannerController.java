@@ -46,7 +46,6 @@ public class BannerController {
      */
     @GetMapping("/list")
     public CommonResult<List<Banner>> list(){
-
-        return CommonResult.success(list);
+        return CommonResult.success(bannerService.getBanners());
     }
 }

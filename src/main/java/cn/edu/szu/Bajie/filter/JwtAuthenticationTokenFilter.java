@@ -1,5 +1,6 @@
 package cn.edu.szu.Bajie.filter;
 
+import cn.edu.szu.Bajie.common.OpenIdHolder;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
@@ -51,7 +52,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             return;
         }
         String userId = (String) map.get("userId");
-        response.addHeader("userId",userId);
+
 
         // 根据用户id查看用户信息
         UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
@@ -60,6 +61,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request,response);
             return;
         }
+
+        //response.addHeader("userId",userId);
+        OpenIdHolder.openIdThreadLocal.set(userId);
+
         // 得到用户信息之后存入SecurityContext给后面的过滤器使用
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,userDetails.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);

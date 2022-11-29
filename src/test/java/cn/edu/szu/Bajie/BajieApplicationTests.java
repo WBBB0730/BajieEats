@@ -29,14 +29,11 @@ class BajieApplicationTests {
     @Autowired
     private MockMvc mockMvc;
 
-    private static final String baseContext = "/bajie";
     @Autowired
     private CanteenService canteenService;
     @Test
     void contextLoads() {
 
-        Canteen canteenById = canteenService.getCanteenById(1L);
-        System.out.println(canteenById);
     }
 
     @Test

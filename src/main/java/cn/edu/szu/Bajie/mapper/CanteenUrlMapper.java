@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
 * @author Whitence
 * @description 针对表【canteen_url(餐厅图片)】的数据库操作Mapper
-* @createDate 2022-11-26 17:14:25
+* @createDate 2022-11-28 21:23:23
 * @Entity cn.edu.szu.Bajie.entity.CanteenUrl
 */
 public interface CanteenUrlMapper extends BaseMapper<CanteenUrl> {

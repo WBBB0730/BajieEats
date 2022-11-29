@@ -1,6 +1,7 @@
 package cn.edu.szu.Bajie.controller;
 
 import cn.edu.szu.Bajie.common.CommonResult;
+import cn.edu.szu.Bajie.common.OpenIdHolder;
 import cn.edu.szu.Bajie.dto.query.CanteenListQueryDto;
 import cn.edu.szu.Bajie.dto.result.CanteenDetailResultDto;
 import cn.edu.szu.Bajie.dto.result.FloorsInfoResultDto;
@@ -11,6 +12,8 @@ import cn.edu.szu.Bajie.service.CanteenService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -26,7 +29,6 @@ public class CanteenController {
 
     private CanteenService canteenService;
 
-
     /**
      * 获取餐厅详情信息
      * @param canteenId
@@ -34,10 +36,8 @@ public class CanteenController {
      */
 
     @GetMapping
-    public CommonResult<Canteen> get(@RequestParam("canteenId") Long canteenId){
-
-        return CommonResult.success(canteenService.getCanteenById(canteenId));
-
+    public CommonResult<CanteenDetailResultDto> get(@RequestParam("canteenId") Long canteenId){
+        return CommonResult.success(canteenService.getCanteenDetail(canteenId));
     }
 
     /**
