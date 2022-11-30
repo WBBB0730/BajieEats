@@ -18,6 +18,42 @@ import java.util.List;
 @Data
 public class DishDetailResultDto extends Dish implements Serializable {
 
-    List<DishUrl> urlList;
+
+    /**
+     * 标签
+     */
+    private String tags;
+
+    /**
+     * 推荐状态
+     */
+    private Integer recommendStatus;
+
+    /**
+     * 排序
+     */
+    private Integer sort;
+
+    /**
+     * 评分
+     */
+    private BigDecimal score;
+
+    /**
+     * 在售状态
+     */
+    private Integer onSaleStatus;
+
+
+    /**
+     * 是否收藏
+     */
+    private Integer isCollected;
+
+    /**
+     * 照片
+     */
+
+    List<String> urlList;
 
 }

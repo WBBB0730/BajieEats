@@ -6,11 +6,13 @@ import java.util.List;
 @Data
 public class WindowInfo {
 
-    private Integer windowId;
+    private Long winId;
 
-    private String windowName;
+    private String winName;
 
-    private Integer openingStatus;
+    private Integer isOpening;
 
-    private List<Dish> dishList;
+    private Integer isCollected;
+
+    private List<SimpleDishResultDto> dishes;
 }

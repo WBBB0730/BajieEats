@@ -25,7 +25,7 @@ public class CanteenUrl implements Serializable {
      * 餐厅id
      */
     @TableField(value = "canteen_id")
-    private Integer canteenId;
+    private Long canteenId;
 
     /**
      * url

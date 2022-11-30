@@ -60,4 +60,9 @@ public class SimpleCanteenResultDto implements Serializable {
      * 评论
      */
     private String announce;
+
+    /**
+     * 是否收藏
+     */
+    private Integer isCollected;
 }

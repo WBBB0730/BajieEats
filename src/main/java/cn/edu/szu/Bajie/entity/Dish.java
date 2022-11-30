@@ -1,9 +1,7 @@
 package cn.edu.szu.Bajie.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -44,7 +42,7 @@ public class Dish implements Serializable {
      * 窗口id
      */
     @TableField(value = "win_id")
-    private Integer winId;
+    private Long winId;
 
     /**
      * 主料
@@ -56,6 +54,7 @@ public class Dish implements Serializable {
      * 删除状态
      */
     @TableField(value = "delete_status")
+    @TableLogic
     private Integer deleteStatus;
 
     /**

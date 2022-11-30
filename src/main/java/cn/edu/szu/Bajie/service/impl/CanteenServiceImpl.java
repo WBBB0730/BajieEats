@@ -3,16 +3,21 @@ package cn.edu.szu.Bajie.service.impl;
 import cn.edu.szu.Bajie.constant.CacheConstant;
 import cn.edu.szu.Bajie.constant.CacheTimeInterval;
 import cn.edu.szu.Bajie.converter.CanteenConverter;
+import cn.edu.szu.Bajie.converter.WindowsConverter;
+import cn.edu.szu.Bajie.dto.query.CanteenListQueryDto;
 import cn.edu.szu.Bajie.dto.result.CanteenDetailResultDto;
+import cn.edu.szu.Bajie.dto.result.FloorsInfoResultDto;
+import cn.edu.szu.Bajie.dto.result.SimpleCanteenResultDto;
+import cn.edu.szu.Bajie.dto.result.WindowInfo;
 import cn.edu.szu.Bajie.entity.CanteenDynamic;
 import cn.edu.szu.Bajie.entity.CanteenUrl;
-import cn.edu.szu.Bajie.service.CanteenDynamicService;
-import cn.edu.szu.Bajie.service.CanteenUrlService;
+import cn.edu.szu.Bajie.entity.Windows;
+import cn.edu.szu.Bajie.service.*;
 import cn.edu.szu.Bajie.util.CacheService;
+import cn.edu.szu.Bajie.util.DistanceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.szu.Bajie.entity.Canteen;
-import cn.edu.szu.Bajie.service.CanteenService;
 import cn.edu.szu.Bajie.mapper.CanteenMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
@@ -20,6 +25,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -40,6 +46,12 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
     private CanteenDynamicService canteenDynamicService;
 
     private CanteenConverter canteenConverter;
+
+    private WindowsService windowsService;
+
+    private WindowsConverter windowsConverter;
+
+    private DishService dishService;
 
     private CacheService cacheService;
 
@@ -64,16 +76,7 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
             CanteenDynamic canteenDynamic = canteenDynamicService.getById(canteenId);
             canteenConverter.canteenDynamic2canteenDetail(canteenDynamic,resultDto);
             // 获取照片
-            resultDto.setCanteenUrls(
-                    canteenUrlService.list(
-                            new LambdaQueryWrapper<CanteenUrl>()
-                                    .eq(CanteenUrl::getCanteenId, canteenId)
-                    )
-                            .stream()
-                            .map(CanteenUrl::getUrl)
-                            .collect(Collectors.toList())
-
-            );
+            resultDto.setCanteenUrls(getCanteenUrls(canteenId));
             return resultDto;
         };
         // 缓存
@@ -88,6 +91,100 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
 
 
         return result;
+    }
+
+    @Override
+    public List<SimpleCanteenResultDto> getCanteenList(CanteenListQueryDto dto) {
+
+         Comparator<SimpleCanteenResultDto> comparing = null;
+
+        switch (dto.getSortType()){
+            case 0:
+                comparing=Comparator.comparing(SimpleCanteenResultDto::getScore);break;
+            case 1:
+                comparing=Comparator.comparing(SimpleCanteenResultDto::getScore).reversed();break;
+            case 2:
+                comparing=Comparator.comparing(SimpleCanteenResultDto::getDistance);break;
+            case 3:
+                comparing=Comparator.comparing(SimpleCanteenResultDto::getDistance).reversed();break;
+            default:
+        }
+
+        return canteenDynamicService
+                .list()
+                .stream()
+                .map(canteenDynamic -> {
+
+                    Canteen canteen = getBaseCanteenById(canteenDynamic.getCanteenId());
+
+                    SimpleCanteenResultDto simpleCanteenResultDto = canteenConverter.canteen2SimpleCanteen(canteen);
+
+                    canteenConverter.canteenDynamic2SimpleCanteen(canteenDynamic,simpleCanteenResultDto);
+
+                    simpleCanteenResultDto.setDistance(
+                            // 计算距离
+                            (int) DistanceUtil.getDistance(
+                                    dto.getLongitude(),
+                                    dto.getLongitude(),
+                                    canteen.getCanteenPositionLongitude().doubleValue(),
+                                    canteen.getCanteenPositionLatitude().doubleValue()
+                            )
+                    );
+
+                    return simpleCanteenResultDto;
+                })
+                .sorted(comparing)
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<FloorsInfoResultDto> getFloorsInfo(Long canteenId) {
+        return windowsService
+                // 获取餐厅窗口
+                .getWindowsByCanteenId(canteenId)
+                .stream()
+                // 分组转为map存储
+                .collect(Collectors.groupingBy(Windows::getFloorName,Collectors.toList()))
+                // 遍历所有entrySet
+                .entrySet()
+                .stream()
+                .map(entry ->{
+                    // 准备结果类
+                    FloorsInfoResultDto resultDto = new FloorsInfoResultDto();
+                    // 设置楼层
+                    resultDto.setFloorName(entry.getKey());
+                    // 设置窗口信息
+                    resultDto.setWindowList(
+                            //
+                            entry.getValue()
+                                    .stream()
+                                    .map(windows -> {
+                                        WindowInfo windowInfo = windowsConverter.window2windowInfo(windows);
+
+                                        windowInfo.setDishes(
+                                                dishService.getDishesByWinId(windows.getWinId())
+                                        );
+                                        return windowInfo;
+                                    })
+                                    .collect(Collectors.toList())
+                    );
+                    return resultDto;
+                })
+                .sorted(Comparator.comparing(FloorsInfoResultDto::getFloorName))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Cacheable(key = "'canteenUrls::'+#canteenId")
+    public List<String> getCanteenUrls(Long canteenId) {
+        return canteenUrlService.list(
+                new LambdaQueryWrapper<CanteenUrl>()
+                        .eq(CanteenUrl::getCanteenId,canteenId)
+        )
+                .stream()
+                .map(CanteenUrl::getUrl)
+                .collect(Collectors.toList());
     }
 
 

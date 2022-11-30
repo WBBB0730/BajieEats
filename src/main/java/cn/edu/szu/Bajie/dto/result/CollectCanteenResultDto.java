@@ -1,6 +1,7 @@
 package cn.edu.szu.Bajie.dto.result;
 
 import cn.edu.szu.Bajie.entity.Collection;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -80,6 +81,7 @@ public class CollectCanteenResultDto implements Collection.ICollectionHelper {
 
     @Override
     public String getName() {
-        return canteenName;
+        return PinyinUtil.getPinyin(canteenName,"");
     }
+
 }

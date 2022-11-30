@@ -1,7 +1,9 @@
 package cn.edu.szu.Bajie.util;
 
 
+import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.commons.util.IdUtils;
 
 /**
  * @author Whitence
@@ -47,14 +49,10 @@ public class DistanceUtil {
     }
 
     public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
 
-        double a = 113.001;
-        double b = 23.001;
-
-        double x = 113.002;
-        double y = 23.002;
-
-        System.out.println(getDistance(a,b,x,y));
+            System.out.println(IdUtil.getSnowflakeNextId());
+        }
     }
 
 }

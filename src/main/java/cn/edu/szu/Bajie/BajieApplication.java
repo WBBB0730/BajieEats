@@ -25,8 +25,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableCaching // springCache
 public class BajieApplication {
 
-
-
     public static void main(String[] args) {
         SpringApplication.run(BajieApplication.class, args);
 

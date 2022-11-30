@@ -20,4 +20,8 @@ public class CustomizeValidator {
     public static boolean checkIsCollected(int value){
         return value == 0 || value == 1;
     }
+
+    public static boolean checkCanteenListSortType(int value){
+        return value == 0 || value == 1 || value == 2 || value == 3;
+    }
 }
