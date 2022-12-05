@@ -1,8 +1,8 @@
 <!-- 首页 -->
 
-<view class="top_address" bindtap="moveToLocation">
-  <text class="address" style="font-size: 14px;"> 深圳大学沧海校区</text>
-  <view id="arrowHead"></view>
+<view class="top_address" bindtap="toChoosePosition">
+  <text class="address">{{loc}}</text>
+  <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/fas fa-caret-down@3x.png" class="arrowHead"></image>
 </view>
 <view class="search_input" catchtap="clickSearch">
   <text class="search">点击搜索</text>
@@ -18,7 +18,7 @@
 <!-- 二级功能 -->
 <view class="function_entries">
   <!-- 地图 -->
-  <view class="function_block">
+  <view class="function_block" bindtap="toMap">
     <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/地图(Map)_爱给网_aigei_com.png" class="function_img"></image>
     <text style="color:gray;font-size:12px">地 图</text>
   </view>

@@ -1,0 +1,23 @@
+<map name="test" class="geography" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" scale = "15" bindcallouttap="showInfo">
+  <cover-view slot = "callout">
+    <cover-view class="container" marker-id="1">
+      <cover-image class="canteenPhoto" src="/images/shiyanCanteen.jpeg"></cover-image>
+      <cover-view style="width: 200rpx;text-align: center;">实验餐厅 {{distance[1]}}</cover-view>
+    </cover-view>
+    <cover-view class="container" marker-id="2">
+      <cover-image class="canteenPhoto" src="/images/nanquCanteen.jpg"></cover-image>
+      <cover-view style="width: 200rpx;text-align: center;">荔园美食汇 {{distance[2]}}</cover-view>
+    </cover-view>
+    <cover-view class="container" marker-id="3">
+      <cover-image class="canteenPhoto" src="/images/xiNanCanteen.jpg"></cover-image>
+      <cover-view style="width: 200rpx;text-align: center;">新西南餐厅 {{distance[3]}}</cover-view>
+    </cover-view>
+  </cover-view>
+</map>
+<view class="canteenInfo" wx:if="{{showCanteenInfo}}">
+  <view class = "left">
+    <text class="canteenName">{{name}}</text>
+    <text class="address">{{s}} {{loc}}</text>
+  </view>
+  <view class="goHere" bindtap="goHere" data-markerId="{{markerId}}">到这去</view>
+</view>

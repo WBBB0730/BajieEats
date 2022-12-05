@@ -1,14 +1,15 @@
 
 /* 头部开始 */
+
 .dish-top {
   position: relative;
-  width: auto;
-  height: auoto;
+  border: red solid 5rpx;
 }
 /* 头部图片 */
 .dish-img {
-  width: 751rpx;
+  width: 100%;
   height: 450rpx;
+  border: red solid 5rpx;
 }
 /* 分享图标 */
 .share-part {
@@ -33,28 +34,29 @@
   display: flex;
   justify-content: space-between;
   bottom: 65rpx;
-  width: 751rpx;
   height: 260rpx;
   background-color: white;
+  border: red solid 5rpx;
 }
 .left {
   left: 20rpx;
-  width: 600rpx;
+  width: 80%;
   height: 260rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border: red solid 5rpx;
 }
 .right {
   position: relative;
   top: 14rpx;
-  left: 26rpx;
-  width: 152rpx;
+  width: 15%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items:center;
+  border: red solid 5rpx;
 }
 .dish-name{
   position: relative;
@@ -101,10 +103,10 @@
 .card-title {
   position: relative;
   bottom: 40rpx;
-  width: 752rpx;
   height: 90rpx;
   background-color: white;
   border-bottom: #BBBBBB solid 1rpx;
+  border: solid 5rpx red;
 }
 .detail-word {
   position: relative;
@@ -161,9 +163,9 @@
 .detail-content {
   position: relative;
   bottom: 40rpx;
-  width: 752rpx;
   height: 250rpx;
   background-color: white;
+  border: red solid 5rpx;
 }
 .introduce {
   display: inline-block;
@@ -269,16 +271,16 @@
   /* 样式 */
   position: relative;
   bottom: 40rpx;
-  width: 752rpx;
-  height: auto;
   background-color: white;
   /* 布局 */
   display: flex;
   justify-content: space-around;
   border-bottom: rgba(187,187,187,0.16) solid 1px ;
+  border: red solid 5rpx;
 }
 .left-part {
   margin-top: 20rpx;
+  border: red solid 5rpx;
 }
 .middle-part {
   position: relative;
@@ -289,11 +291,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: red solid 5rpx;
 }
 .right-part {
   margin-top: 20rpx;
   font-size: 24rpx;
   color: gray;
+  border: red solid 5rpx;
 }
 .comment-photos {
   display: flex;

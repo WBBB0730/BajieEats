@@ -1,8 +1,21 @@
 /* 地址头部 */
 .top_address {
   position: relative;
-  left: 50rpx;
+  padding: 0 50rpx;
   top: 10rpx;
+  display: flex;
+  align-items: center;
+}
+.address {
+  font-size: 30rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.arrowHead {
+  width: 30rpx;
+  height: 30rpx;
+  padding: 10rpx;
 }
 /* 搜索框 */
 .search_input {

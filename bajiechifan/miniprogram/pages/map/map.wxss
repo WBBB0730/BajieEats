@@ -1,0 +1,58 @@
+.geography{
+  width: 750rpx;
+  height: 1380rpx;
+}
+.container{
+  width: 220rpx;
+  height: 160rpx;
+  background-color: white;
+  padding: 10rpx;
+  font-size: 24rpx;
+  border-radius: 10%;
+}
+.canteenPhoto{
+  margin: 10rpx;
+  width: 170rpx;
+  height: 110rpx;
+  border-radius: 10%;
+}
+.canteenInfo{
+  position: fixed;
+  background-color: white;
+  width: 718rpx;
+  padding: 16rpx;
+  top:85%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.left{
+  padding: 20rpx;
+  width: 440rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.canteenName{
+  width: 440rpx;
+  font-size: large;
+  display:inline-block;
+  margin-bottom: 30rpx;
+}
+.address{
+  font-size: 28rpx;
+  color: gray;
+  width: 440rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
+}
+.goHere{
+  width: 194rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: white;
+  background-color: blue;
+  padding: 16rpx 0 16rpx 0;
+  border-radius: 52rpx;
+}

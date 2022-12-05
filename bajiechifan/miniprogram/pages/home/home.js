@@ -2,7 +2,40 @@ Page({
   data: {
     canteen_list: [],
     collectFlagArray: [],
-    swiperList: []
+    swiperList: [],
+    loc: '',
+    longitude: 113.936696,
+    latitude: 22.532742
+  },
+  onReady() {
+    let that = this
+    // wx.getSetting({
+    // success(res) {
+    console.log('set')
+    // if (res.authSetting['scope.userLocation']) {
+    wx.getLocation({
+      success(result) {
+        console.log(result, 'location');
+        wx.setStorageSync('location', [result.longitude, result.latitude]);
+        that.getLocation();
+      },
+      fail() {
+        console.log('fail')
+        if (wx.getStorageSync('location')) {
+          that.getLocation();
+        } 
+        else {
+          wx.setStorageSync('location', [113.936696, 22.532742]);
+          that.getLocation();
+        }
+      }
+    })
+    // }
+    // else {
+    // }
+    // }
+    // }
+    // })
   },
   onShow() {
     var j;
@@ -13,7 +46,7 @@ Page({
     this.setData({
       collectFlagArray: temp
     })
-    var _this = this;
+    let _this = this;
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/canteen/list',
       method: 'POST',
@@ -32,7 +65,6 @@ Page({
         _this.setData({
           canteen_list: resobj.data
         })
-        console.log(resobj);
       },
       fail() {
         console.log("fail")
@@ -55,8 +87,10 @@ Page({
         console.log("fail")
       }
     })
+    this.getLocation()
   },
   toCanteenDetail(e) {
+    console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
       url: '/pages/canteenDetails/canteenDetails?id=' + e.currentTarget.dataset.id,
     })
@@ -64,7 +98,6 @@ Page({
   clickCollection: function (e) {
     let _this = this;
     let i = e.target.dataset.num;
-    console.log("i=" + i);
     let token = getApp().globalData.token;
     // 如果用户未登录
     if (!token) {
@@ -87,7 +120,6 @@ Page({
         isCollected: _this.data.canteen_list[i].isCollected ? 1 : 0
       },
       success: (res) => {
-        console.log(res);
         if (res.data.code != 200) {
           console.log("失败（收藏）", res)
         }
@@ -107,6 +139,32 @@ Page({
   toMyFavorites() {
     wx.navigateTo({
       url: '/pages/myFavorites/myFavorites',
+    })
+  },
+  toChoosePosition() {
+    wx.navigateTo({
+      url: '/pages/choosePosition/choosePosition',
+    })
+  },
+  getLocation() {
+    let _this = this
+    let location = wx.getStorageSync('location');
+    let l = location[0];
+    let a = location[1];
+    console.log(l, a, 1);
+    wx.request({
+      url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${a},${l}&key=EFYBZ-GFPKG-7DXQK-I2RD7-U5RW2-CSBPZ`,
+      success(res) {
+        console.log(res)
+        _this.setData({
+          loc: res.data.result.formatted_addresses.recommend
+        })
+      }
+    })
+  },
+  toMap() {
+    wx.navigateTo({
+      url: '/pages/map/map',
     })
   }
 })

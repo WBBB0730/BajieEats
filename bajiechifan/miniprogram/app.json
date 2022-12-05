@@ -11,7 +11,9 @@
     "pages/social/social",
     "pages/comment/comment",
     "pages/myFavorites/myFavorites",
-    "pages/postComment/postComment"
+    "pages/postComment/postComment",
+    "pages/choosePosition/choosePosition",
+    "pages/map/map"
   ],
   "permission": {
     "scope.userLocation": {
