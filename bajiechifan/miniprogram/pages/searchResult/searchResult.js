@@ -5,10 +5,12 @@ Page({
     search_list:[],
     show_list_flag:true
   },
-  onLoad(){
-    const h_list=wx.getStorageSync('h_list');
+  onLoad(o){
+    console.log('start')
+    let search_value = JSON.parse(o.value)
+    console.log(search_value)
     this.setData({
-      search_value: h_list[0]
+      search_value: search_value
     })
     // 调接口
 
@@ -24,28 +26,10 @@ Page({
       url: '/pages/search/search',
     })
   },
-  getSearchValue(e){
-    console.log(e.detail.value)
-    this.setData({
-      search_value:e.detail.value
-    })
-    console.log(this.data.search_value,11)
-  },
-  clickSearch(){
-    console.log(this.data.historyList,"origin");
-    var _this = this;
-    var hList = wx.getStorageSync('h_list');
-        if(this.data.search_value != '') {
-          hList.unshift(_this.data.search_value)
-        }
-          console.log(hList,"push")
 
-    wx.setStorageSync('h_list', hList)
-    var test=wx.getStorageSync('h_list')
-    console.log(test,"push?")
-    //刷新
-    wx.reLaunch({
-      url: '/pages/searchResult/searchResult',
+  catchFocus(){
+    wx.navigateTo({
+      url: '/pages/search/search',
     })
   }
 })

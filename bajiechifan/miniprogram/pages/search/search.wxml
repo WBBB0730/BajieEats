@@ -13,6 +13,6 @@
 	<view bindtap="clear_history" class="clear-history">清除全部</view>
 </view>
 <view class="history-list">
-  <view class="history-item" wx:for="{{historyList}}" bindtap="tap_history" data-value="{{item}}">{{item}}</view>
+  <view class="history-item" wx:for="{{historyList}}" bindtap="tap_history" data-value="{{item}}" data-index = "{{index}}">{{item}}</view>
 </view>
 <!-- <view style="position: relative;top:100rpx;left:200rpx" bindtap="entryResult">入口</view> -->

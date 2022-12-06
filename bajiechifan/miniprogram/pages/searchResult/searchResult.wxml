@@ -1,11 +1,11 @@
 <view class="search">
   <view class="left-part">
   <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arrow_back@3x.png" class="search-icon" bindtap="backToSearch"></image>
-  <input class="search-input" value="{{search_value}}" bindinput="getSearchValue"></input>
+  <input class="search-input" value="{{search_value}}" bindinput="getSearchValue" catchfocus = "catchFocus"></input>
   </view>
   <view class="right-part">
     <!-- <view class="search-button" bindtap="clearSearch">搜索</view> -->
-    <view class="search-button" bindtap="clickSearch">搜索</view>
+    <view class="search-button">搜索</view>
   </view>
 </view>
 <view wx:if="{{show_list_flag}}">
