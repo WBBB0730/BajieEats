@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 菜品动态信息表
@@ -14,6 +17,8 @@ import lombok.Data;
  */
 @TableName(value ="dish_dynamic")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DishDynamic implements Serializable {
     /**
      * 菜品id

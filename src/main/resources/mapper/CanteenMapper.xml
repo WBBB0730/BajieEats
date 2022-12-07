@@ -23,4 +23,5 @@
         opening_time,delete_status,create_time,
         update_time
     </sql>
+
 </mapper>

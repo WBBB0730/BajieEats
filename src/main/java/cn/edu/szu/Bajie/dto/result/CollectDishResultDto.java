@@ -2,12 +2,16 @@ package cn.edu.szu.Bajie.dto.result;
 
 import cn.edu.szu.Bajie.entity.Collection;
 import cn.hutool.extra.pinyin.PinyinUtil;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CollectDishResultDto implements Collection.ICollectionHelper {
 
     /**
@@ -17,7 +21,7 @@ public class CollectDishResultDto implements Collection.ICollectionHelper {
     /**
      * 菜品id
      */
-    private Integer dishId;
+    private Long dishId;
     /**
      * 菜品名
      */

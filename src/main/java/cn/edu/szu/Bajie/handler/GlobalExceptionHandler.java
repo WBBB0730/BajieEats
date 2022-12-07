@@ -2,6 +2,7 @@ package cn.edu.szu.Bajie.handler;
 
 
 import cn.edu.szu.Bajie.common.CommonResult;
+import org.springframework.core.annotation.Order;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -20,6 +21,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
+    @ExceptionHandler(value = Exception.class)
+    @Order
+    public CommonResult handleCommonException(Exception e) {
+        return CommonResult.failed(e.getMessage());
+    }
     /**
      * api错误
      * @param e
@@ -64,10 +71,12 @@ public class GlobalExceptionHandler {
         if (bindingResult.hasErrors()) {
             FieldError fieldError = bindingResult.getFieldError();
             if (fieldError != null) {
-                message = fieldError.getField()+fieldError.getDefaultMessage();
+                message = fieldError.getDefaultMessage();
             }
         }
         return CommonResult.validateFailed(message);
     }
+
+
 }
 

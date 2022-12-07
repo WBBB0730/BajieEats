@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.annotation.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 餐厅基本信息表
@@ -13,6 +16,8 @@ import lombok.Data;
  */
 @TableName(value ="canteen")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Canteen implements Serializable {
     /**
      * 餐厅id

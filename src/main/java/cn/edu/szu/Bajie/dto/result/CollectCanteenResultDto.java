@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +19,8 @@ import java.util.Date;
  * @version 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CollectCanteenResultDto implements Collection.ICollectionHelper {
 
     /**
@@ -27,7 +31,7 @@ public class CollectCanteenResultDto implements Collection.ICollectionHelper {
     /**
      * 餐厅id
      */
-    private Integer canteenId;
+    private Long canteenId;
     /**
      * 餐厅名
      */

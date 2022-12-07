@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -12,6 +16,9 @@ import lombok.Data;
  */
 @TableName(value ="collection")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
 public class Collection implements Serializable {
     /**
      * 收藏id
@@ -68,5 +75,21 @@ public class Collection implements Serializable {
 
 
          String getName();
+    }
+
+    public enum CollectionType{
+        CANTEEN(0),
+        WINDOW(1),
+        DISH(2);
+
+        private int value;
+
+        CollectionType(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

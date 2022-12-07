@@ -33,7 +33,7 @@ import java.util.Map;
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 
-    @Value("${caching.cachingPrefix:bajie}")
+    @Value("${caching.cachingPrefix:BAJIE::}")
     private String cachePrefix;
 
     @Value("${caching.defaultTtl:60}")

@@ -1,9 +1,7 @@
 package cn.edu.szu.Bajie.service;
 
 import cn.edu.szu.Bajie.dto.query.CanteenListQueryDto;
-import cn.edu.szu.Bajie.dto.result.CanteenDetailResultDto;
-import cn.edu.szu.Bajie.dto.result.FloorsInfoResultDto;
-import cn.edu.szu.Bajie.dto.result.SimpleCanteenResultDto;
+import cn.edu.szu.Bajie.dto.result.*;
 import cn.edu.szu.Bajie.entity.Canteen;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -29,4 +27,7 @@ public interface CanteenService extends IService<Canteen> {
     List<String> getCanteenUrls(Long canteenId);
 
 
+    BriefDishResultDto getSimpleDishResult(Long dishId);
+
+    List<SearchAllResultDto> searchAll(String keyWord);
 }

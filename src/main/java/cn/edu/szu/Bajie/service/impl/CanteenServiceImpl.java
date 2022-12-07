@@ -5,30 +5,39 @@ import cn.edu.szu.Bajie.constant.CacheTimeInterval;
 import cn.edu.szu.Bajie.converter.CanteenConverter;
 import cn.edu.szu.Bajie.converter.WindowsConverter;
 import cn.edu.szu.Bajie.dto.query.CanteenListQueryDto;
-import cn.edu.szu.Bajie.dto.result.CanteenDetailResultDto;
-import cn.edu.szu.Bajie.dto.result.FloorsInfoResultDto;
-import cn.edu.szu.Bajie.dto.result.SimpleCanteenResultDto;
-import cn.edu.szu.Bajie.dto.result.WindowInfo;
-import cn.edu.szu.Bajie.entity.CanteenDynamic;
-import cn.edu.szu.Bajie.entity.CanteenUrl;
-import cn.edu.szu.Bajie.entity.Windows;
+import cn.edu.szu.Bajie.dto.result.*;
+import cn.edu.szu.Bajie.entity.*;
 import cn.edu.szu.Bajie.service.*;
 import cn.edu.szu.Bajie.util.CacheService;
 import cn.edu.szu.Bajie.util.DistanceUtil;
+import cn.hutool.core.io.resource.ClassPathResource;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.extra.pinyin.PinyinUtil;
+import cn.hutool.extra.tokenizer.Result;
+import cn.hutool.extra.tokenizer.TokenizerEngine;
+import cn.hutool.extra.tokenizer.TokenizerUtil;
+import cn.hutool.extra.tokenizer.Word;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.edu.szu.Bajie.entity.Canteen;
 import cn.edu.szu.Bajie.mapper.CanteenMapper;
+import com.hankcs.hanlp.HanLP;
+import com.hankcs.hanlp.dictionary.CustomDictionary;
+import com.hankcs.hanlp.dictionary.py.Pinyin;
+import com.hankcs.hanlp.seg.common.Term;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.Collection;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
 * @author Whitence
@@ -55,10 +64,16 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
 
     private CacheService cacheService;
 
+    private TokenizeService tokenizeService;
+
     @Override
-    @Cacheable(key = "#canteenId")
     public Canteen getBaseCanteenById(Long canteenId) {
-        return this.getById(canteenId);
+        return cacheService.getByCacheObj(
+                MessageFormat.format(CacheConstant.CANTEEN_BASE,canteenId),
+                ()->this.getById(canteenId),
+                Canteen.class,
+                CacheTimeInterval.AN_HOUR
+        );
     }
 
     @Override
@@ -70,6 +85,10 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
         Supplier<CanteenDetailResultDto> supplier = ()->{
             // 餐厅基本信息
             Canteen canteen = getBaseCanteenById(canteenId);
+
+            if(ObjectUtil.isNull(canteen)){
+                return null;
+            }
             // 创建结果类
             CanteenDetailResultDto resultDto = canteenConverter.canteen2canteenDetail(canteen);
             // 获取餐厅动态数据并设置
@@ -86,9 +105,6 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
                 CanteenDetailResultDto.class,
                 CacheTimeInterval.ONE_MIN
         );
-
-        // 获取收藏状态
-
 
         return result;
     }
@@ -115,7 +131,7 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
                 .stream()
                 .map(canteenDynamic -> {
 
-                    Canteen canteen = getBaseCanteenById(canteenDynamic.getCanteenId());
+                    Canteen canteen = this.getBaseCanteenById(canteenDynamic.getCanteenId());
 
                     SimpleCanteenResultDto simpleCanteenResultDto = canteenConverter.canteen2SimpleCanteen(canteen);
 
@@ -176,16 +192,57 @@ public class CanteenServiceImpl extends ServiceImpl<CanteenMapper, Canteen>
     }
 
     @Override
-    @Cacheable(key = "'canteenUrls::'+#canteenId")
     public List<String> getCanteenUrls(Long canteenId) {
-        return canteenUrlService.list(
-                new LambdaQueryWrapper<CanteenUrl>()
-                        .eq(CanteenUrl::getCanteenId,canteenId)
-        )
-                .stream()
-                .map(CanteenUrl::getUrl)
-                .collect(Collectors.toList());
+        return cacheService
+                .getByCacheList(
+                        MessageFormat.format(CacheConstant.CANTEEN_URLS,canteenId),
+                        ()->canteenUrlService.list(
+                                        new LambdaQueryWrapper<CanteenUrl>()
+                                                .eq(CanteenUrl::getCanteenId,canteenId)
+                                )
+                                .stream()
+                                .map(CanteenUrl::getUrl)
+                                .collect(Collectors.toList()),
+                        String.class,
+                        CacheTimeInterval.AN_HOUR
+                );
     }
+
+    @Override
+    @Cacheable(key = "'breifDishInfo'+#dishId")
+    public BriefDishResultDto getSimpleDishResult(Long dishId) {
+
+        Dish baseDishInfo = dishService.getBaseDishInfo(dishId);
+
+        Windows windowInfo = windowsService.getWindowInfo(baseDishInfo.getWinId());
+
+        Canteen canteen = this.getBaseCanteenById(windowInfo.getCanteenId());
+
+        return BriefDishResultDto
+                .builder()
+                .dishId(baseDishInfo.getDishId())
+                .dishName(baseDishInfo.getDishName())
+                .dishImage(baseDishInfo.getDishImage())
+                .canteenName(canteen.getCanteenName())
+                .canteenAddress(canteen.getCanteenAddress())
+                .floorName(windowInfo.getFloorName())
+                .winName(windowInfo.getWinName())
+                .build();
+
+    }
+
+    @Override
+    public List<SearchAllResultDto> searchAll(String keyWord) {
+
+        Set<String> parse = tokenizeService.parse(keyWord);
+
+
+
+
+        return null;
+    }
+
+
 
 
 }

@@ -1,6 +1,8 @@
 package cn.edu.szu.Bajie.functional;
 
+import cn.edu.szu.Bajie.annotation.ExecuteTest;
 import cn.edu.szu.Bajie.entity.TestArg;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.ContentResultMatchers;
@@ -18,6 +20,7 @@ public class BannerTest {
      * @return
      */
 
+    @ExecuteTest(execute = true)
     public static TestArg getBannerListTest(){
 
         List<ResultMatcher> resultMatcherList =new LinkedList<>();
@@ -34,6 +37,7 @@ public class BannerTest {
 
         // 响应体
         ContentResultMatchers content = MockMvcResultMatchers.content();
+
         ResultMatcher result = content.json("{\n" +
                 "    \"code\": 200,\n" +
                 "    \"message\": \"操作成功\",\n" +
@@ -79,5 +83,6 @@ public class BannerTest {
                 .resultMatcherList(resultMatcherList)
                 .build();
     }
+
 
 }

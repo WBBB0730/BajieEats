@@ -5,11 +5,12 @@ import cn.edu.szu.Bajie.entity.Dish;
 import cn.hutool.extra.pinyin.PinyinUtil;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 @Data
-public class CollectWindowResultDto  implements Collection.ICollectionHelper {
+public class CollectWindowResultDto  implements Collection.ICollectionHelper , Serializable {
     /**
      * 收藏类型
      */
@@ -17,7 +18,7 @@ public class CollectWindowResultDto  implements Collection.ICollectionHelper {
     /**
      * 窗口id
      */
-    private Integer winId;
+    private Long winId;
     /**
      * 窗口名
      */
@@ -26,6 +27,11 @@ public class CollectWindowResultDto  implements Collection.ICollectionHelper {
      * 是否营业
      */
     private Integer isOpening;
+
+    /**
+     * 餐厅id
+     */
+    private Long canteenId;
     /**
      * 餐厅名
      */

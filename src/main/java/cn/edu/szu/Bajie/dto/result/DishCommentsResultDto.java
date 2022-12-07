@@ -20,8 +20,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
-public class UserCommentsResultDto extends CommentDish {
+@SuperBuilder
+public class DishCommentsResultDto extends CommentDish {
 
 
     /**
@@ -35,8 +35,8 @@ public class UserCommentsResultDto extends CommentDish {
     private String avatarUrl;
 
     /**
-     * 简单菜品
+     * 是否点赞
      */
-    private BriefDishResultDto dishInfo;
+    private Integer isLiked;
 
 }

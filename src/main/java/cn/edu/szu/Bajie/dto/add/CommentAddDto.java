@@ -1,5 +1,6 @@
 package cn.edu.szu.Bajie.dto.add;
 
+import cn.edu.szu.Bajie.annotation.CheckSensitive;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,18 +17,18 @@ public class CommentAddDto implements Serializable {
     /**
      * 评论内容
      */
+    @CheckSensitive(message = "评论含有敏感词汇")
     private String content;
-
 
     /**
      * 菜品id
      */
-    private Integer dishId;
+    private Long dishId;
 
     /**
      * 评分
      */
-    private BigDecimal score;
+    private Integer score;
 
     /**
      * 评论照片

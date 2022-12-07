@@ -78,6 +78,10 @@ spring:
         max-idle: 50     #连接池中的最大空闲连接
         min-idle: 5     #连接池中的最小空闲连接
     timeout: 10000ms    #连接超时时间（毫秒）
+  data:
+    mongodb:
+      uri: mongodb://bajie:bajiechifan2022@114.132.234.161:27017/bajie
+
   #定时任务
   task:
     scheduling:

@@ -6,63 +6,70 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 /**
  * 评论表
  * @TableName comment
  */
-@TableName(value ="comment")
+
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder(toBuilder = true)
 public class Comment implements Serializable {
     /**
      * 评论
      */
-    @TableId(value = "comment_id")
-    private Integer commentId;
+    @MongoId
+    private Long commentId;
 
     /**
      * 评论内容
      */
-    @TableField(value = "content")
     private String content;
 
     /**
      * 点赞
      */
-    @TableField(value = "likes")
-    private Integer likes;
-
-    /**
-     * 评分
-     */
-    @TableField(value = "score")
-    private Integer score;
+    private Integer likes = 0;
 
     /**
      * wxOpenId
      */
-    @TableField(value = "open_id")
     private String openId;
-
-    /**
-     * 菜品id
-     */
-    @TableField(value = "dish_id")
-    private Long dishId;
 
     /**
      * 创建时间
      */
-    @TableField(value = "create_time")
-    private Date createTime;
+    private Date createTime =new Date();
+
 
     /**
-     * 更新时间
+     * 是否可见
      */
-    @TableField(value = "update_time")
-    private Date updateTime;
+    private boolean visible = true;
 
-    @TableField(exist = false)
+    /**
+     * 删除状态
+     */
+    private boolean deleted = false;
+
+
+    /**
+     * 点赞用户
+     */
+    private List<String> likeUsers =new LinkedList<>();
+
+    @JsonIgnore
     private static final long serialVersionUID = 1L;
 }

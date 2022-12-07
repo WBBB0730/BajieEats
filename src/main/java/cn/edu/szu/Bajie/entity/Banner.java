@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 轮播图
@@ -14,6 +17,8 @@ import lombok.Data;
  */
 @TableName(value ="banner")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Banner implements Serializable {
     /**
      * 轮播图id

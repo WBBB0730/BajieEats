@@ -1,15 +1,19 @@
 package cn.edu.szu.Bajie.dto.result;
 
 import cn.edu.szu.Bajie.entity.Comment;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SimpleCanteenResultDto implements Serializable {
 
-    private Integer canteenId;
+    private Long canteenId;
 
     /**
      * 餐厅名

@@ -8,9 +8,13 @@ import java.util.List;
 import cn.edu.szu.Bajie.entity.CanteenUrl;
 import cn.edu.szu.Bajie.entity.Windows;
 import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CanteenDetailResultDto extends Canteen {
 
 

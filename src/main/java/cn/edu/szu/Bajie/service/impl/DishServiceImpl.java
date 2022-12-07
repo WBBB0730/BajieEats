@@ -1,5 +1,7 @@
 package cn.edu.szu.Bajie.service.impl;
 
+import cn.edu.szu.Bajie.constant.CacheConstant;
+import cn.edu.szu.Bajie.constant.CacheTimeInterval;
 import cn.edu.szu.Bajie.converter.DishConverter;
 import cn.edu.szu.Bajie.dto.result.DishDetailResultDto;
 import cn.edu.szu.Bajie.dto.result.SimpleDishResultDto;
@@ -7,6 +9,8 @@ import cn.edu.szu.Bajie.entity.DishDynamic;
 import cn.edu.szu.Bajie.entity.DishUrl;
 import cn.edu.szu.Bajie.service.DishDynamicService;
 import cn.edu.szu.Bajie.service.DishUrlService;
+import cn.edu.szu.Bajie.util.CacheService;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.szu.Bajie.entity.Dish;
@@ -17,6 +21,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +31,6 @@ import java.util.stream.Collectors;
 * @createDate 2022-11-28 21:23:23
 */
 @Service
-@CacheConfig(cacheNames = "dish")
 @AllArgsConstructor
 public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
     implements DishService{
@@ -37,19 +41,33 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
 
     private DishConverter dishConverter;
 
+    private CacheService cacheService;
+
     @Override
-    @Cacheable(key = "#dishId",unless = "#result == null")
     public Dish getBaseDishInfo(Long dishId) {
-        return this.getById(dishId);
+        // 获取菜品基本信息并缓存
+        return cacheService
+                .getByCacheObj(
+                        MessageFormat.format(CacheConstant.DISH_BASE,dishId),
+                        ()->this.getById(dishId),
+                        Dish.class,
+                        CacheTimeInterval.AN_HOUR
+                );
     }
 
     @Override
-    @Cacheable(key = "'dishes::'+#winId")
     public List<Dish> getBaseDishesByWinId(Long winId) {
-        return this.list(
-                new LambdaQueryWrapper<Dish>()
-                        .eq(Dish::getWinId,winId)
-        );
+        // 获取菜品基本信息并缓存
+        return cacheService
+                .getByCacheList(
+                        MessageFormat.format(CacheConstant.DISH_BASES,winId),
+                        ()->this.list(
+                                new LambdaQueryWrapper<Dish>()
+                                        .eq(Dish::getWinId,winId)
+                        ),
+                        Dish.class,
+                        CacheTimeInterval.AN_HOUR
+                );
     }
 
     @Override
@@ -59,7 +77,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
                 .stream()
                 .map(dish -> {
                     SimpleDishResultDto resultDto = dishConverter.dish2simpleDish(dish);
-
+                    // 获取菜品动态信息
                     DishDynamic dishDynamic = dishDynamicService.getOne(
                             new LambdaQueryWrapper<DishDynamic>()
                                     .eq(DishDynamic::getDishId, dish.getDishId())
@@ -75,34 +93,42 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
 
     @Override
     public DishDetailResultDto getDishDetail(Long dishId) {
-
+        // 获取基本信息
         Dish dish = getBaseDishInfo(dishId);
 
+        if(ObjectUtil.isNull(dish)){
+            return null;
+        }
+        // 准备详细信息
         DishDetailResultDto resultDto = dishConverter.dish2DishDetail(dish);
-
+        // 获取动态信息
         DishDynamic dishDynamic = dishDynamicService.getOne(
                 new LambdaQueryWrapper<DishDynamic>()
-                        .eq(DishDynamic::getDishId, dish)
+                        .eq(DishDynamic::getDishId, dish.getDishId())
         );
-
+        // 赋值动态信息
         dishConverter.dishDynamic2DishDetail(dishDynamic,resultDto);
-
+        // 菜品URL
         resultDto.setUrlList(getDishUrls(dishId));
 
         return resultDto;
     }
 
     @Override
-    @Cacheable(key = "'dishUrls::'+#dishId")
     public List<String> getDishUrls(Long dishId) {
-        return dishUrlService
-                .list(
-                        new LambdaQueryWrapper<DishUrl>()
-                                .eq(DishUrl::getDishId,dishId)
-                )
-                .stream()
-                .map(DishUrl::getUrl)
-                .collect(Collectors.toList());
+        return cacheService.getByCacheList(
+                MessageFormat.format(CacheConstant.DISH_URLS,dishId),
+                ()->dishUrlService
+                        .list(
+                                new LambdaQueryWrapper<DishUrl>()
+                                        .eq(DishUrl::getDishId,dishId)
+                        )
+                        .stream()
+                        .map(DishUrl::getUrl)
+                        .collect(Collectors.toList()),
+                String.class,
+                CacheTimeInterval.AN_HOUR
+        );
     }
 
 

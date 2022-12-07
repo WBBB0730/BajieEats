@@ -18,4 +18,9 @@ public interface CacheConstant {
     String COLLECTION_MQ = "BAJIE::COLLECTION::MQ";
 
 
+    String CANTEEN_BASE = "BAJIE::CANTEEN::CANTEEN_BASE_{0}";
+    String DISH_BASE = "BAJIE::DISH::DISH_BASE_{0}";
+    String DISH_BASES = "BAJIE::DISH::DISH_BASES_{0}";
+    String DISH_URLS = "BAJIE::DISH::DISH_URLS_{0}";
+    String CANTEEN_URLS = "BAJIE::CANTEEN::CANTEEN_URLS_{0}";
 }

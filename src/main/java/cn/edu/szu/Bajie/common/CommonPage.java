@@ -2,7 +2,9 @@ package cn.edu.szu.Bajie.common;
 
 import com.github.pagehelper.PageInfo;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -13,31 +15,14 @@ import java.util.List;
  * @version 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommonPage<T> {
     private Integer pageNum;
     private Integer pageSize;
     private Integer totalPage;
     private Integer total;
     private List<T> list;
-
-    /**
-     * 将PageHelper分页后的list转为分页信息
-     */
-    public static <T> CommonPage<T> restPage(List<T> list) {
-        CommonPage<T> result = new CommonPage<>();
-        PageInfo<T> pageInfo = new PageInfo<>(list);
-
-        result.setTotalPage(pageInfo.getPages());
-
-        result.setPageNum(pageInfo.getPageNum());
-
-        result.setPageSize(pageInfo.getPageSize());
-
-        result.setTotal(pageInfo.getSize());
-
-        result.setList(pageInfo.getList());
-        return result;
-    }
 
     /**
      * 将SpringData分页后的list转为分页信息
@@ -51,6 +36,22 @@ public class CommonPage<T> {
         result.setTotal((int) pageInfo.getTotal());
         result.setTotalPage((int) pageInfo.getPages());
         return result;
+    }
+
+    public static <T> CommonPage<T> toPage(
+            Integer pageNum,
+            Integer pageSize,
+            Integer totalPage,
+            Integer total,
+            List<T> list
+    ){
+        return new CommonPage<>(
+                pageNum,
+                pageSize,
+                totalPage,
+                total,
+                list
+        );
     }
 
 }

@@ -3,8 +3,10 @@ package cn.edu.szu.Bajie.controller;
 import cn.edu.szu.Bajie.common.CommonPage;
 import cn.edu.szu.Bajie.common.CommonResult;
 import cn.edu.szu.Bajie.dto.add.CommentAddDto;
+import cn.edu.szu.Bajie.dto.result.DishCommentsResultDto;
 import cn.edu.szu.Bajie.dto.result.UserCommentsResultDto;
 import cn.edu.szu.Bajie.entity.Comment;
+import cn.edu.szu.Bajie.entity.CommentDish;
 import cn.edu.szu.Bajie.entity.CommentUrl;
 import cn.edu.szu.Bajie.entity.Dish;
 import cn.edu.szu.Bajie.service.CommentService;
@@ -13,6 +15,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -43,10 +46,11 @@ public class CommentController {
      */
 
     @GetMapping("/list")
-    public CommonResult<CommonPage<Comment>> list(@RequestParam("dishId") Integer dishId,
-                                     @RequestParam("pageIndex") Integer pageIndex,
-                                     @RequestParam("pageSize") Integer pageSize){
-        return null;
+    public CommonResult<CommonPage<DishCommentsResultDto>> list(@RequestParam("dishId") Long dishId,
+                                                                @RequestParam("pageIndex") Integer pageIndex,
+                                                                @RequestParam("pageSize") Integer pageSize){
+
+        return CommonResult.success(commentService.getDishComments(dishId,pageIndex,pageSize));
     }
 
     /**
@@ -57,17 +61,23 @@ public class CommentController {
      */
 
     @PostMapping
-    public CommonResult<String> add(@RequestBody CommentAddDto dto, HttpServletResponse response){
-
-        return null;
+    public CommonResult<String> add(@RequestBody @Validated CommentAddDto dto){
+        commentService.commentDish(dto);
+        return CommonResult.success("评论成功");
 
     }
 
     @GetMapping("/user")
-    public CommonResult<List<UserCommentsResultDto>> userComments(HttpServletResponse response){
-        return null;
+    public CommonResult<CommonPage<UserCommentsResultDto>> userComments(@RequestParam("pageIndex") Integer pageIndex,@RequestParam("pageSize") Integer pageSize){
+        return CommonResult.success(commentService.getUserComments(pageIndex,pageSize));
     }
 
 
+
+    @GetMapping("/doLike")
+    public CommonResult<String> doLike(@RequestParam("commentId") Long commentId){
+        commentService.doLike(commentId);
+        return CommonResult.success("操作成功");
+    }
 
 }

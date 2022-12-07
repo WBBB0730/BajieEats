@@ -38,15 +38,15 @@ public class CollectionController {
      */
 
     @PostMapping
-    public CommonResult<String> add(@RequestBody @Validated CollectionAddDto dto, HttpServletResponse response){
-
-        return null;
+    public CommonResult<String> add(@RequestBody @Validated CollectionAddDto dto){
+        collectionService.doCollect(dto);
+        return CommonResult.success("操作成功");
     }
 
 
     @PostMapping("/list")
-    public CommonResult<List<Object>> list(@RequestBody @Validated CollectionsQueryDto dto,HttpServletResponse response){
-        return null;
+    public CommonResult<List<Object>> list(@RequestBody @Validated CollectionsQueryDto dto){
+        return CommonResult.success(collectionService.getCollectionInfos(dto));
 
     }
 }

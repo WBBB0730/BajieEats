@@ -25,8 +25,6 @@ public interface DishConverter {
 
     void dishDynamic2DishDetail(DishDynamic dishDynamic,@MappingTarget DishDetailResultDto resultDto);
 
-    CollectDishResultDto dish2ColletDish(Dish dish);
 
-
-
+    CollectDishResultDto dishdetail2ColletDish(DishDetailResultDto dish);
 }

@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 菜品图片url
@@ -14,6 +17,8 @@ import lombok.Data;
  */
 @TableName(value ="dish_url")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DishUrl implements Serializable {
     /**
      * 数据id
