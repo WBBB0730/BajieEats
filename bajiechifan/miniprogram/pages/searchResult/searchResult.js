@@ -29,7 +29,7 @@ Page({
             method: 'POST',
             url: 'http://114.132.234.161:8888/bajie/search/all',
             header: {
-              'contebt-Type': 'application/x-www-form-urlencoded'
+              'content-Type': 'application/x-www-form-urlencoded'
             },
             data:{
               keyWord: that.data.search_value,

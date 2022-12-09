@@ -182,9 +182,13 @@ Page({
         content: '请先授权登录~',
         success(res) {
           if (res.confirm) {
-            wx.switchTab({
-              url: '/pages/mine/mine',
+            wx.showLoading({
+              title: '正在登录',
+              mask: true
             })
+            app.login().then(wx.showToast({
+              title: '登录成功',
+            }));
           } else {
             console.log('stay')
           }
