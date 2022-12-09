@@ -9,23 +9,26 @@
   </view>
 </view>
 <view wx:if="{{show_list_flag}}">
-    <view class="search-result" wx:for="{{search_list}}">
+    <view  wx:for="{{search_list}}">
+    <view class="search-result" wx:if="{{item.isOpening}}" data-id="{{item.canteenId}}" catchtap="toCanteen">
       <view class="left_part">
-          <image class="canteen_image" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄.jpeg"></image>
-          <view class="canteen_distance">
-            <image class="location_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/iconPark-local@3x.png"></image>
-            <text class="location">沧海校区</text>
-            <text class="distance">100m</text>
-          </view>
+          <image class="canteen_image" src="{{item.mainImage}}"></image>
       </view>
       <view class="middle_part">
-          <view class="canteen_name">梨园</view>
+          <view class="canteen_name">{{item.canteenName}}</view>
           <view class="comment_score">
+           <text>营业中</text>
             <image class="comment_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png"></image>
-            <text class="comment_point">4.7</text>
+            <text class="comment_point">{{item.score}}</text>
           </view>
-          <view class="time">6：30-20：00</view>
-          <view class="comment">合适</view>
+          <view class="time">{{item.openingTime}}</view>
+          <view class="canteen-notice" style="width: {{item.announce.length * 29}}rpx;"><text class="canteen-notice orange" style="animation-duration: {{item.announce.length * 29 > 420 ? item.announce.length / 3 : 0}}s;">{{item.announce}}</text></view>
+      </view>
+    </view>
+    <view class="canteen_distance">
+        <image class="location_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/iconPark-local@3x.png"></image>
+        <text class="distance">{{item.distance}}m</text>
+        <text class="location">{{item.canteenAddress}}</text>
       </view>
   </view>
 </view>

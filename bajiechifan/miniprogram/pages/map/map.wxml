@@ -14,7 +14,7 @@
     </cover-view>
   </cover-view>
 </map>
-<view class="canteenInfo" wx:if="{{showCanteenInfo}}">
+<view class="canteenInfo" wx:if="{{showCanteenInfo}}" catchtap="toCanteen">
   <view class = "left">
     <text class="canteenName">{{name}}</text>
     <text class="address">{{s}} {{loc}}</text>

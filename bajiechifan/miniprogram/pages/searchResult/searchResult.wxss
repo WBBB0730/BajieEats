@@ -44,51 +44,53 @@
 /* 搜索结果列表 */
 .search-result {
   position: relative;
-  top: 60rpx;
+  top: 50rpx;
   left: 10rpx;
   width: 670rpx;
-  height: 180rpx;
-  border: solid 1px #e9e8e8;
   border-radius: 25rpx;
-  margin: 20rpx 32rpx 20rpx 28rpx;
+  margin: 10rpx 32rpx 10rpx 28rpx;
   display: flex;
 }
 .left_part {
   margin-left: 20rpx;
   width: 220rpx;
-  height: 180rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .canteen_image {
   width: 220rpx;
-  height: 124rpx;
+  height: 220rpx;
   margin-top: 14rpx;
   border-radius: 20rpx;
 }
 /* 距离地址 */
 .canteen_distance {
-  width: 220rpx;
+  position: relative;
+  left: 40rpx;
+  top:40rpx;
   height: 40rpx;
   display: flex;
-  justify-content: space-between;
-
+  align-items: center;
+  margin: 20rpx 0 10rpx 0;
+  color: gray;
 }
 .location_icon {
   width:30rpx;
   height:30rpx;
+  margin: 10rpx;
 }
 .location {
+  margin: 10rpx;
   font-size: 24rpx; 
 }
 .distance {
   font-size: 26rpx;
+  margin: 10rpx;
 }
 /* 左部结束 中部开始*/
 .middle_part {
-  width: 280rpx;
-  height: 160rpx;
+  height: 210rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -104,7 +106,6 @@
   width: 280rpx;
   height: 40rpx;
   font-size: 26rpx;
-  color: orange;
 }
 .comment_icon {
   width: 30rpx;
@@ -112,17 +113,31 @@
   margin-right: 10rpx;
   position: relative;
   top: 4rpx;
+  left: 30rpx
+}
+.comment_point {
+  position: relative;
+  left: 30rpx;
+  color: orange;
 }
 .time {
   height: 40rpx;
-  font-size: 26rpx;
+  font-size: 24rpx;
   font-weight: 600;
-  color: rgba(248, 191, 84,0.6);
+  color:#6C6C6C
 }
-.comment {
-  height: 36rpx;
-  font-size: 26rpx;
-  color: #e45252;
-  opacity: 76%;
-  font-weight: 600;
+view.canteen-notice {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  color: orange;
+}
+@keyframes roll {
+  0% {left: 420rpx;}
+  100% {left: -100%;}
+}
+text.canteen-notice {
+  position: relative;
+  animation: roll linear infinite;
+  white-space: nowrap;
 }

@@ -8,7 +8,8 @@ Page({
     name:'',
     s:'',
     markerId: -1,
-    showCanteenInfo: false
+    showCanteenInfo: false,
+    canteenId: -1
   },
   onShow(){
     let location = wx.getStorageSync('location');
@@ -109,7 +110,8 @@ Page({
             name:"实验餐厅",
             loc: res.data.result.address,
             s: s,
-            markerId: 1
+            markerId: 1,
+            canteenId:1600463815153733600
           })
         }
       })
@@ -126,7 +128,8 @@ Page({
             name:"荔园美食汇",
             loc: res.data.result.address,
             s: s,
-            markerId: 2
+            markerId: 2,
+            canteenId:1597588696299405300
           })
         }
       })
@@ -143,7 +146,8 @@ Page({
             name:"新西南餐厅",
             loc: res.data.result.address,
             s: s,
-            markerId: 3
+            markerId: 3,
+            canteenId: 1600462252704161800
           })
         }
       })
@@ -159,6 +163,13 @@ Page({
       name: that.data.name,
       address: that.data.loc,
       scale: 18
+    })
+  },
+  toCanteen(){
+    let id = this.data.canteenId
+    console.log(id)
+  wx.navigateTo({
+      url: '/pages/canteenDetails/canteenDetails?id=' + id,
     })
   }
 })
