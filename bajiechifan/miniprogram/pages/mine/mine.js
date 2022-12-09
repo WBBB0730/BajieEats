@@ -1,18 +1,15 @@
 Page({
   data: {
-    avatarUrl:wx.getStorageSync('userInfo').avatarUrl,
-    name:wx.getStorageSync('userInfo').nickName,
+    avatarUrl: "",
+    name: "",
     flag: 0,
     myset: [{
         'name': '我发布的评论',
-      },
-      {
+      }, {
         'name': '我发布的失物招领',
-      },
-      {
+      }, {
         'name': '我发布的寻物启事',
-      },
-      {
+      }, {
         'name': '我的收藏',
       }
     ],
@@ -21,6 +18,11 @@ Page({
 
   onShow: function () {
     let _this = this;
+    _this.setData({
+      flag: 0,
+      avatarUrl: wx.getStorageSync('userInfo').avatarUrl,
+      name: wx.getStorageSync('userInfo').nickName
+    })
     let token = getApp().globalData.token;
     if (token) {
       _this.getUserProfile(token);

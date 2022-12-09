@@ -6,11 +6,14 @@
     </view>
   </view>
 
-  <view class="detail" catchtap="editName">我的昵称
+  <view class="detail" catchtap="editName">
+    <text>我的昵称</text>
     <view class="value">
       <text>{{name}}</text>
       <image class="icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/右箭头.png"></image>
     </view>
   </view>
+
+  <view class="button" hover-class="ontap" catchtap="logout">退出登录</view>
 
 </view>

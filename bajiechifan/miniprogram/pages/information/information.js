@@ -68,7 +68,6 @@ Page({
                   // 将url上传到服务器，更新头像
                   success: (res) => {
                     let avatarUrl = res.fileID;
-                    console.log(avatarUrl);
                     wx.request({
                       url: 'http://114.132.234.161:8888/bajie/user/updateUser',
                       method: "POST",
@@ -95,7 +94,7 @@ Page({
                             nickname: _this.data.name
                           });
                         } else {
-                          console.log(res);
+                          console.log("修改失败", res);
                           wx.showToast({
                             title: res.data.message,
                             icon: "error"
@@ -113,10 +112,18 @@ Page({
     })
   },
 
+  // 修改昵称
   editName() {
     let _this = this;
     wx.navigateTo({
       url: "editName?name=" + encodeURIComponent(JSON.stringify(_this.data.name))
     })
+  },
+
+  // 退出登录
+  logout() {
+    getApp().globalData.token = null;
+    wx.setStorageSync('token', null);
+    wx.navigateBack();
   }
 })
