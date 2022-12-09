@@ -21,8 +21,8 @@
   margin: auto 0 auto 50rpx;
 }
 
-.name{ 
-  font-size: 40rpx;
+.name{
+  font-size: 38rpx;
   line-height: 100rpx;
   margin-left: 30rpx;
   margin-top: 25rpx;
@@ -57,9 +57,10 @@
   text-align: center;
 }
  
-.icon{
-  margin:auto 30rpx auto auto;
-  color: rgba(202, 202, 202);
+.icon {
+  width: 20rpx;
+  height: 20rpx;
+  margin: auto 30rpx auto auto;
 }
 
 

@@ -1,18 +1,34 @@
 Page({
   data:{
     commentList:[],
-    avatarUrl:wx.getStorageSync('userInfo').avatarUrl,
-    nickName:wx.getStorageSync('userInfo').nickName
+    avatarUrl: '',
+    nickName: ''
   },
   onShow(){
-    let app = getApp();
     var _this = this;
+    _this.setData({
+      avatarUrl: wx.getStorageSync('userInfo').avatarUrl,
+      nickName: wx.getStorageSync('userInfo').nickName
+    });
+    wx.request({
+      url: 'http://114.132.234.161:8888/bajie/user',
+      header: {
+        token: getApp().globalData.token
+      },
+      success: (res) => {
+        _this.setData({
+          avatarUrl: res.data.data.avatarUrl,
+          nickName: res.data.data.nickName
+        });
+        wx.setStorageSync('userInfo', res.data.data);
+      }
+    });
     //获取用户评价列表
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/comment/user',
       method: 'GET',
       header: {
-        'token': app.globalData.token
+        'token': getApp().globalData.token
       },
       success(res) {
         var resstr = JSON.stringify(res.data)

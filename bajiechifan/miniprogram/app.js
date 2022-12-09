@@ -13,13 +13,71 @@ App({
         traceUser: true,
       });
     }
-
     this.globalData = {
       token: wx.getStorageSync('token')
     };
     console.log("token: " + this.globalData.token);
   },
+
   globalData: {
     token: ''
+  },
+
+  // 登录
+  login: function () {
+    let _this = this;
+    let token = '';
+    // 获取code
+    return new Promise((resolve, reject) => {
+      wx.login({
+        success: (res) => {
+          if (res.code) {
+            // 获取token
+            wx.request({
+              url: 'http://114.132.234.161:8888/bajie/user/login',
+              data: {
+                code: res.code,
+              },
+              success: (res) => {
+                if (res.data.code == 200) {
+                  token = res.data.data;
+                  _this.globalData.token = token;
+                  wx.setStorageSync('token', token);
+                  console.log("登录成功", res);
+                  resolve(token);
+                } else {
+                  console.log("登录（获取token）失败", res);
+                  reject(res);
+                }
+              },
+              fail: (res) => {
+                console.log("登录（获取token）失败", res);
+                reject(res);
+              }
+            })
+          } else {
+            console.log("登录（获取code）失败", res);
+            reject(res);
+          }
+        },
+        fail: (res) => {
+          console.log("登录（获取code）失败", res);
+          reject(res);
+        }
+      })
+    });
+  },
+
+  request: function (options) {
+    return new Promise((resolve, reject) => {
+      options.url = "http://114.132.234.161:8888/bajie" + options.url;
+      options.success = (res) => {
+        resolve(res);
+      };
+      options.fail = (res) => {
+        reject(res);
+      };
+      wx.request(options);
+    })
   }
 });

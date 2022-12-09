@@ -1,4 +1,5 @@
 {
-  "usingComponents": {"custom-component": "/components/custom-component/custom-component"},
-  "navigationStyle": "custom"
+  "usingComponents": {},
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTitleText": "我的评价"
 }

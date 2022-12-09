@@ -1,0 +1,10 @@
+input[type="nickname"] {
+  width: 700rpx;
+  height: 50rpx;
+  border-bottom: 1rpx solid grey;
+  margin: 25rpx auto;
+}
+
+button {
+  margin-top: 50rpx;
+}

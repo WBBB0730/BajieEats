@@ -13,7 +13,8 @@
     "pages/myFavorites/myFavorites",
     "pages/postComment/postComment",
     "pages/choosePosition/choosePosition",
-    "pages/map/map"
+    "pages/map/map",
+    "pages/information/editName"
   ],
   "permission": {
     "scope.userLocation": {

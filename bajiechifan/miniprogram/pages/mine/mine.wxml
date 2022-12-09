@@ -2,7 +2,7 @@
 
 <view wx:if="{{flag==0}}">
   <view class="top">
-    <view bindtap="getUserProfile" class="login">微信授权登录</view>
+    <view catchtap="login" class="login">微信授权登录</view>
   </view>
 </view>
 
@@ -10,14 +10,14 @@
   <view class="top" catchtap="toInformation">
       <image src="{{avatarUrl}}" class="picture"></image>
     <view class="name">{{name}}</view>
-    <view class="icon">></view>
+    <image class="icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/右箭头.png"></image>
   </view>
 </view>
 
 <view wx:for="{{myset}}" wx:key="index" data-type="{{item.name}}" class="my" bindtap="tomyset">
   <view class="middle">
     {{item.name}}
-    <view class="icon">></view>
+    <image class="icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/右箭头.png"></image>
   </view>
 </view>
-<view class="middle1">{{set}}<view class="icon">></view></view>
+<view class="middle1">{{set}}<image class="icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/右箭头.png"></image></view>

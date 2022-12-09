@@ -1,0 +1,5 @@
+<form>
+  <input type="nickname" name="nickName" value="{{name}}" placeholder="请输入昵称" bindinput="onInput" maxlength="12"></input>
+  <!-- <text class="err" wx:if="{{err.length}}">{{err}}</text> -->
+  <button type="primary" catchtap="saveName">保 存</button>
+</form>

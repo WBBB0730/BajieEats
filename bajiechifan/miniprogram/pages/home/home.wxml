@@ -55,7 +55,8 @@
         <text class="comment_point">{{item.score}}</text>
       </view>
       <view class="time">{{item.openingTime}}</view>
-      <view class="comment">好吃，美味</view>
+      <!-- <view class="comment">好吃，美味</view> -->
+      <view class="canteen-notice" style="width: {{item.announce.length * 26}}rpx;"><text class="canteen-notice orange" style="animation-duration: {{item.announce.length * 26 > 280 ? item.announce.length / 3 + 4 : 0}}s;">{{item.announce}}</text></view>
     </view>
     <view class="right_part">
       <image class="collection_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/dislike@3x.png" catchtap="clickCollection" data-num="{{i}}" wx:if="{{!item.isCollected}}"></image>

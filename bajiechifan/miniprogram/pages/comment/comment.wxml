@@ -1,5 +1,5 @@
 <custom-component></custom-component>
-<view wx:for="{{commentList}}" wx:for-item="pro" class="comment" wx:for-index="commentIndex">
+<view wx:for="{{commentList}}" wx:for-item="pro" class="comment" wx:for-index="commentIndex" wx:key="index">
   <!-- 用户头像，昵称显示 -->
   <view class="user-info">
     <image src="{{avatarUrl}}" class="user-photo"></image>
@@ -7,7 +7,7 @@
   </view>
   <!-- 展示上传的评论图片 -->
   <view class="comment-photos">
-    <view wx:for="{{pro.commentUrls}}">
+    <view wx:for="{{pro.commentUrls}}" wx:key="index">
       <image class="comment-photo" src="{{item}}" mode="aspectFill" bindtap="bigImg" data-index="{{index}}" data-commentIndex="{{commentIndex}}"></image>
     </view>
   </view>
@@ -19,7 +19,7 @@
   <view class="score">
     评分
     <view class="five-stars">
-      <view wx:for="{{5}}">
+      <view wx:for="{{5}}" wx:key="index">
         <image class="color-star" src="{{(pro.score>=index+1) ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star 2@3x.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-star@3x.png'}}"></image>
       </view>
     </view>

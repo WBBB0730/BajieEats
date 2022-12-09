@@ -77,5 +77,5 @@
   border-radius: 60rpx;
   position: relative;
   top:60rpx;
-  left:226rpx
+  margin: 0 auto;
 }

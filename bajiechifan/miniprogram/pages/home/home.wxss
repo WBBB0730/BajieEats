@@ -176,7 +176,7 @@ background-color: #dfdfdf;
   flex-direction: column;
   justify-content: space-between;
   margin: 10rpx 0 10rpx 30rpx;
-
+  overflow: hidden;
 }
 .canteen_name {
   font-size: 34rpx;
@@ -203,13 +203,34 @@ background-color: #dfdfdf;
   font-weight: 600;
   color: rgba(248, 191, 84,0.6);
 }
-.comment {
+
+view.canteen-notice {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes roll {
+  0% {left: 420rpx;}
+  100% {left: -100%;}
+}
+
+text.canteen-notice {
+  color: #e45252;
+  font-size: 26rpx;
+  font-weight: 600;
+  position: relative;
+  animation: roll linear infinite;
+  white-space: nowrap;
+}
+
+/* .comment {
   height: 36rpx;
   font-size: 26rpx;
   color: #e45252;
   opacity: 76%;
   font-weight: 600;
-}
+} */
 .collection_icon {
   width: 44rpx;
   height: 44rpx;
