@@ -75,8 +75,7 @@ Page({
                         token: getApp().globalData.token,
                       },
                       data: {
-                        avatarUrl: avatarUrl,
-                        nickname: _this.data.name
+                        avatarUrl: avatarUrl
                       },
                       success: (res) => {
                         if (res.data.code == 200) {

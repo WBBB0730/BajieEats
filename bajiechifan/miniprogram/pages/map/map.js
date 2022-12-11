@@ -12,11 +12,13 @@ Page({
     canteenId: -1
   },
   onShow(){
-    let location = wx.getStorageSync('location');
-    console.log(location[0],location[1])
-    this.setData({
-      longitude: location[0],
-      latitude: location[1],
+    let _this = this;
+    let app = getApp();
+    let location = app.globalData.location;
+    console.log(location);
+    _this.setData({
+      longitude: location.longitude,
+      latitude: location.latitude,
       markers:[
         {
           id: 0,
@@ -61,15 +63,15 @@ Page({
         }
       ]
     })
-    this.getDistanceArray()
+    _this.getDistanceArray()
   },
   rad(d){
     return d*Math.PI / 180;
   },
   getDistance(canteenl,canteena){
     let location = wx.getStorageSync('location');
-    let myl = location[0];
-    let mya = location[1];
+    let myl = location.longitude;
+    let mya = location.latitude;
     let a = Math.abs(this.rad(myl) - this.rad(canteenl));
     let b = Math.abs(this.rad(mya) - this.rad(canteena));
     var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
@@ -111,7 +113,7 @@ Page({
             loc: res.data.result.address,
             s: s,
             markerId: 1,
-            canteenId:1600463815153733600
+            canteenId:463815153733600
           })
         }
       })
@@ -129,7 +131,7 @@ Page({
             loc: res.data.result.address,
             s: s,
             markerId: 2,
-            canteenId:1597588696299405300
+            canteenId: 7588696299405312
           })
         }
       })
@@ -147,7 +149,7 @@ Page({
             loc: res.data.result.address,
             s: s,
             markerId: 3,
-            canteenId: 1600462252704161800
+            canteenId: 462252704161800
           })
         }
       })

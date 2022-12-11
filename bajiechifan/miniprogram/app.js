@@ -14,13 +14,14 @@ App({
       });
     }
     this.globalData = {
-      token: wx.getStorageSync('token')
+      token: wx.getStorageSync('token'),
+      location: wx.getStorageSync('location')
     };
-    console.log("token: " + this.globalData.token);
   },
 
   globalData: {
-    token: ''
+    token: '',
+    location: null
   },
 
   // 登录
@@ -68,7 +69,7 @@ App({
     });
   },
 
-  request: function (options) {
+  request(options) {
     return new Promise((resolve, reject) => {
       options.url = "http://114.132.234.161:8888/bajie" + options.url;
       options.success = (res) => {
@@ -79,5 +80,15 @@ App({
       };
       wx.request(options);
     })
-  }
+  },
+
+  showErr(message) {
+    wx.showToast({
+      title: message,
+      icon: "error",
+      mask: true
+    });
+  },
+
+
 });

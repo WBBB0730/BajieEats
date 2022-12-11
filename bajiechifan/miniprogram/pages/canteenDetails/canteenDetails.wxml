@@ -1,32 +1,32 @@
 <!--pages/canteenDetails/canteenDetails.wxml-->
 <!-- 轮播图 -->
-<swiper class="canteen-images" indicator-dots="{{indicator_dots}}" autoplay="{{autoplay}}" indicator-active-color="orange" circular="true" duration="1000">
-  <swiper-item wx:for="{{canteen_info.canteen_images}}" wx:key="index">
-    <image class="canteen-image" src="{{item}}" mode="aspectFill" style="--canteen-image-blur--:{{canteen_image_blur}}rpx"></image>
+<swiper class="canteen-images" indicator-dots="{{dots}}" autoplay="{{autoplay}}" indicator-active-color="orange" circular="true" duration="1000">
+  <swiper-item wx:for="{{canteenInfo.images}}" wx:key="index">
+    <image class="canteen-image" src="{{item}}" mode="aspectFill" style="--canteen-image-blur--:{{blur}}rpx"></image>
   </swiper-item>
 </swiper>
 
 <!-- 主体 -->
-<view class="body" style="--body-border-radius--:{{body_border_radius}}rpx;">
+<view class="body" style="--body-border-radius--:{{corner}}rpx;">
   <view class="head">
     <!-- 标题 -->
     <view class="canteen-title">
-      <text class="canteen-name">{{canteen_info.canteen_name}}</text>
+      <text class="canteen-name">{{canteenInfo.canteenName}}</text>
       <!-- 餐厅收藏按钮 -->
-      <image class="favorites-button" src="{{canteen_info.is_canteen_favored ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" catchtap="favorCanteen"></image>
+      <image class="favorites-button" src="{{canteenInfo.isCollected ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" catchtap="favorCanteen"></image>
     </view>
     <!-- 营业信息 -->
     <view class="canteen-business-info">
-      <text class="canteen-business-state">{{canteen_info.canteen_business_state ? '营业中' : '休息中'}}</text>
-      <text class="canteen-business-hours">{{canteen_info.canteen_business_hours}}</text>
+      <text class="canteen-business-state">{{canteenInfo.isOpening ? '营业中' : '休息中'}}</text>
+      <text class="canteen-business-hours">{{canteenInfo.openingTime}}</text>
     </view>
     <!-- 位置信息 -->
     <view class="canteen-location-info">
       <view class="canteen-distance">
         <image class="location-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位.png"></image>
-        <text class="canteen-distance">{{canteen_info.canteen_distance}}</text>
+        <text class="canteen-distance">{{canteenInfo.distance}}</text>
       </view>
-      <text class="canteen-address">{{canteen_info.canteen_address}}</text>
+      <text class="canteen-address">{{canteenInfo.canteenAddress}}</text>
       <view class="navigate-button">
         <image class="navigate-button" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/导航.png"></image>
         <text class="navigate-button">路线</text>
@@ -38,39 +38,74 @@
     </view>
   </view>
 
-  <!-- 选择楼层 -->
-  <view class="content" style="--height--:{{window_height}}rpx">
+  <view class="content" style="--height--:{{windowHeight}}rpx">
     <view class="banner">
+      <!-- 选择楼层 -->
       <scroll-view class="floor-selector" scroll-x="true">
-        <view class="floor" wx:for="{{floor_list}}" wx:key="floorIndex" bindtap="selectFloor" data-index="{{item.floorIndex}}">
-          <text>{{item.floorName}}\n</text>
-          <view class="line" wx:if="{{item.floorIndex === selected_floorIndex}}"></view>
+        <view class="floor" wx:for="{{floorList}}" wx:key="index" bindtap="selectFloor" data-index="{{index}}">
+          <text>{{item.navigate}}\n</text>
+          <view class="line" wx:if="{{index === floorIndex}}"></view>
         </view>
       </scroll-view>
-      <!-- <view class="block"></view> -->
+      <image class="search" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/userAvatars/搜索.png" catchtap="toSearch"></image>
     </view>
-    <!-- 窗口列表 -->
-    <scroll-view class="window-selector" scroll-y="true" style="--height--:{{window_height - 100}}rpx" show-scrollbar="false">
-      <!-- 窗口卡片 -->
-      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowIndex">
-        <view class="window {{selected_windowIndex === item.windowIndex ? 'selected' : 'unselected'}}" catchtap="selectWindow" data-index="{{item.windowIndex}}">
-          <text class="window-name">{{item.windowName}}\n</text>
-          <text class="window-business-state">{{item.openingStatus ? '营业中' : '休息中'}}</text>
+
+    <!-- 搜索结果 -->
+    <scroll-view wx:if="{{floorList[floorIndex].navigate == '搜索结果'}}" class="result" enhanced="true" scroll-y="true" enable-flex="true" style="--height--:{{windowHeight - 100}}rpx">
+      <block wx:for="{{floorList[floorIndex].objects}}" wx:key="index">
+        <!-- 窗口卡片 -->
+        <view class="card" wx:if="{{item.winId}}" catchtap="toWindow" data-id="{{item.canteenId}}">
+          <view class="result-window-title">
+            <text class="result-window-name">{{item.winName}}</text>
+            <text class="result-window-status">{{item.floorName}} {{item.isOpening ? '营业中' : '休息中'}}</text>
+          </view>
+          <view class="result-dishes" wx:if="{{item.isOpening}}">
+            <view class="result-dish" wx:for="{{item.dishes}}" wx:key="dishId">
+              <image class="result-window-dish-image" src="{{item.dishImage}}" mode="aspectFill"></image>
+              <text class="result-window-dish-name">\n{{item.dishName}}</text>
+              <text class="darkorange">\n￥{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+        <!-- 菜品卡片 -->
+        <view class="card" wx:if="{{item.dishId}}" catchtap="toDish" data-id="{{item.dishId}}">
+          <image class="result-dish-image" src="{{item.dishImage}}" mode="aspectFill"></image>
+          <view class="result-dish-info">
+            <text class="result-dish-name">{{item.dishName}}</text>
+            <text class="result-dish-address">{{item.canteenName}} {{item.floorName}} | {{item.winName}}</text>
+            <text>{{item.onSaleStatus ? '在售' : '售罄'}}</text>
+            <view class="result-dish-tags">
+              <text class="result-dish-tag" wx:for="{{fn.split(item.tags, ',')}}" wx:key="index">{{item}}</text>
+            </view>
+            <text class="result-dish-price">￥{{item.price}}</text>
+          </view>
         </view>
       </block>
     </scroll-view>
+
+    <!-- 窗口列表 -->
+    <scroll-view wx:if="{{floorList[floorIndex].navigate != '搜索结果'}}" class="window-selector" scroll-y="true" enhanced="true" style="--height--:{{windowHeight - 100}}rpx" show-scrollbar="false">
+      <!-- 窗口卡片 -->
+      <block wx:for="{{floorList[floorIndex].objects}}" wx:key="index">
+        <view class="window {{windowIndex === index ? 'selected' : 'unselected'}}" catchtap="selectWindow" data-index="{{index}}">
+          <text class="window-name">{{item.winName}}\n</text>
+          <text class="window-business-state">{{item.isOpening ? '营业中' : '休息中'}}</text>
+        </view>
+      </block>
+    </scroll-view>
+
     <!-- 菜品列表 -->
-    <scroll-view class="dish-list" scroll-y="true" style="--height--:{{window_height - 100}}rpx" enhanced="false" bindscroll="scrollDishList">
+    <scroll-view wx:if="{{floorList[floorIndex].navigate != '搜索结果'}}" class="dish-list" enhanced="true" scroll-y="true" bindscroll="scrollDishList" style="--height--:{{windowHeight - 100}}rpx">
       <!-- 窗口盒子 -->
-      <block wx:for="{{floor_list[selected_floorIndex].windowList}}" wx:key="windowIndex">
-        <view class="window-title" id="window-{{item.windowId}}">
+      <block wx:for="{{floorList[floorIndex].objects}}" wx:key="windowIndex">
+        <view class="window-title" id="window-{{index}}">
           <!-- 窗口名字 -->
-          <text>{{item.windowName}}</text>
+          <text>{{item.winName}}</text>
           <!-- 窗口收藏按钮 -->
-          <image class="favorites-button" src="{{item.isCollected ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" catchtap="favorWindow" data-floor_index="{{selected_floorIndex}}" data-window_index="{{index}}"></image>
+          <image class="favorites-button" src="{{item.isCollected ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_已收藏.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/收藏_未收藏.png'}}" catchtap="favorWindow" data-index="{{index}}"></image>
         </view>
         <!-- 菜品卡片 -->
-        <block wx:for="{{item.dishList}}" wx:key="dishId">
+        <block wx:for="{{item.dishes}}" wx:key="dishId">
           <view class="dish-card" catchtap="toDish" data-id="{{item.dishId}}">
             <image class="dish-image" src="{{item.dishImage}}" mode="aspectFill"></image>
             <view class="relative-box">

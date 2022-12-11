@@ -5,128 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    state: "state-1",
+    canteenId: null,
+    keyWord: null,
+    canteenInfo: null,
+    floorList: null,
+    floorIndex: 0,
+    windowIndex: 0,
+    windowHeight: 0,
     scrollTop: 0,
-    canteen_info: {
-      canteen_id: "",
-      canteen_images: [
-        // 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/IMG_20221107_165024.jpg', 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/IMG_20221107_162531.jpg', 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/IMG_20221107_162419.jpg'
-      ],
-      is_canteen_favored: false,
-      canteen_name: "沧海餐厅（南区食堂）",
-      canteen_business_state: "营业中",
-      canteen_business_hours: "07:00-08:30、10:30-13:00、16:00-21:00",
-      canteen_distance: "900km",
-      canteen_address: "深圳大学-沧海校区宿舍区附近ewfdsfsfsfwfwfe",
-    },
-    floor_list: [{
-      floorIndex: 0,
-      floorName: "1F",
-      windowList: [{
-        windowIndex: 0,
-        windowId: 0,
-        windowName: "石锅菜",
-        openingSataus: "营业中",
-        isCollected: false,
-        dishList: [{
-          dishName: "香芋排骨煲",
-          price: "13",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/香芋排骨煲1：1.jpg",
-          score: "4.7",
-          tags: ["咸鲜", "不辣"]
-        }, {
-          dishName: "香芋排骨煲",
-          price: "13",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/香芋排骨煲1：1.jpg",
-          score: "4.7",
-          tags: ["咸鲜", "不辣"]
-        }, {
-          dishName: "香芋排骨煲",
-          price: "13",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/香芋排骨煲1：1.jpg",
-          score: "4.7",
-          tags: ["咸鲜", "不辣"]
-        }, {
-          dishName: "香芋排骨煲",
-          price: "13",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/香芋排骨煲1：1.jpg",
-          score: "4.7",
-          tags: ["咸鲜", "不辣"]
-        }, {
-          dishName: "香芋排骨煲",
-          price: "13",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/香芋排骨煲1：1.jpg",
-          score: "4.7",
-          tags: ["咸鲜", "不辣"]
-        }, {
-          dishName: "香芋排骨煲",
-          price: "13",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/香芋排骨煲1：1.jpg",
-          score: "4.7",
-          tags: ["咸鲜", "不辣"]
-        }]
-      }, {
-        windowId: 1,
-        windowName: "大众菜、测试测试1212",
-        openingSataus: "营业中",
-        dishList: [{
-          dishName: "番茄炒蛋",
-          price: "3.5",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄炒蛋1：1.jpg",
-          score: "4.5",
-          tags: ["酸甜", "不辣"]
-        }, {
-          dishName: "番茄炒蛋",
-          price: "3.5",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄炒蛋1：1.jpg",
-          score: "4.5",
-          tags: ["酸甜", "不辣"]
-        }, {
-          dishName: "番茄炒蛋",
-          price: "3.5",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄炒蛋1：1.jpg",
-          score: "4.5",
-          tags: ["酸甜", "不辣"]
-        }, {
-          dishName: "番茄炒蛋",
-          price: "3.5",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄炒蛋1：1.jpg",
-          score: "4.5",
-          tags: ["酸甜", "不辣"]
-        }, {
-          dishName: "番茄炒蛋",
-          price: "3.5",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄炒蛋1：1.jpg",
-          score: "4.5",
-          tags: ["酸甜", "不辣"]
-        }, {
-          dishName: "番茄炒蛋",
-          price: "3.5",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄炒蛋1：1.jpg",
-          score: "4.5",
-          tags: ["酸甜", "不辣"]
-        }, {
-          dishName: "番茄炒蛋",
-          price: "3.5",
-          dishImage: "cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/番茄炒蛋1：1.jpg",
-          score: "4.5",
-          tags: ["酸甜", "不辣"]
-        }]
-      }]
-    }, {
-      floorIndex: 1,
-      floorName: "2F"
-    }],
-    window_top_list: [],
-    selected_floorIndex: 0,
-    selected_windowIndex: 0,
-    body_border_radius: 0,
-    canteen_image_blur: 0,
-    indicator_dots: true,
+    contentTop: 2e9,
+    corner: 0,
+    blur: 0,
+    dots: true,
     autoplay: true,
-    window_height: 0,
-    scroll_enabled: false,
-    content_top: 10000,
+    scrollEnabled: false,
   },
 
   /**
@@ -135,75 +27,65 @@ Page({
   onLoad(options) {
     let _this = this;
     _this.setData({
-      "canteen_info.canteen_id": options.id
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+      canteenId: options.id,
+      keyWord: options.keyWord ? JSON.parse(decodeURIComponent(options.keyWord)) : null
+    });
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {
+  async onShow() {
     let _this = this;
-    wx.request({
-      url: 'http://114.132.234.161:8888/bajie/canteen/',
-      data: {
-        canteenId: _this.data.canteen_info.canteen_id
-      },
-      header: {
-        'contetnt-type': 'application/json',
-        'token': getApp().globalData.token
-      },
-      success: (res) => {
-        let data = res.data.data;
-        let temp = this.data.canteen_info;
-        temp.canteen_name = data.canteenName;
-        temp.is_canteen_favored = data.isCollected;
-        temp.canteen_address = data.canteenAddress;
-        temp.canteen_business_hours = data.openingTime;
-        temp.canteen_business_state = data.isOpening;
-        temp.canteen_images = [];
-        temp.canteen_images.push(data.mainImage);
-        for (let i = 0; i < data.canteenUrls.length; i++) {
-          temp.canteen_images.push(data.canteenUrls[i].url);
-        }
-        _this.setData({
-          canteen_info: temp
-        })
-      }
-    })
+    let app = getApp();
+    let res;
 
-    wx.request({
-      url: 'http://114.132.234.161:8888/bajie/canteen/getFloorList',
-      data: {
-        canteenId: _this.data.canteen_info.canteen_id
-      },
+    // 获取餐厅信息
+    res = await app.request({
+      url: "/canteen/",
       header: {
-        'contetnt-type': 'application/json',
-        'token': getApp().globalData.token
+        token: app.globalData.token
       },
-      success: (res) => {
-        let temp = res.data.data;
-        for (let i = 0; i < temp.length; i++) {
-          temp[i].floorIndex = i;
-          for (let j = 0; j < temp[i].windowList.length; j++) {
-            temp[i].windowList[j].windowIndex = j;
-          }
-        }
-        _this.setData({
-          floor_list: temp
-        });
+      data: {
+        canteenId: _this.data.canteenId,
+        longitude: app.globalData.location ? app.globalData.location.longitude : 0,
+        latitude: app.globalData.location ? app.globalData.location.latitude : 0
       }
     });
+    // 获取成功
+    if (res.data.code == 200) {
+      let canteenInfo = res.data.data;
+      canteenInfo.images = [canteenInfo.mainImage, ...canteenInfo.canteenUrls];
+      _this.setData({
+        canteenInfo: canteenInfo
+      });
+      console.log(canteenInfo);
+    } else {
+      app.showErr(res.data.message);
+    }
+
+    // 获取楼层列表
+    res = await app.request({
+      url: "/canteen/getFloorList",
+      header: {
+        token: app.globalData.token
+      },
+      data: {
+        canteenId: _this.data.canteenId,
+        keyWord: _this.data.keyWord
+      }
+    });
+    // 获取成功
+    if (res.data.code == 200) {
+      _this.setData({
+        floorList: res.data.data
+      });
+    } else {
+      app.showErr(res.data.message);
+    }
 
     _this.setData({
-      window_height: px_to_rpx(wx.getSystemInfoSync().windowHeight)
+      windowHeight: toRpx(wx.getSystemInfoSync().windowHeight)
     })
 
     // 获取内容部分顶部坐标
@@ -212,42 +94,54 @@ Page({
       .selectViewport().scrollOffset()
       .exec(function (res) {
         _this.setData({
-          content_top: res[0].top + res[1].scrollTop
+          contentTop: res[0].top + res[1].scrollTop
         })
       });
 
     // 禁用滚动
-    wx.createSelectorQuery()
-      .select(".dish-list").node()
-      .exec(function (res) {
-        const scroll_view = res[0].node;
-        scroll_view.scrollEnabled = false;
-        _this.setData({
-          scroll_enabled: false
-        })
-      });
+    if (_this.data.floorList[_this.data.floorIndex].navigate == "搜索结果") {
+      wx.createSelectorQuery()
+        .select(".result").node()
+        .exec(function (res) {
+          res[0].node.scrollEnabled = false;
+          _this.setData({
+            scrollEnabled: false
+          })
+        });
+    } else {
+      wx.createSelectorQuery()
+        .select(".dish-list").node()
+        .exec(function (res) {
+          res[0].node.scrollEnabled = false;
+          _this.setData({
+            scrollEnabled: false
+          })
+        });
+    }
 
     // 生成滚动位置信息
-    for (let i = 0; i < this.data.floor_list[this.data.selected_floorIndex].windowList.length; i++) {
-      let window = this.data.floor_list[this.data.selected_floorIndex].windowList[i],
-        _top;
-      this.setData({
-        window_top_list: []
-      });
-      wx.createSelectorQuery()
-        .select("#window-" + window.windowId).boundingClientRect()
-        .select(".dish-list").boundingClientRect()
-        .select(".dish-list").scrollOffset()
-        .exec(res => {
-          let obj = {
-            index: window.windowIndex,
-            top: res[0].top - res[1].top + res[2].scrollTop
-          };
-          _this.data.window_top_list.push(obj);
-          // console.log(_this.data.window_top_list);
-        })
-    };
+    if (_this.data.floorList[_this.data.floorIndex].navigate == "搜索结果") {
 
+    } else {
+      for (let i = 0; i < this.data.floorList[this.data.floorIndex].objects.length; i++) {
+        let window = this.data.floorList[this.data.floorIndex].objects[i];
+        this.setData({
+          window_top_list: []
+        });
+        wx.createSelectorQuery()
+          .select("#window-" + i).boundingClientRect()
+          .select(".dish-list").boundingClientRect()
+          .select(".dish-list").scrollOffset()
+          .exec(res => {
+            let obj = {
+              index: i,
+              top: res[0].top - res[1].top + res[2].scrollTop
+            };
+            _this.data.window_top_list.push(obj);
+            // console.log(_this.data.window_top_list);
+          })
+      };
+    }
   },
 
   /**
@@ -267,7 +161,7 @@ Page({
     if (e.scrollTop <= 0) {
       e.scrollTop = 0;
       this.setData({
-        indicator_dots: true,
+        dots: true,
         autoplay: true
       });
     }
@@ -275,51 +169,48 @@ Page({
     // 不在顶部时隐藏圆点并停止自动播放
     if (e.scrollTop > 0) {
       this.setData({
-        indicator_dots: false,
+        dots: false,
         autoplay: false
       });
     }
 
     // 平滑圆角过渡
-    if (e.scrollTop >= 0 && e.scrollTop <= rpx_to_px(120)) {
+    if (e.scrollTop >= 0 && e.scrollTop <= toPx(120)) {
       this.setData({
-        body_border_radius: px_to_rpx(e.scrollTop / 3),
-        // canteen_image_blur: e.scrollTop / 12
+        corner: toRpx(e.scrollTop / 3)
       });
     }
 
     // 平滑模糊效果
-    if (e.scrollTop >= 0 && e.scrollTop <= rpx_to_px(240)) {
+    if (e.scrollTop >= 0 && e.scrollTop <= toPx(240)) {
       _this.setData({
-        canteen_image_blur: e.scrollTop / 20
+        blur: e.scrollTop / 20
       })
     }
 
     // 页面到达底部后解锁列表滚动
-    if (this.data.scroll_enabled === false && e.scrollTop >= this.data.scrollTop && e.scrollTop >= this.data.content_top) {
+    if (this.data.scrollEnabled === false && e.scrollTop >= this.data.scrollTop && e.scrollTop >= this.data.contentTop) {
       wx.createSelectorQuery()
-        .select(".dish-list").node()
+        .select(_this.data.floorList[_this.data.floorIndex].navigate == "搜索结果" ? ".result" : ".dish-list").node()
         .exec(function (res) {
-          const scroll_view = res[0].node;
-          scroll_view.scrollEnabled = true;
+          res[0].node.scrollEnabled = true;
           _this.setData({
-            scroll_enabled: true
+            scrollEnabled: true
           })
-          console.log("触底：" + scroll_view.scrollEnabled);
+          console.log("触底");
         });
     }
 
     // 页面离开底部后锁定列表滚动
-    if (this.data.scroll_enabled === true && e.scrollTop < this.data.scrollTop && e.scrollTop < this.data.content_top) {
+    if (this.data.scrollEnabled === true && e.scrollTop < this.data.scrollTop && e.scrollTop < this.data.contentTop) {
       wx.createSelectorQuery()
-        .select(".dish-list").node()
+        .select(_this.data.floorList[_this.data.floorIndex].navigate == "搜索结果" ? ".result" : ".dish-list").node()
         .exec(function (res) {
-          const scroll_view = res[0].node;
-          scroll_view.scrollEnabled = false;
+          res[0].node.scrollEnabled = false;
           _this.setData({
-            scroll_enabled: false
+            scrollEnabled: false
           })
-          console.log("上滑：" + scroll_view.scrollEnabled);
+          console.log("上滑");
         });
     }
 
@@ -328,55 +219,59 @@ Page({
       _this.setData({
         scrollTop: e.scrollTop
       })
-    }, 0)
+    }, 0);
   },
 
   // 选择楼层
   selectFloor: function (e) {
     let _this = this;
-    let floor_index = e.currentTarget.dataset.index;
-    let window = _this.data.floor_list[floor_index].windowList[0];
+    let index = e.currentTarget.dataset.index;
     _this.setData({
-      selected_floorIndex: floor_index,
+      floorIndex: index,
       selected_windowIndex: 0
     });
     wx.pageScrollTo({
-      scrollTop: this.data.content_top,
+      scrollTop: this.data.contentTop,
     })
-    wx.createSelectorQuery()
-      .select(".dish-list").node()
-      .exec((res) => {
-        const scroll_view = res[0].node;
-        scroll_view.scrollIntoView("#window-0");
-        console.log("选择:" + scroll_view.scrollEnabled);
-      });
 
-    // 生成滚动位置信息
-    for (let i = 0; i < this.data.floor_list[this.data.selected_floorIndex].windowList.length; i++) {
-      let window = this.data.floor_list[this.data.selected_floorIndex].windowList[i],
-        _top;
-      this.setData({
-        window_top_list: []
-      });
+    if (_this.data.floorList[index].navigate == "搜索结果") {
+
+    } else {
       wx.createSelectorQuery()
-        .select("#window-" + window.windowId).boundingClientRect()
-        .select(".dish-list").boundingClientRect()
-        .select(".dish-list").scrollOffset()
-        .exec(res => {
-          let obj = {
-            index: window.windowIndex,
-            top: res[0].top - res[1].top + res[2].scrollTop
-          };
-          _this.data.window_top_list.push(obj);
-          // console.log(_this.data.window_top_list);
-        })
-    };
+        .select(".dish-list").node()
+        .exec((res) => {
+          const scroll_view = res[0].node;
+          scroll_view.scrollIntoView("#window-0");
+          console.log("选择:" + scroll_view.scrollEnabled);
+        });
+
+      // 生成滚动位置信息
+      for (let i = 0; i < this.data.floorList[this.data.floorIndex].objects.length; i++) {
+        let window = this.data.floorList[this.data.floorIndex].objects[i],
+          _top;
+        this.setData({
+          window_top_list: []
+        });
+        wx.createSelectorQuery()
+          .select("#window-" + i).boundingClientRect()
+          .select(".dish-list").boundingClientRect()
+          .select(".dish-list").scrollOffset()
+          .exec(res => {
+            let obj = {
+              index: window.windowIndex,
+              top: res[0].top - res[1].top + res[2].scrollTop
+            };
+            _this.data.window_top_list.push(obj);
+            // console.log(_this.data.window_top_list);
+          })
+      };
+    }
   },
 
   // 选择窗口
   selectWindow: function (e) {
     wx.pageScrollTo({
-      scrollTop: this.data.content_top,
+      scrollTop: this.data.contentTop,
     })
     wx.createSelectorQuery()
       .select(".dish-list").node()
@@ -401,7 +296,7 @@ Page({
     }
     // 用户已登录
     _this.setData({
-      "canteen_info.is_canteen_favored": !_this.data.canteen_info.is_canteen_favored
+      "canteenInfo.isCollected": !_this.data.canteenInfo.isCollected
     });
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/collection/',
@@ -411,18 +306,20 @@ Page({
       },
       data: {
         type: 0,
-        targetId: _this.data.canteen_info.canteen_id,
-        isCollected: _this.data.canteen_info.is_canteen_favored ? 1 : 0
+        targetId: _this.data.canteenId,
+        isCollected: _this.data.canteenInfo.isCollected ? 1 : 0
       },
       success: (res) => {
         console.log(res);
-        if (res.statusCode != 200) {
-          console.log("失败（收藏）", res)
-        }
-        if (_this.data.canteen_info.is_canteen_favored) {
-          console.log("收藏成功");
+        if (res.data.code == 200) {
+          if (_this.data.canteenInfo.isCollected) {
+            console.log("收藏成功");
+          } else {
+            console.log("取消收藏成功");
+          }
         } else {
-          console.log("取消收藏成功");
+          console.log("失败（收藏）", res);
+          getApp().showErr(res.data.message);
         }
       }
     })
@@ -431,9 +328,8 @@ Page({
   // 点击窗口收藏按钮
   favorWindow: function (e) {
     let _this = this;
-    let floor_index = e.currentTarget.dataset.floor_index;
-    let window_index = e.currentTarget.dataset.window_index;
-    let window = _this.data.floor_list[floor_index].windowList[window_index];
+    let index = e.currentTarget.dataset.index;
+    let window = _this.data.floorList[_this.data.floorIndex].objects[index];
     console.log(e, window);
     let token = getApp().globalData.token;
     // 如果用户未登录
@@ -444,7 +340,7 @@ Page({
     // 用户已登录
     window.isCollected = !window.isCollected;
     _this.setData({
-      ["floor_list[" + floor_index + "].windowList[" + window_index + "]"]: window
+      ["floorList[" + _this.data.floorIndex + "].objects[" + index + "]"]: window
     });
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/collection/',
@@ -454,18 +350,20 @@ Page({
       },
       data: {
         type: 1,
-        targetId: window.windowId,
+        targetId: window.winId,
         isCollected: window.isCollected ? 1 : 0
       },
       success: (res) => {
         console.log(res);
-        if (res.statusCode != 200) {
-          console.log("失败（收藏）", res)
-        }
-        if (_this.data.canteen_info.is_canteen_favored) {
-          console.log("收藏成功");
+        if (res.data.code == 200) {
+          if (_this.data.canteenInfo.isCollected) {
+            console.log("收藏成功");
+          } else {
+            console.log("取消收藏成功");
+          }
         } else {
-          console.log("取消收藏成功");
+          console.log("失败（收藏）", res)
+          getApp().showErr(res.data.message);
         }
       }
     })
@@ -476,7 +374,7 @@ Page({
     // console.log(e.detail.scrollTop);
     let length = this.data.window_top_list.length;
     for (let i = 0; i < length; i++) {
-      if (e.detail.scrollTop > this.data.window_top_list[i].top + rpx_to_px(5) && (i == length - 1 || e.detail.scrollTop < this.data.window_top_list[i + 1].top - rpx_to_px(5)) && this.data.window_top_list[i].index !== this.data.selected_windowIndex) {
+      if (e.detail.scrollTop > this.data.window_top_list[i].top + toPx(5) && (i == length - 1 || e.detail.scrollTop < this.data.window_top_list[i + 1].top - toPx(5)) && this.data.window_top_list[i].index !== this.data.selected_windowIndex) {
         this.setData({
           selected_windowIndex: this.data.window_top_list[i].index
         });
@@ -493,10 +391,10 @@ Page({
 
 })
 
-function rpx_to_px(rpx) {
+function toPx(rpx) {
   return rpx / 750 * wx.getSystemInfoSync().windowWidth;
 }
 
-function px_to_rpx(px) {
+function toRpx(px) {
   return px / wx.getSystemInfoSync().windowWidth * 750;
 }

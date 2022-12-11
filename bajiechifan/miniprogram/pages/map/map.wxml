@@ -19,5 +19,5 @@
     <text class="canteenName">{{name}}</text>
     <text class="address">{{s}} {{loc}}</text>
   </view>
-  <view class="goHere" bindtap="goHere" data-markerId="{{markerId}}">到这去</view>
+  <view class="goHere" catchtap="goHere" data-markerId="{{markerId}}">到这去</view>
 </view>

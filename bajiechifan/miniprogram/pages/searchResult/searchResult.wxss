@@ -50,6 +50,7 @@
   border-radius: 25rpx;
   margin: 10rpx 32rpx 10rpx 28rpx;
   display: flex;
+  background-color: white;
 }
 .left_part {
   margin-left: 20rpx;
@@ -61,24 +62,23 @@
 .canteen_image {
   width: 220rpx;
   height: 220rpx;
-  margin-top: 14rpx;
+  margin-top: 20rpx;
   border-radius: 20rpx;
 }
 /* 距离地址 */
 .canteen_distance {
   position: relative;
-  left: 40rpx;
-  top:40rpx;
   height: 40rpx;
   display: flex;
   align-items: center;
-  margin: 20rpx 0 10rpx 0;
+  margin: 10rpx 0;
   color: gray;
+  white-space: nowrap;
 }
 .location_icon {
   width:30rpx;
   height:30rpx;
-  margin: 10rpx;
+  flex-shrink: 0;
 }
 .location {
   margin: 10rpx;
@@ -91,10 +91,12 @@
 /* 左部结束 中部开始*/
 .middle_part {
   height: 210rpx;
+  width: 380rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 10rpx 0 10rpx 30rpx;
+  margin: 20rpx 0 10rpx 30rpx;
+  overflow: hidden;
 }
 .canteen_name {
   font-size: 34rpx;
@@ -133,7 +135,7 @@ view.canteen-notice {
   color: orange;
 }
 @keyframes roll {
-  0% {left: 420rpx;}
+  0% {left: 380rpx;}
   100% {left: -100%;}
 }
 text.canteen-notice {

@@ -66,7 +66,7 @@
       <text class="canteen-name">{{item.canteenName}}</text>
       <text>{{item.isOpening ? '营业中' : '休息中'}}</text>
       <text class="opening-time">{{item.openingTime}}</text>
-      <view class="canteen-notice" style="width: {{item.announce.length * 29}}rpx;"><text class="canteen-notice orange" style="animation-duration: {{item.announce.length * 29 > 420 ? item.announce.length / 3 : 0}}s;">{{item.announce}}</text></view>
+      <view class="canteen-notice" style="width: {{item.announce.length * 29}}rpx;"><text class="canteen-notice orange" style="animation-duration: {{item.announce.length * 29 > 420 ? item.announce.length / 3 + 5 : 0}}s;">{{item.announce}}</text></view>
     </view>
     <view class="canteen-address">
       <image class="canteen-distance-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/定位.png"></image>
@@ -86,7 +86,7 @@
       <text>{{function.getDisStr(item.distance)}}</text>
     </view>
     <view class="dishes" wx:if="{{item.isOpening}}">
-      <view class="dish" wx:for="{{item.dishs}}" wx:key="dishId">
+      <view class="dish" wx:for="{{item.dishes}}" wx:key="dishId">
         <image class="window-dish-image" src="{{item.dishImage}}" mode="aspectFill"></image>
         <text class="window-dish-name">\n{{item.dishName}}</text>
         <text class="darkorange">\n{{function.getPriceStr(item.price)}}</text>

@@ -7,27 +7,26 @@ Page({
     longitude: 113.936696,
     latitude: 22.532742
   },
-  onReady() {
-    let that = this
+  onLoad() {
+    let _this = this;
+    let app = getApp();
     // wx.getSetting({
     // success(res) {
-    console.log('set')
     // if (res.authSetting['scope.userLocation']) {
     wx.getLocation({
-      success(result) {
-        console.log(result, 'location');
-        wx.setStorageSync('location', [result.longitude, result.latitude]);
-        that.getLocation();
+      success(res) {
+        console.log(res, 'location');
+        let location = {
+          longitude: res.longitude,
+          latitude: res.latitude
+        };
+        app.globalData.location = location;
+        wx.setStorageSync('location', location);
+        _this.getLocation();
       },
       fail() {
-        console.log('fail')
-        if (wx.getStorageSync('location')) {
-          that.getLocation();
-        } 
-        else {
-          wx.setStorageSync('location', [113.936696, 22.532742]);
-          that.getLocation();
-        }
+        console.log('fail');
+        _this.getLocation();
       }
     })
     // }
@@ -57,14 +56,11 @@ Page({
       },
       header: {
         'token': getApp().globalData.token,
-        'contebt-Type': 'application/x-www-form-urlencoded'
       },
       success(res) {
-        var resstr = JSON.stringify(res.data)
-        var resobj = JSON.parse(resstr)
         _this.setData({
-          canteen_list: resobj.data
-        })
+          canteen_list: res.data.data
+        });
       },
       fail() {
         console.log("fail")
@@ -73,9 +69,6 @@ Page({
     wx.request({
       url: 'http://114.132.234.161:8888/bajie/banner/list',
       method: 'GET',
-      header: {
-        'contebt-Type': 'application/json'
-      },
       success(res) {
         var resstr = JSON.stringify(res.data)
         var resobj = JSON.parse(resstr)
@@ -93,6 +86,7 @@ Page({
     console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
       url: '/pages/canteenDetails/canteenDetails?id=' + e.currentTarget.dataset.id,
+      // url: "/pages/canteen/canteen?id=" + e.currentTarget.dataset.id
     })
   },
   clickCollection: function (e) {
@@ -147,20 +141,39 @@ Page({
     })
   },
   getLocation() {
-    let _this = this
-    let location = wx.getStorageSync('location');
-    let l = location[0];
-    let a = location[1];
-    console.log(l, a, 1);
-    wx.request({
-      url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${a},${l}&key=EFYBZ-GFPKG-7DXQK-I2RD7-U5RW2-CSBPZ`,
-      success(res) {
-        console.log(res)
+    let _this = this;
+    let app = getApp();
+    if (app.globalData.location) {
+      location = app.globalData.location;
+      if (location.name) {
         _this.setData({
-          loc: res.data.result.formatted_addresses.recommend
-        })
+          longitude: location.longitude,
+          latitude: location.latitude,
+          loc: location.name
+        });
+      } else {
+        wx.request({
+          url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${location.latitude},${location.longitude}&key=EFYBZ-GFPKG-7DXQK-I2RD7-U5RW2-CSBPZ`,
+          success(res) {
+            console.log(res);
+            location.name = res.data.result.formatted_addresses.recommend;
+            _this.setData({
+              longitude: location.longitude,
+              latitude: location.latitude,
+              loc: location.name
+            });
+            app.globalData.location = location;
+            wx.setStorageSync('location', location);
+          }
+        });
       }
-    })
+    } else {
+      _this.setData({
+        longitude: 113.936696,
+        latitude: 22.532742,
+        loc: "深圳大学（粤海校区）"
+      });
+    }
   },
   toMap() {
     wx.navigateTo({

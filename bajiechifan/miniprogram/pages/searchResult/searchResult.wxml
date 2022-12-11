@@ -1,7 +1,7 @@
 <view class="search">
   <view class="left-part">
-  <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arrow_back@3x.png" class="search-icon" bindtap="backToSearch"></image>
-  <input class="search-input" value="{{search_value}}" bindinput="getSearchValue" catchfocus = "catchFocus"></input>
+    <image src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arrow_back@3x.png" class="search-icon" bindtap="backToSearch"></image>
+    <input class="search-input" value="{{search_value}}" bindinput="getSearchValue" catchfocus="catchFocus"></input>
   </view>
   <view class="right-part">
     <!-- <view class="search-button" bindtap="clearSearch">搜索</view> -->
@@ -9,29 +9,29 @@
   </view>
 </view>
 <view wx:if="{{show_list_flag}}">
-    <view  wx:for="{{search_list}}">
+  <view wx:for="{{search_list}}">
     <view class="search-result" wx:if="{{item.isOpening}}" data-id="{{item.canteenId}}" catchtap="toCanteen">
       <view class="left_part">
-          <image class="canteen_image" src="{{item.mainImage}}"></image>
+        <image class="canteen_image" src="{{item.mainImage}}"></image>
+        <view class="canteen_distance">
+          <image class="location_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/iconPark-local@3x.png"></image>
+          <text class="distance">{{item.distance}}m</text>
+          <text class="location">{{item.canteenAddress}}</text>
+        </view>
       </view>
       <view class="middle_part">
-          <view class="canteen_name">{{item.canteenName}}</view>
-          <view class="comment_score">
-           <text>营业中</text>
-            <image class="comment_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png"></image>
-            <text class="comment_point">{{item.score}}</text>
-          </view>
-          <view class="time">{{item.openingTime}}</view>
-          <view class="canteen-notice" style="width: {{item.announce.length * 29}}rpx;"><text class="canteen-notice orange" style="animation-duration: {{item.announce.length * 29 > 420 ? item.announce.length / 3 : 0}}s;">{{item.announce}}</text></view>
+        <view class="canteen_name">{{item.canteenName}}</view>
+        <view class="comment_score">
+          <text>营业中</text>
+          <image class="comment_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/like@3x.png"></image>
+          <text class="comment_point">{{item.score}}</text>
+        </view>
+        <view class="time">{{item.openingTime}}</view>
+        <view class="canteen-notice" style="width: {{item.announce.length * 29}}rpx;"><text class="canteen-notice orange" style="animation-duration: {{item.announce.length * 29 > 380 ? item.announce.length / 3 + 4 : 0}}s;">{{item.announce}}</text></view>
       </view>
     </view>
-    <view class="canteen_distance">
-        <image class="location_icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/iconPark-local@3x.png"></image>
-        <text class="distance">{{item.distance}}m</text>
-        <text class="location">{{item.canteenAddress}}</text>
-      </view>
   </view>
 </view>
 <view wx:else class="no-finding">
- <text>什么都没找到~</text> 
+  <text>什么都没找到~</text>
 </view>

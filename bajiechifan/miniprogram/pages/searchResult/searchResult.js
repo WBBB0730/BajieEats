@@ -28,9 +28,6 @@ Page({
           wx.request({
             method: 'POST',
             url: 'http://114.132.234.161:8888/bajie/search/all',
-            header: {
-              'content-Type': 'application/x-www-form-urlencoded'
-            },
             data:{
               keyWord: that.data.search_value,
               longitude: longitude,
@@ -63,15 +60,14 @@ Page({
   },
  //点击搜索回到搜索页面
   catchFocus(){
-    wx.navigateTo({
-      url: '/pages/search/search',
-    })
+    wx.navigateBack();
   },
   toCanteen(e) {
+    let _this = this;
     console.log(e.currentTarget.dataset.id)
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/canteenDetails/canteenDetails?id=' + id,
+      url: '/pages/canteenDetails/canteenDetails?id=' + id + '&keyWord=' + encodeURIComponent(JSON.stringify(_this.data.search_value)),
     })
   }
 })
