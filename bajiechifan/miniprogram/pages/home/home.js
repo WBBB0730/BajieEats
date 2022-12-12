@@ -58,9 +58,13 @@ Page({
         'token': getApp().globalData.token,
       },
       success(res) {
-        _this.setData({
-          canteen_list: res.data.data
-        });
+        if (res.data.code == 200) {
+          _this.setData({
+            canteen_list: res.data.data
+          });
+        } else {
+          getApp().showErr(res.data.message);
+        }
       },
       fail() {
         console.log("fail")
@@ -70,10 +74,8 @@ Page({
       url: 'http://114.132.234.161:8888/bajie/banner/list',
       method: 'GET',
       success(res) {
-        var resstr = JSON.stringify(res.data)
-        var resobj = JSON.parse(resstr)
         _this.setData({
-          swiperList: resobj.data
+          swiperList: res.data
         })
       },
       fail() {

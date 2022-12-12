@@ -13,7 +13,7 @@
 }
 .search-input {
   display: inline-block;
-  width:300rpx;
+  width:400rpx;
   position: relative;
   left: 20rpx;
   font-size: 30rpx;
@@ -26,7 +26,16 @@
   height: 50rpx;
   /* border-radius: 40rpx; */
 }
+.right-part {
+  display: flex;
+}
+.clear-input {
+  width: 40rpx;
+  height: 40rpx;
+  margin: auto 10rpx auto 0;
+}
 .search-button {
+  display: inline-block;
   width: 130rpx;
   text-align: center;
   line-height: 66rpx;

@@ -2,7 +2,7 @@
   <view class="detail_avatarUrl" catchtap="editAvatar">
     <text class="avatar-text">我的头像</text>
     <view class="value">
-      <image src="{{avatarUrl}}" class="avatar"></image>
+      <image src="{{avatarUrl}}" class="avatar" mode="aspectFill"></image>
     </view>
   </view>
 

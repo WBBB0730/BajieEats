@@ -1,7 +1,8 @@
 Page({
       data: {
         search_value: '',
-        historyList: []
+        historyList: [],
+        focus: true
       },
       backToHome() {
         wx.switchTab({
@@ -19,10 +20,10 @@ Page({
             wx.getStorage({
               key: "h_list",
               success(res) {
-                console.log(res.data, "clear")
+                console.log(res.data, "clear history");
               },
               fail(res) {
-                console.log("fail")
+                console.log("fail clear history");
               }
             })
           }
@@ -39,16 +40,27 @@ Page({
           })
         }
       },
+
+      onShow() {
+        let _this = this;
+        _this.setData({
+          focus: true
+        });
+      },
+
       getSearchValue(e) {
-        console.log(e.detail.value)
         this.setData({
           search_value: e.detail.value
         })
-        console.log(this.data.search_value, 11)
+      },
+      clearInput() {
+        let _this = this;
+        _this.setData({
+          search_value: ""
+        })
       },
       clickSearch() {
         // var hList = this.data.historyList;
-        console.log(this.data.historyList, "origin");
         var hList = this.data.historyList;
         console.log(hList, 'hlist',this.data.search_value)
         if (this.data.search_value) {
@@ -84,6 +96,7 @@ Page({
           hList.splice(index,1);
           hList.unshift(value);
           this.setData({
+            search_value: value,
             historyList: hList
           })
           wx.setStorageSync('h_list', hList)

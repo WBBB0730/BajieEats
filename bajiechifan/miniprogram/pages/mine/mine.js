@@ -61,6 +61,25 @@ Page({
   },
 
   tomyset: function (e) {
+    let app = getApp();
+    let _this = this;
+    if (!app.globalData.token) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录后再进行操作',
+        complete: (res) => {
+          if (res.confirm) {
+            app.login().then(() => {
+              wx.showToast({
+                title: '登录成功',
+              });
+              _this.onShow();
+            });
+          }
+        }
+      });
+      return;
+    }
     if (e.currentTarget.dataset.type == '我发布的评论') {
       wx.navigateTo({
         url: '../comment/comment',

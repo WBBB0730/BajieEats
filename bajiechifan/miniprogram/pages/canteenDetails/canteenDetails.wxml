@@ -47,7 +47,7 @@
           <view class="line" wx:if="{{index === floorIndex}}"></view>
         </view>
       </scroll-view>
-      <image class="search" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/userAvatars/搜索.png" catchtap="toSearch"></image>
+      <image class="search" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/搜索.png" catchtap="toSearch"></image>
     </view>
 
     <!-- 搜索结果 -->

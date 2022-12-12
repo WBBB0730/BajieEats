@@ -54,9 +54,7 @@ Page({
   },
   //返回按钮
   backToSearch(){
-    wx.navigateTo({
-      url: '/pages/search/search',
-    })
+    wx.navigateBack();
   },
  //点击搜索回到搜索页面
   catchFocus(){
