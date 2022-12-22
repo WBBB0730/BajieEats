@@ -30,12 +30,13 @@ Page({
       header: {
         'token': getApp().globalData.token
       },
+      data: {
+        pageIndex: 1,
+        pageSize: 10
+      },
       success(res) {
-        var resstr = JSON.stringify(res.data)
-        var resobj = JSON.parse(resstr)
-        console.log(resobj)
         _this.setData({
-          commentList: resobj.data
+          commentList: res.data.data.list
         })
       },
       fail(){

@@ -25,15 +25,15 @@
     </view>
   </view>
   <!-- 展示菜品信息 -->
-  <view class="dish" catchtap="toDish" data-dishId = "{{pro.dishId}}">
-    <image class="dish-photo" src="{{pro.dishImage}}" mode="aspectFill"></image>
+  <view class="dish" catchtap="toDish" data-dishId = "{{pro.dishInfo.dishId}}">
+    <image class="dish-photo" src="{{pro.dishInfo.dishImage}}" mode="aspectFill"></image>
     <view class="dish-info">
-      <text class="canteen-name">{{pro.dishName}}</text>
-      <text class="window-dish">{{pro.canteenName}} · {{pro.winName}}</text>
+      <text class="canteen-name">{{pro.dishInfo.dishName}}</text>
+      <text class="window-dish">{{pro.dishInfo.canteenName}} · {{pro.dishInfo.winName}}</text>
     </view>
   </view>
   <!-- 底部 -->
-  <view class="post-time">发布于 {{pro.createTime}}</view>
+  <view class="post-time">发布于 {{func.split(pro.createTime, 'T')[0]}}</view>
   <view class="bottom">
     <view class="like">
       <image class="like-icon" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-good-job@3x.png"></image>
@@ -42,3 +42,10 @@
     <image class="more" src="cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/arcoDesign-more@3x.png" bindtap="more" data-id="{{pro.commentId}}"></image>
   </view>
 </view>
+<wxs module="func">
+  module.exports = {
+    split: function(s, c) {
+      return s.split(c);
+    }
+  };
+</wxs>
