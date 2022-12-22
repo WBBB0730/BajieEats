@@ -60,7 +60,10 @@
           </view>
         </view>
       </view>
-      <view class="right-part">{{item.createTime}}</view>
+      <view class="right-part">
+      2022-12-12
+        <image src= "{{ isLike ? 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-good-job@3x.png' : 'cloud://cloud1-2gef5vhe7ba352bb.636c-cloud1-2gef5vhe7ba352bb-1314850831/images/ze-good-job-o@3x.png'}}" class="good" catchtap = "clickLike" data-commentId = "{{item.commentId}}"></image>
+      </view>
     </view>
   </view>
   <!-- 评价卡片主体 -->

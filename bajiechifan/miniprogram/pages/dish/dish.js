@@ -21,6 +21,9 @@ Page({
     // cardType为0则为详情，为1则为评价
     cardType: 0,
     commentType: null,
+    commentId: -1,
+    isLike:false,
+    isLikeNum: 0
   },
 
   onLoad(options) {
@@ -39,7 +42,6 @@ Page({
         dishId: _this.data.dishId
       },
       header: {
-        'contebt-Type': 'application/json',
         'token': getApp().globalData.token
       },
       success(res) {
@@ -208,5 +210,45 @@ Page({
       current: commentUrls[i],
       urls: commentUrls
     })
+  },
+  async getLikes() {
+    let app = getApp();
+    console.log(app.globalData.token)
+    let res = await app.request({
+      url:"/comment/doLike",
+      data: {
+        isLiked : this.data.isLikeNum,
+        commentId : this.data.commentId,
+        header: {
+          token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJvZXR2SjRtT2loSVNocDRQcTd3aC1EbXNMc2owIn0.JNrcavMnhg_nl56t47BAff_P0pU5uzUBgggaZbH8AXo',
+        }
+      }
+    })
+    console.log(res,'like1')
+    if(res.data.code == 200) {
+      console.log('like')
+    }
+  },
+  clickLike(e) {
+    this.setData({
+      isLike: !this.data.isLike,
+    })
+    if(this.data.isLike){
+      this.setData({
+        isLikeNum: 1
+      })
+    }
+    else {
+      this.setData({
+        isLikeNum: 0
+      })
+    }
+    wx.setStorageSync('isLike', this.data.isLike);
+    let commentId = e.currentTarget.dataset.commentid;
+    this.setData({
+      commentId: commentId
+    })
+    console.log(this.data.commentId)
+    this.getLikes();
   }
 });

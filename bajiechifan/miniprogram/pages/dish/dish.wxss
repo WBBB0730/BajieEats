@@ -3,13 +3,13 @@
 
 .dish-top {
   position: relative;
-  border: red solid 5rpx;
+
 }
 /* 头部图片 */
 .dish-img {
   width: 100%;
   height: 450rpx;
-  border: red solid 5rpx;
+
 }
 /* 分享图标 */
 .share-part {
@@ -36,7 +36,7 @@
   bottom: 65rpx;
   height: 260rpx;
   background-color: white;
-  border: red solid 5rpx;
+
 }
 .left {
   left: 20rpx;
@@ -45,7 +45,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: red solid 5rpx;
+
 }
 .right {
   position: relative;
@@ -56,7 +56,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items:center;
-  border: red solid 5rpx;
+
 }
 .dish-name{
   position: relative;
@@ -106,7 +106,7 @@
   height: 90rpx;
   background-color: white;
   border-bottom: #BBBBBB solid 1rpx;
-  border: solid 5rpx red;
+
 }
 .detail-word {
   position: relative;
@@ -165,7 +165,6 @@
   bottom: 40rpx;
   height: 250rpx;
   background-color: white;
-  border: red solid 5rpx;
 }
 .introduce {
   display: inline-block;
@@ -276,11 +275,10 @@
   display: flex;
   justify-content: space-around;
   border-bottom: rgba(187,187,187,0.16) solid 1px ;
-  border: red solid 5rpx;
+
 }
 .left-part {
   margin-top: 20rpx;
-  border: red solid 5rpx;
 }
 .middle-part {
   position: relative;
@@ -291,13 +289,22 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: red solid 5rpx;
+
 }
 .right-part {
   margin-top: 20rpx;
   font-size: 24rpx;
   color: gray;
-  border: red solid 5rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.good {
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  left: 70rpx;
+  bottom: 26rpx;
 }
 .comment-photos {
   display: flex;
